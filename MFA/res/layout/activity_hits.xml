@@ -1,0 +1,104 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Hits" >
+
+   <TextView
+       android:id="@+id/textView1"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_margin="5dp"
+       android:layout_marginLeft="18dp"
+       android:text="@string/hits_hits"
+       android:textAppearance="?android:attr/textAppearanceLarge"
+       android:typeface="serif" />
+
+    <TextView
+        android:id="@+id/Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/cash"
+        android:layout_margin="15dp"
+        android:layout_toRightOf="@+id/HitsList"
+        android:text="Massive Asteroid"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:typeface="serif" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Name"
+        android:layout_alignRight="@+id/cash"
+        android:layout_below="@+id/Name"
+        android:longClickable="false"
+        android:text="blah blah blah blah blahblah blah blah blah blahblah blah blah blah blahblah blah blah blah blahblah blah blah blah blahblah blah blah blah blahblah blah blah blah blahblah blah blah blah blah"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:typeface="serif" />
+
+    <TextView
+        android:id="@+id/cash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/hits_cash"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:typeface="serif" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/cash"
+        android:text="@string/hits_money"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:typeface="serif" />
+
+    <ImageView
+        android:id="@+id/hit_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Name"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/description"
+        android:src="@drawable/untitled" />
+
+    <TextView
+        android:id="@+id/Cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/hit_image"
+        android:layout_alignRight="@+id/hit_image"
+        android:paddingBottom="7dp"
+        android:paddingRight="10dp"
+        android:text="Cost : 1200"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:typeface="serif" />
+
+    <ListView
+        android:id="@+id/HitsList"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginLeft="2dp"
+        tools:listitem="@android:layout/simple_gallery_item" >
+
+    </ListView>
+
+    <Button
+        android:id="@+id/purchase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/hit_image"
+        android:layout_below="@+id/hit_image"
+        android:text="@string/hits_purchase_hit"
+        android:visibility="visible"
+        android:onClick="purchase" />
+
+</RelativeLayout>

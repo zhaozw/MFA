@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MFA</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_game_logo">GameLogo</string>
+    <string name="desc">Image in the game</string>
+    <string name="title_activity_main_menu">MainMenu</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_options">Options</string>
+    <string name="title_activity_high_scores">HighScores</string>
+    <string name="title_activity_hits">Hits</string>
+    <string name="title_activity_credits">Credits</string>
+    <string name="title_activity_new_game_options">NewGameOptions</string>
+    <string name="title_activity_choose_rival">ChooseRival</string>
+    <string name="title_activity_light_thread">LightThread</string>
+
+ 
+    <string name="choose_rival_hit_type">Example Hit</string>
+    <string name="choose_rival_player_stats">Example Hit</string>
+    <string name="choose_rival_include_message">Send Message With?</string>
+    <string name="choose_rival_is_active">Hit Available</string>
+    <string name="choose_rival_send_hit">-----SEND-----</string>
+    <string name="choose_rival_activity_player_select">XML_Options_Menu</string>
+    <string name="choose_rival_player_type">Player Type</string>
+    
+    <string name="hits_hits">HITS</string>
+    <string name="hits_cash">Cash :</string>
+    <string name="hits_purchase_hit">PURCHASE HIT</string>
+    <string name="hits_money">1000</string>
+    <string name="hits_hit_type">Example Hit</string>
+    
+    <string name="new_game_options_standard_game">Standard </string>
+    <string name="new_game_options_custom_game">Custom </string>
+    
+</resources>
