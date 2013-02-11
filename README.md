@@ -1,25 +1,21 @@
-MFA
-API Reference
+#MFA#
+###API Reference###
+___
 
-Login
+###Login###
 
-Currently there really is no login process. 
+We're Working On Facebook and Twitter Intagration. Then We'll Use that for User Authentication. 
 
-Querying
+___
 
-application/json
+####User Methods####
 
 
-User Methods
 
-Load Basic Infomation:
+**Load Basic Data** - `POST /Player_Info.php?FBID=###` 
 
-----  POST  ---- 
-
-/Player_Info.php?FBID=###
-
-Returns:
-
+_Returns:_
+```
 {
   Game: [
   {
@@ -32,15 +28,15 @@ Returns:
   }
       ]
 }
+```
 
-Get Hit Infomation:
 
----  POST  ----
+**Load Player's Hits** - `/Get_Hits.php?hits=###` 
 
-/Get_Hits.php?hits=###
 
-Returns:
 
+_Returns:_
+```
 Hits: [
         {
           HitsID: "james0123",
@@ -52,3 +48,4 @@ Hits: [
           Hit1Msg: "NULL"
         }
       ]
+```
