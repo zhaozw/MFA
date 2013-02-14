@@ -1,18 +1,10 @@
 package com.example.objects;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import com.example.mfa.R;
 
 
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.util.Log;
 
 public class InteractiveSong {

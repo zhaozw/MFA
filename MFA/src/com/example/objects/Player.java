@@ -5,9 +5,7 @@ import java.util.Random;
 import com.example.mfa.gamepanel.MainGamePanel;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.util.Log;
 
 public class Player 
 {

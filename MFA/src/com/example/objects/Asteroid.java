@@ -1,6 +1,5 @@
 package com.example.objects;
 
-import java.awt.*; 
 import java.util.Random;
 
 import com.example.mfa.gamepanel.MainGamePanel;
@@ -8,7 +7,6 @@ import com.example.mfa.gamepanel.MainGamePanel;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.RectF;
 public class Asteroid 
 { 
     double   xVelocity, yVelocity, radius,mineRadius=200; 

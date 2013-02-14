@@ -4,7 +4,6 @@ import com.example.mfa.gamepanel.MainGamePanel;
 import com.example.objects.TouchButton;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
 public class MainGameVisuals {

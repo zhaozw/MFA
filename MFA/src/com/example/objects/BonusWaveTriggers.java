@@ -1,5 +1,4 @@
 package com.example.objects;
-import java.awt.*; 
 import java.util.Random;
 
 import com.example.mfa.gamepanel.MainGamePanel;

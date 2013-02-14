@@ -153,6 +153,7 @@ public final class R {
         public static final int menu_settings=0x7f060001;
         public static final int new_game_options_custom_game=0x7f06001a;
         public static final int new_game_options_standard_game=0x7f060019;
+        public static final int test=0x7f06001b;
         public static final int title_activity_choose_rival=0x7f06000b;
         public static final int title_activity_credits=0x7f060009;
         public static final int title_activity_game_logo=0x7f060002;

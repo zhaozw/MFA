@@ -19,7 +19,6 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 public class GameLogo extends Activity {

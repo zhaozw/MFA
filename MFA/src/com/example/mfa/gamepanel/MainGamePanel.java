@@ -3,15 +3,10 @@
  */
 package com.example.mfa.gamepanel;
 
-import java.io.IOException;
 import java.util.Random;
-import java.util.Vector;
-
 import com.example.mfa.R;
-import com.example.mfa.OldMenus_JustForReference.GameOverVisuals;
 import com.example.mfa.OldMenus_JustForReference.MainGameVisuals;
 import com.example.mfa.OldMenus_JustForReference.MainMenuVisuals;
-import com.example.mfa.OldMenus_JustForReference.OptionsVisuals;
 import com.example.objects.Alien;
 import com.example.objects.AnalogStick;
 import com.example.objects.Asteroid;
@@ -24,28 +19,20 @@ import com.example.objects.PowerUpsAll;
 import com.example.objects.SoundEffectsManager;
 import com.example.objects.Thrusters;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.graphics.RectF;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.SoundPool;
-import android.os.Bundle;
 
 /**
  * @author impaler
@@ -816,12 +803,12 @@ public int barY;
           //check for collisions with the ship
           if(asteroids[i].shipCollision(ship)&&life>0&&ship.unlocked){ 
               asteroids[i].moveBack();
-              collision(1,(int)ship.x,(int)ship.y);
+              collision(1,ship.x,ship.y);
              } 
           //check for collision with the user shots.
           for(int j=0;j<ship.numUserShots;j++){
         	  if(asteroids[i].shotCollision(ship.shots[j])){ 
-        		  collision(2,(int)asteroids[i].x,asteroids[i].y);
+        		  collision(2,asteroids[i].x,asteroids[i].y);
                   ship.deleteShot(j); 
                   //delete the original asteroid
                   asteroids[i].moveBack(); 

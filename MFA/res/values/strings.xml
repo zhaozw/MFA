@@ -32,5 +32,6 @@
     
     <string name="new_game_options_standard_game">Standard </string>
     <string name="new_game_options_custom_game">Custom </string>
+    <string name="test">test</string>
     
 </resources>

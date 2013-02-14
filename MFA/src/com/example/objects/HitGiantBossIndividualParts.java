@@ -1,7 +1,5 @@
 package com.example.objects;
 import java.util.Random;
-import java.awt.*;
-
 import com.example.mfa.gamepanel.MainGamePanel;
 
 import android.graphics.Bitmap;
