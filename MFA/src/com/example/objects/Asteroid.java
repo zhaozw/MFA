@@ -2,11 +2,10 @@ package com.example.objects;
 
 import java.util.Random;
 
-import com.example.mfa.gamepanel.MainGamePanel;
-
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+
+import com.example.mfa.gamepanel.MGP;
 public class Asteroid 
 { 
     double   xVelocity, yVelocity, radius,mineRadius=200; 
@@ -19,23 +18,24 @@ public class Asteroid
     int IMG;
     private Bitmap bitmap;	// the actual bitmap
     
-    public Asteroid(Bitmap bitmap,double radius,double minVelocity, double maxVelocity,int scrnW,int scrnH)     
+    public Asteroid(Bitmap bitmap,double minVelocity, double maxVelocity,int scrnW,int scrnH)     
     { 
     	this.scrnW=scrnW;
     	this.scrnH=scrnH;
     	this.bitmap = bitmap;
-    	this.radius=radius;  
+    	this.radius=(bitmap.getWidth()/2);  
         this.y = generator.nextInt(scrnH); 
-        this.x= generator.nextInt(scrnW)+scrnW+150; 
+        this.x= generator.nextInt(scrnW)+scrnW+(int) MGP.dp[150]; 
         IMG= generator.nextInt(3)+1;   
         //calculates a random direction and a random 
         //velocity between minVelocity and maxVelocity
         double vel=minVelocity + Math.random()*(maxVelocity-minVelocity), dir=2*Math.PI*1; // random direction
         
-        xVelocity=vel*Math.cos(dir); 
-        yVelocity=vel*Math.sin(dir); 
+        xVelocity=(int)vel*Math.cos(dir); 
+        yVelocity=(int)vel*Math.sin(dir); 
     }
     
+   
     public void move()
      { 
 //       if(x==0)
@@ -45,25 +45,25 @@ public class Asteroid
        {
     	   x-=xVelocity; //move the asteroid
            y-=yVelocity;
-    	   x-=MainGamePanel.totalSpeed/2;
-            if(x<=-100)
+    	   x-=MGP.totalSpeed/2;
+            if(x<=- MGP.dp[100])
              {
                  moveBack();
-                 if(MainGamePanel.asteroidsPassed+1!=MainGamePanel.asteroidPassLimit)
-                 MainGamePanel.asteroidsPassed+=1;
+                 if(MGP.asteroidsPassed+1!=MGP.asteroidPassLimit)
+                 MGP.asteroidsPassed+=1;
              }
            
           
        }
        else if(unlocked==false)
        {
-           if(x<scrnW+50)
+           if(x<scrnW+MGP.dp[50])
          {
             //x-=AsteroidsGame.totalSpeed;
-        	x-=MainGamePanel.totalSpeed;
+        	x-=MGP.totalSpeed;
             x-=xVelocity; //move the asteroid
             y-=yVelocity;
-            if(x<-100)
+            if(x<-MGP.dp[100])
                  {
             	  moveBack();
                  }
@@ -99,6 +99,7 @@ public class Asteroid
     public void draw(Canvas canvas) 
     {
 		canvas.drawBitmap(bitmap, x , y , null);
+		canvas.drawLine(cx,cy,(float) (cx-radius),cy,MGP.redPaint);
 	}
     
     public boolean getLockedState()
@@ -115,6 +116,6 @@ public class Asteroid
     public void moveBack()
     {
         this.y = generator.nextInt(scrnH);   
-        this.x = generator.nextInt((scrnW)*2)+scrnW+150;
+        this.x = generator.nextInt((scrnW)*2)+scrnW+(int)MGP.dp[150];
     }   
 }

@@ -2,10 +2,10 @@ package com.example.objects;
 
 import java.util.Random;
 
-import com.example.mfa.gamepanel.MainGamePanel;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+
+import com.example.mfa.gamepanel.MGP;
 
 public class Player 
 {
@@ -22,7 +22,7 @@ public class Player
      public boolean shooting=false;
 	 public int shotDelay, shotDelayLeft;
      public int numUserShots;
-	 public boolean unlocked=false;   
+	 public boolean unlocked=true;   
 	 public Player(Bitmap i1,Bitmap i2,Bitmap i3,Bitmap i4,Bitmap i5, Bitmap shotImg, int x, int y)         
 	    { 
 		    this.img1 = i1;
@@ -159,7 +159,7 @@ public class Player
 //				canvas.drawBitmap(img5, x - (img5.getWidth() / 2), y - (img5.getHeight() / 2), null);
 //			 break;
 //		 }
-//		 canvas.drawLine(x,y,x+30,y,MainGamePanel.yellowPaint);
+//		 canvas.drawLine(x,y,x+30,y,MGP.yellowPaint);
 			 
 	 }
 
@@ -168,7 +168,7 @@ public class Player
 		 if(unlocked)
 		 {
 			 //ship will move forward
-			 if(xDiff/6>0&&x<MainGamePanel.deviceWidth-15)
+			 if(xDiff/6>0&&x<MGP.deviceWidth-15)
 				 x+=(xDiff/6);
 			 
 			 //ship will move backwards	 
@@ -176,7 +176,7 @@ public class Player
 		    	 x+=(xDiff/6);
 		     
 		     //ship will move down	 
-			 if(yDiff/6>0&&y<MainGamePanel.deviceHeight-15)
+			 if(yDiff/6>0&&y<MGP.deviceHeight-15)
 				  y+=(yDiff/6); 
 			 
 			 //ship will move up	 
@@ -185,18 +185,18 @@ public class Player
 		 }
 		 else if(enter)
 		 {
-			 if(x>=MainGamePanel.deviceHeight/8&&y>=MainGamePanel.deviceHeight/2)
+			 if(x>=MGP.deviceHeight/8&&y>=MGP.deviceHeight/2)
 			 {
 				 unlocked=true;
 			     enter=false;
 			 }
 			 else
 			 {
-				 if(x<MainGamePanel.deviceHeight/8)
+				 if(x<MGP.deviceHeight/8)
 				 {
 				     x+=1;
 				 } 
-			     if(y<MainGamePanel.deviceHeight/2)
+			     if(y<MGP.deviceHeight/2)
 				     y+=1;
 			 }
 		 }
@@ -240,6 +240,6 @@ public class Player
 	    { 
 	 
 	        shotDelayLeft=shotDelay+generator.nextInt(2); 
-	        return new Shot(cx+img1.getWidth() / 2,cy,0,60,12,shotImg);
+	        return new Shot(cx+img1.getWidth() / 2,cy,0,60,12,shotImg,0);
 	    }
 }

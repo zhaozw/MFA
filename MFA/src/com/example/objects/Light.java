@@ -5,10 +5,10 @@ package com.example.objects;
 
 import java.util.Random;
 
-import com.example.mfa.gamepanel.MainGamePanel;
-
-
 import android.graphics.RectF;
+
+import com.example.mfa.gamepanel.MGP;
+
 public class Light
 {
 Random generator = new Random();
@@ -30,8 +30,8 @@ int WIDTH;
  int Speed;
  boolean active;
 // RectF shape ;
-// MainGamePanel.deviceHeight
- //MainGamePanel.deviceWidth
+// MGP.deviceHeight
+ //MGP.deviceWidth
  public RectF  shape = new RectF(X,Y,X+100,Y+100);
  //Light initialization
   public Light()
@@ -40,8 +40,8 @@ int WIDTH;
      WIDTH = 5;
      HEIGHT = 5;
      
-     X = generator.nextInt(MainGamePanel.deviceWidth);
-     Y = generator.nextInt(MainGamePanel.deviceHeight);
+     X = generator.nextInt(MGP.deviceWidth);
+     Y = generator.nextInt(MGP.deviceHeight);
   // RectF  shape = new RectF(X,Y,X+10,Y+10);
  }
  
@@ -51,8 +51,8 @@ int WIDTH;
      WIDTH = w;
      HEIGHT = 2;
      randS = generator.nextInt(Speed);
-     X = generator.nextInt(MainGamePanel.deviceWidth);
-     Y = generator.nextInt(MainGamePanel.deviceHeight);
+     X = generator.nextInt(MGP.deviceWidth);
+     Y = generator.nextInt(MGP.deviceHeight);
      shape.set(X,Y,X+HEIGHT,Y+WIDTH);
  }
   
@@ -67,34 +67,34 @@ int WIDTH;
        X-=Speed+randS;
          
        if(X<0){
-    	 X = MainGamePanel.deviceWidth;
-         Y = generator.nextInt(MainGamePanel.deviceHeight);
+    	 X = MGP.deviceWidth;
+         Y = generator.nextInt(MGP.deviceHeight);
          }
        
        if(Speed<=3){
-    	   if(MainGamePanel.totalSpeed>2)
+    	   if(MGP.totalSpeed>2)
     	   {
-    	   X-=MainGamePanel.totalSpeed;
+    	   X-=MGP.totalSpeed;
     	   
-    	   if(MainGamePanel.totalSpeed>0)
-    		   shape.set(X,Y,X+(WIDTH)*(MainGamePanel.totalSpeed),Y+HEIGHT);
+    	   if(MGP.totalSpeed>0)
+    		   shape.set(X,Y,X+(WIDTH)*(MGP.totalSpeed),Y+HEIGHT);
     	   else
     		   shape.set(X,Y,X+WIDTH,Y+HEIGHT);
     	   }
          rSize = generator.nextInt(3);
          WIDTH = rSize;
          HEIGHT = rSize;
-         if(MainGamePanel.totalSpeed>0)
-  		   shape.set(X,Y,X+(WIDTH)*(MainGamePanel.totalSpeed),Y+HEIGHT);
+         if(MGP.totalSpeed>0)
+  		   shape.set(X,Y,X+(WIDTH)*(MGP.totalSpeed),Y+HEIGHT);
   	   else
   		   shape.set(X,Y,X+WIDTH,Y+HEIGHT);
        }
        else
        {
-    	   if(MainGamePanel.totalSpeed>2)
-    		  X-=(MainGamePanel.totalSpeed)/2;
-    	   if(MainGamePanel.totalSpeed>0)
-    		   shape.set(X,Y,X+(WIDTH)*(MainGamePanel.totalSpeed),Y+HEIGHT);
+    	   if(MGP.totalSpeed>2)
+    		  X-=(MGP.totalSpeed)/2;
+    	   if(MGP.totalSpeed>0)
+    		   shape.set(X,Y,X+(WIDTH)*(MGP.totalSpeed),Y+HEIGHT);
     	   else
     		   shape.set(X,Y,X+WIDTH,Y+HEIGHT);
        }

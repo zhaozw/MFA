@@ -2,12 +2,12 @@ package com.example.objects;
 
 import java.util.Random;
 
-import com.example.mfa.R;
-import com.example.mfa.gamepanel.MainGamePanel;
-
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;
+
+import com.example.mfa.R;
+import com.example.mfa.gamepanel.MGP;
 
 public class SoundEffectsManager {
 	
@@ -75,9 +75,9 @@ public class SoundEffectsManager {
 			
 			    //player hit sounds
 			    if(playerHitST==0){
-		           if(MainGamePanel.life==3)
+		           if(MGP.life==3)
 			          SP.play(shipHit1SID, 1, 1,0, 0,playBackRate);
-	      	       else if(MainGamePanel.life==2)
+	      	       else if(MGP.life==2)
 		              SP.play(shipHit2SID, 1, 1,0, 0,playBackRate);
 		           else
 			          SP.play(shipHit3SID, 1, 1,0, 0,playBackRate);

@@ -1,8 +1,8 @@
 package com.example.objects;
 
-import com.example.mfa.gamepanel.MainGamePanel;
-
 import android.graphics.Canvas;
+
+import com.example.mfa.gamepanel.MGP;
 
 public class Explosion {
 	
@@ -88,7 +88,7 @@ public class Explosion {
 
 	public void draw(Canvas canvas)
 	{
-		switch(MainGamePanel.explodeColor)
+		switch(MGP.explodeColor)
 		{
 		case(0):
 				   for(int k=0; k< FireBalls.length;k++)
@@ -161,6 +161,6 @@ public class Explosion {
 		
 		
 	}
-	//canvas.drawOval(lights2[r][c].getShape(),MainGamePanel.WPaint);   
+	//canvas.drawOval(lights2[r][c].getShape(),MGP.WPaint);   
 	 
 }

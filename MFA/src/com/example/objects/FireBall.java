@@ -4,7 +4,9 @@ package com.example.objects;
 //this class is to be used to make multiple lights to move quickly 
 //across the screen to create the appearence of motion
 import java.util.Random;
-import com.example.mfa.gamepanel.MainGamePanel;
+import java.awt.*;
+
+import com.example.mfa.gamepanel.MGP;
 
 import android.graphics.Canvas;
 import android.graphics.RectF;
@@ -29,7 +31,7 @@ public class FireBall
    public int color = 1;
    // 1 = red   2 = orange   3 = magenta  4 = yellow  5 = white
    
-   RectF  shape = new RectF(X,Y,X+100,Y+100);
+   RectF  shape = new RectF(X,Y,X+(int)MGP.dp[100],Y+(int)MGP.dp[100]);
    
    public FireBall(int t, int dr)
    {
@@ -58,61 +60,61 @@ public class FireBall
   
    public void ThrustersGo(double x, double y)
    {  
-	   if(WIDTH<10)
-        {WIDTH=10;
-         HEIGHT=7;}
+	   if(WIDTH<MGP.dp[10])
+        {WIDTH= (int) MGP.dp[10];
+         HEIGHT= (int) MGP.dp[10];}
 	   
-	 if(X>x-35){
+	 if(X>x-MGP.dp[35]){
 		 color=1;
-		 Y -= generator.nextInt(2) ;
-         Y += generator.nextInt(2) ;
+		 Y -= generator.nextInt((int) MGP.dp[2]) ;
+         Y += generator.nextInt((int) MGP.dp[2]) ;
 	 }
 	 else if(X>x-38){
 		 color=2; 
-		 WIDTH -= generator.nextInt(2) ;
-         WIDTH += generator.nextInt(5) ;
-         HEIGHT -= generator.nextInt(2) ; 
-         HEIGHT += generator.nextInt(2); 
-         Y -= generator.nextInt(3) ;
-         Y += generator.nextInt(3) ;
+		 WIDTH -= generator.nextInt((int) MGP.dp[2]) ;
+         WIDTH += generator.nextInt((int) MGP.dp[5]) ;
+         HEIGHT -= generator.nextInt((int) MGP.dp[2]) ; 
+         HEIGHT += generator.nextInt((int) MGP.dp[2]); 
+         Y -= generator.nextInt((int) MGP.dp[3]) ;
+         Y += generator.nextInt((int) MGP.dp[3]) ;
 	 }
      else if(X>x-50){
     	 color=3;
-    	 WIDTH -= generator.nextInt(2) ;
-         WIDTH += generator.nextInt(5) ;
-         HEIGHT -= generator.nextInt(2) ; 
-         HEIGHT += generator.nextInt(2); 
-         Y -= generator.nextInt(5) ;
-         Y += generator.nextInt(5) ;
+    	 WIDTH -= generator.nextInt((int) MGP.dp[2]) ;
+         WIDTH += generator.nextInt((int) MGP.dp[5]) ;
+         HEIGHT -= generator.nextInt((int) MGP.dp[2]) ; 
+         HEIGHT += generator.nextInt((int) MGP.dp[2]); 
+         Y -= generator.nextInt((int) MGP.dp[5]) ;
+         Y += generator.nextInt((int) MGP.dp[5]) ;
      }
 	 else if(X>x-58){
 		 color=4;
-		 WIDTH -= generator.nextInt(2) ;
-         WIDTH += generator.nextInt(5) ;
-         HEIGHT -= generator.nextInt(2) ; 
-         HEIGHT += generator.nextInt(2); 
-         Y -= generator.nextInt(5) ;
-         Y += generator.nextInt(5) ;
+		 WIDTH -= generator.nextInt((int) MGP.dp[2]) ;
+         WIDTH += generator.nextInt((int) MGP.dp[5]) ;
+         HEIGHT -= generator.nextInt((int) MGP.dp[2]) ; 
+         HEIGHT += generator.nextInt((int) MGP.dp[2]); 
+         Y -= generator.nextInt((int) MGP.dp[5]) ;
+         Y += generator.nextInt((int) MGP.dp[5]) ;
 	 }
 	 else{
 		 color=5;
-		 WIDTH -= generator.nextInt(2) ;
-         WIDTH += generator.nextInt(5) ;
-         HEIGHT -= generator.nextInt(2) ; 
-         HEIGHT += generator.nextInt(2); 
-         Y -= generator.nextInt(5) ;
-         Y += generator.nextInt(5) ;
+		 WIDTH -= generator.nextInt((int) MGP.dp[2]) ;
+         WIDTH += generator.nextInt((int) MGP.dp[5]) ;
+         HEIGHT -= generator.nextInt((int) MGP.dp[2]) ; 
+         HEIGHT += generator.nextInt((int) MGP.dp[2]); 
+         Y -= generator.nextInt((int) MGP.dp[5]) ;
+         Y += generator.nextInt((int) MGP.dp[5]) ;
 	 }
 	 
-     X -= generator.nextInt(17) ;    
+     X -= generator.nextInt((int) MGP.dp[17]) ;    
      
-       if(WIDTH>27||HEIGHT>27||X<0||X-10>x)
+       if(WIDTH> MGP.dp[27]||HEIGHT> MGP.dp[27]||X<0||X- MGP.dp[10]>x)
            {
                HEIGHT=0;
                WIDTH=0;
                X = (int)x;
-               Y = (int)y-(5);
-               X-=24;
+               Y = (int)y-((int)MGP.dp[5]);
+               X-=MGP.dp[24];
             }
           shape.set(X,Y,X+WIDTH,Y+HEIGHT);
    }
@@ -120,15 +122,15 @@ public class FireBall
    public void drawThrusters(Canvas canvas)
     { 
 	   if(color == 1)
-		   canvas.drawOval(shape,MainGamePanel.blueT);   
+		   canvas.drawOval(shape,MGP.blueT);   
 	   else if(color == 2)
-		   canvas.drawOval(shape,MainGamePanel.redT); 
+		   canvas.drawOval(shape,MGP.redT); 
 	   else if(color== 3) 
-		   canvas.drawOval(shape,MainGamePanel.orangeT); 
+		   canvas.drawOval(shape,MGP.orangeT); 
 	   else if(color == 4)
-		   canvas.drawOval(shape,MainGamePanel.yellowT); 
+		   canvas.drawOval(shape,MGP.yellowT); 
 	   else if(color== 5) 
-		   canvas.drawOval(shape,MainGamePanel.s1); 
+		   canvas.drawOval(shape,MGP.s1); 
     }  
   
    
@@ -137,18 +139,18 @@ public class FireBall
 	   if(type!=3) 
       {
 	   if(color == 1)
-		   canvas.drawOval(shape,MainGamePanel.redPaint);   
+		   canvas.drawOval(shape,MGP.redPaint);   
 	   else if(color == 2)
-		   canvas.drawOval(shape,MainGamePanel.orangePaint); 
+		   canvas.drawOval(shape,MGP.orangePaint); 
 	   else if(color== 3) 
-		   canvas.drawOval(shape,MainGamePanel.blackPaint); 
+		   canvas.drawOval(shape,MGP.blackPaint); 
 	   else if(color == 4)
-		   canvas.drawOval(shape,MainGamePanel.yellowPaint); 
+		   canvas.drawOval(shape,MGP.yellowPaint); 
 	   else if(color== 5) 
-		   canvas.drawOval(shape,MainGamePanel.WPaint); 
+		   canvas.drawOval(shape,MGP.WPaint); 
 	   }
   else {
-	   canvas.drawOval(shape,MainGamePanel.WPaint);  
+	   canvas.drawOval(shape,MGP.WPaint);  
 	   }  
     }
   public void drawExplosions2(Canvas canvas)
@@ -156,19 +158,19 @@ public class FireBall
 		   if(type!=3) 
 		      {
 			   if(color == 1)
-				   canvas.drawOval(shape,MainGamePanel.blackPaint);   
+				   canvas.drawOval(shape,MGP.blackPaint);   
 			   else if(color == 2)
-				   canvas.drawOval(shape,MainGamePanel.WPaint); 
+				   canvas.drawOval(shape,MGP.WPaint); 
 			   else if(color== 3) 
-				   canvas.drawOval(shape,MainGamePanel.blackPaint); 
+				   canvas.drawOval(shape,MGP.blackPaint); 
 			   else if(color == 4)
-				   canvas.drawOval(shape,MainGamePanel.WPaint); 
+				   canvas.drawOval(shape,MGP.WPaint); 
 			   else if(color== 5) 
-				   canvas.drawOval(shape,MainGamePanel.blackPaint); 
+				   canvas.drawOval(shape,MGP.blackPaint); 
 			   }
 		   else 
 		   {
-			   canvas.drawOval(shape,MainGamePanel.WPaint); 
+			   canvas.drawOval(shape,MGP.WPaint); 
 			   }  
 	      }
   public void drawExplosions3(Canvas canvas)  
@@ -176,34 +178,34 @@ public class FireBall
 			   if(type!=3) 
 		      {
 			   if(color == 1)
-				   canvas.drawOval(shape,MainGamePanel.redPaint);   
+				   canvas.drawOval(shape,MGP.redPaint);   
 			   else if(color == 2)
-				   canvas.drawOval(shape,MainGamePanel.redPaint); 
+				   canvas.drawOval(shape,MGP.redPaint); 
 			   else if(color== 3) 
-				   canvas.drawOval(shape,MainGamePanel.redPaint); 
+				   canvas.drawOval(shape,MGP.redPaint); 
 			   else if(color == 4)
-				   canvas.drawOval(shape,MainGamePanel.redPaint); 
+				   canvas.drawOval(shape,MGP.redPaint); 
 			   else if(color== 5) 
-				   canvas.drawOval(shape,MainGamePanel.redPaint); }
+				   canvas.drawOval(shape,MGP.redPaint); }
 		   else {
-			   canvas.drawOval(shape,MainGamePanel.redPaint); 
+			   canvas.drawOval(shape,MGP.redPaint); 
 			   } 
 		    }
   public void drawExplosions4(Canvas canvas)
 			    {  if(type!=3) 
 			      {
 					   if(color == 1)
-						   canvas.drawOval(shape,MainGamePanel.s1);   
+						   canvas.drawOval(shape,MGP.s1);   
 					   else if(color == 2)
-						   canvas.drawOval(shape,MainGamePanel.s2); 
+						   canvas.drawOval(shape,MGP.s2); 
 					   else if(color== 3) 
-						   canvas.drawOval(shape,MainGamePanel.s1); 
+						   canvas.drawOval(shape,MGP.s1); 
 					   else if(color == 4)
-						   canvas.drawOval(shape,MainGamePanel.s2); 
+						   canvas.drawOval(shape,MGP.s2); 
 					   else if(color== 5) 
-						   canvas.drawOval(shape,MainGamePanel.s1); }
+						   canvas.drawOval(shape,MGP.s1); }
 				   else {
-					   canvas.drawOval(shape,MainGamePanel.s2);  
+					   canvas.drawOval(shape,MGP.s2);  
 					   }  
 			    }
 	
@@ -211,51 +213,51 @@ public void drawExplosions5(Canvas canvas)
 				    {  if(type!=3) 
 				      {
 						   if(color == 1)
-							   canvas.drawOval(shape,MainGamePanel.bluePaint);   
+							   canvas.drawOval(shape,MGP.bluePaint);   
 						   else if(color == 2)
-							   canvas.drawOval(shape,MainGamePanel.bluePaint); 
+							   canvas.drawOval(shape,MGP.bluePaint); 
 						   else if(color== 3) 
-							   canvas.drawOval(shape,MainGamePanel.blackPaint); 
+							   canvas.drawOval(shape,MGP.blackPaint); 
 						   else if(color == 4)
-							   canvas.drawOval(shape,MainGamePanel.blackPaint); 
+							   canvas.drawOval(shape,MGP.blackPaint); 
 						   else if(color== 5) 
-							   canvas.drawOval(shape,MainGamePanel.WPaint); }
+							   canvas.drawOval(shape,MGP.WPaint); }
 					   else {
-						   canvas.drawOval(shape,MainGamePanel.bluePaint);
+						   canvas.drawOval(shape,MGP.bluePaint);
 						   } 
 				    }
 public void drawExplosions6(Canvas canvas)
 				    {  if(type!=3) 
 				      {
 						   if(color == 1)
-							   canvas.drawOval(shape,MainGamePanel.pinkPaint);   
+							   canvas.drawOval(shape,MGP.pinkPaint);   
 						   else if(color == 2)
-							   canvas.drawOval(shape,MainGamePanel.redPaint); 
+							   canvas.drawOval(shape,MGP.redPaint); 
 						   else if(color== 3) 
-							   canvas.drawOval(shape,MainGamePanel.bluePaint); 
+							   canvas.drawOval(shape,MGP.bluePaint); 
 						   else if(color == 4)
-							   canvas.drawOval(shape,MainGamePanel.pinkPaint); 
+							   canvas.drawOval(shape,MGP.pinkPaint); 
 						   else if(color== 5) 
-							   canvas.drawOval(shape,MainGamePanel.redPaint); }
+							   canvas.drawOval(shape,MGP.redPaint); }
 					   else {
-						   canvas.drawOval(shape,MainGamePanel.pinkPaint);
+						   canvas.drawOval(shape,MGP.pinkPaint);
 						   } 
 				    }
 public void drawExplosions7(Canvas canvas)
 				    {  if(type!=3) 
 				      {
 						   if(color == 1)
-							   canvas.drawOval(shape,MainGamePanel.purplePaint);   
+							   canvas.drawOval(shape,MGP.purplePaint);   
 						   else if(color == 2)
-							   canvas.drawOval(shape,MainGamePanel.bluePaint); 
+							   canvas.drawOval(shape,MGP.bluePaint); 
 						   else if(color== 3) 
-							   canvas.drawOval(shape,MainGamePanel.blackPaint); 
+							   canvas.drawOval(shape,MGP.blackPaint); 
 						   else if(color == 4)
-							   canvas.drawOval(shape,MainGamePanel.purplePaint); 
+							   canvas.drawOval(shape,MGP.purplePaint); 
 						   else if(color== 5) 
-							   canvas.drawOval(shape,MainGamePanel.purplePaint); }
+							   canvas.drawOval(shape,MGP.purplePaint); }
 					   else {
-						   canvas.drawOval(shape,MainGamePanel.purplePaint);
+						   canvas.drawOval(shape,MGP.purplePaint);
 						   } 
 				    
 				    
@@ -265,17 +267,17 @@ public void drawExplosions8(Canvas canvas)
 {  if(type!=3) 
   {
 	   if(color == 1)
-		   canvas.drawOval(shape,MainGamePanel.pinkPaint);   
+		   canvas.drawOval(shape,MGP.pinkPaint);   
 	   else if(color == 2)
-		   canvas.drawOval(shape,MainGamePanel.pinkPaint);
+		   canvas.drawOval(shape,MGP.pinkPaint);
 	   else if(color== 3) 
-		   canvas.drawOval(shape,MainGamePanel.pinkPaint);
+		   canvas.drawOval(shape,MGP.pinkPaint);
 	   else if(color == 4)
-		   canvas.drawOval(shape,MainGamePanel.pinkPaint); 
+		   canvas.drawOval(shape,MGP.pinkPaint); 
 	   else if(color== 5) 
-		   canvas.drawOval(shape,MainGamePanel.pinkPaint); }
+		   canvas.drawOval(shape,MGP.pinkPaint); }
    else {
-	   canvas.drawOval(shape,MainGamePanel.pinkPaint);
+	   canvas.drawOval(shape,MGP.pinkPaint);
 	   } 
 
 
@@ -285,17 +287,17 @@ public void drawExplosions9(Canvas canvas)
 {  if(type!=3) 
   {
 	   if(color == 1)
-		   canvas.drawOval(shape,MainGamePanel.greenPaint);   
+		   canvas.drawOval(shape,MGP.greenPaint);   
 	   else if(color == 2)
-		   canvas.drawOval(shape,MainGamePanel.redPaint); 
+		   canvas.drawOval(shape,MGP.redPaint); 
 	   else if(color== 3) 
-		   canvas.drawOval(shape,MainGamePanel.bluePaint); 
+		   canvas.drawOval(shape,MGP.bluePaint); 
 	   else if(color == 4)
-		   canvas.drawOval(shape,MainGamePanel.purplePaint); 
+		   canvas.drawOval(shape,MGP.purplePaint); 
 	   else if(color== 5) 
-		   canvas.drawOval(shape,MainGamePanel.orangePaint); }
+		   canvas.drawOval(shape,MGP.orangePaint); }
    else {
-	   canvas.drawOval(shape,MainGamePanel.purplePaint);
+	   canvas.drawOval(shape,MGP.purplePaint);
 	   } 
 
 
@@ -305,17 +307,17 @@ public void drawExplosions10(Canvas canvas)
 {  if(type!=3) 
   {
 	   if(color == 1)
-		   canvas.drawOval(shape,MainGamePanel.WPaint);   
+		   canvas.drawOval(shape,MGP.WPaint);   
 	   else if(color == 2)
-		   canvas.drawOval(shape,MainGamePanel.WPaint); 
+		   canvas.drawOval(shape,MGP.WPaint); 
 	   else if(color== 3) 
-		   canvas.drawOval(shape,MainGamePanel.redPaint); 
+		   canvas.drawOval(shape,MGP.redPaint); 
 	   else if(color == 4)
-		   canvas.drawOval(shape,MainGamePanel.greenPaint); 
+		   canvas.drawOval(shape,MGP.greenPaint); 
 	   else if(color== 5) 
-		   canvas.drawOval(shape,MainGamePanel.greenPaint);}
+		   canvas.drawOval(shape,MGP.greenPaint);}
    else {
-	   canvas.drawOval(shape,MainGamePanel.redPaint);
+	   canvas.drawOval(shape,MGP.redPaint);
 	   } 
 
 
@@ -325,19 +327,19 @@ public void drawExplosions10(Canvas canvas)
       if(type!=3) 
        {
         if(color == 1)
-       	 canvas.drawOval(shape,MainGamePanel.greenPaint);   
+       	 canvas.drawOval(shape,MGP.greenPaint);   
         else if(color == 2)
-       	 canvas.drawOval(shape,MainGamePanel.greenPaint); 
+       	 canvas.drawOval(shape,MGP.greenPaint); 
         else if(color== 3) 
-       	 canvas.drawOval(shape,MainGamePanel.greenPaint); 
+       	 canvas.drawOval(shape,MGP.greenPaint); 
         else if(color == 4)
-       	 canvas.drawOval(shape,MainGamePanel.greenPaint); 
+       	 canvas.drawOval(shape,MGP.greenPaint); 
         else if(color== 5) 
-       	 canvas.drawOval(shape,MainGamePanel.greenPaint);  
+       	 canvas.drawOval(shape,MGP.greenPaint);  
        }
       else
       {
-   	   canvas.drawOval(shape,MainGamePanel.greenPaint); 
+   	   canvas.drawOval(shape,MGP.greenPaint); 
       }  
    }
  
@@ -383,21 +385,21 @@ public void drawExplosions10(Canvas canvas)
 	   if(explode)
        { 
         // WIDTH -=5;  //generator.nextInt(2) ;
-        WIDTH +=20;  //generator.nextInt(5) ;
+        WIDTH +=MGP.dp[20];  //generator.nextInt(5) ;
         //HEIGHT -=5; //generator.nextInt(2) ; 
-        HEIGHT += 20; //generator.nextInt(2) ;
+        HEIGHT += MGP.dp[20]; //generator.nextInt(2) ;
         color = generator.nextInt(5)+1;
-        X -= generator.nextInt(150) ;    
-        Y -= generator.nextInt(150) ;
-        X += generator.nextInt(150) ;
-        Y += generator.nextInt(150) ;
-        X -= 8;    
-        Y -= 8;
+        X -= generator.nextInt((int) MGP.dp[150]) ;    
+        Y -= generator.nextInt((int) MGP.dp[150]) ;
+        X += generator.nextInt((int) MGP.dp[150]) ;
+        Y += generator.nextInt((int) MGP.dp[150]) ;
+        X -=  MGP.dp[8];    
+        Y -=  MGP.dp[8];
         
-       if(HEIGHT>MainGamePanel.deviceHeight&&WIDTH>MainGamePanel.deviceWidth)
+       if(HEIGHT>MGP.deviceHeight&&WIDTH>MGP.deviceWidth)
        {
              explode=false;
-            HEIGHT=0;
+             HEIGHT=0;
              WIDTH=0;   
              nuke=false;
           }
@@ -410,36 +412,36 @@ public void drawExplosions10(Canvas canvas)
    {
      if(explode)
       {   
-        HEIGHT=7;
-        WIDTH=7;
+        HEIGHT=(int) MGP.dp[7];
+        WIDTH=(int) MGP.dp[7];
        switch(dir)
       { 
            case(1):
-           X+=10;
+           X+= MGP.dp[10];
              break;
            case(2):
-           X-=10;
+           X-=MGP.dp[10];
              break;
            case(3):
-           Y+=10;
+           Y+=MGP.dp[10];
              break;
            case(4):
-           Y-=10;
+           Y-=MGP.dp[10];
              break;
            case(5):
-            X+=10;Y+=15;
+            X+=MGP.dp[10];Y+=MGP.dp[15];
              break;
            case(6):
-           X+=10;Y-=15;
+           X+=MGP.dp[10];Y-=MGP.dp[15];
              break;
            case(7):
-           X-=10;Y+=15;
+           X-=MGP.dp[10];Y+=MGP.dp[15];
              break;
            case(8):
-           X-=10;Y-=15;
+           X-=MGP.dp[10];Y-=MGP.dp[15];
              break;
         } 
-       if(X<0||Y<0||Y>600||X>1200)
+       if(X<0||Y<0||Y>MGP.deviceWidth||X>MGP.deviceHeight)
        {
             explode=false;
             HEIGHT=0;
@@ -455,17 +457,17 @@ public void drawExplosions10(Canvas canvas)
           if(explode)
           { 
            // WIDTH -=5;  //generator.nextInt(2) ;
-           WIDTH +=10;  //generator.nextInt(5) ;
+           WIDTH +=MGP.dp[10];  //generator.nextInt(5) ;
            //HEIGHT -=5; //generator.nextInt(2) ; 
-           HEIGHT += 10; //generator.nextInt(2) ;
+           HEIGHT += MGP.dp[10]; //generator.nextInt(2) ;
            color = generator.nextInt(5)+1;
-           X -= generator.nextInt(20);    
-           Y -= generator.nextInt(20);
-           X += generator.nextInt(20);
-           Y += generator.nextInt(20);
-           X -= 4;    
-           Y -= 4;
-           if(HEIGHT>100)
+           X -= generator.nextInt((int) MGP.dp[20]);    
+           Y -= generator.nextInt((int) MGP.dp[20]);
+           X += generator.nextInt((int) MGP.dp[20]);
+           Y += generator.nextInt((int) MGP.dp[20]);
+           X -= MGP.dp[4];    
+           Y -= MGP.dp[4];
+           if(HEIGHT>MGP.dp[100])
            {
                 explode=false;
                HEIGHT=0;
@@ -480,20 +482,20 @@ public void drawExplosions10(Canvas canvas)
    {
         if(explode)
           { 
-           X -= 2;    
-           Y -= 2;
+           X -= MGP.dp[2];    
+           Y -= MGP.dp[2];
       // WIDTH -=5;  //generator.nextInt(2) ;
-       WIDTH +=3;  //generator.nextInt(5) ;
+       WIDTH +=MGP.dp[3];  //generator.nextInt(5) ;
        //HEIGHT -=5; //generator.nextInt(2) ; 
-       HEIGHT +=3; //generator.nextInt(2) ;
+       HEIGHT +=MGP.dp[3]; //generator.nextInt(2) ;
        color = generator.nextInt(5)+1;
-       X -= generator.nextInt(15) ;    
-       Y -= generator.nextInt(15) ;
-       X += generator.nextInt(15) ;
-       Y += generator.nextInt(15) ;
+       X -= generator.nextInt((int) MGP.dp[15]) ;    
+       Y -= generator.nextInt((int) MGP.dp[15]) ;
+       X += generator.nextInt((int) MGP.dp[15]) ;
+       Y += generator.nextInt((int) MGP.dp[15]) ;
        //X -= 1;    
        //Y -= 1;
-       if(HEIGHT>50)
+       if(HEIGHT> MGP.dp[50])
         {
            explode=false;
            HEIGHT=0;

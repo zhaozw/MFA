@@ -1,11 +1,11 @@
 package com.example.objects;
 import java.util.Random;
 
-import com.example.mfa.gamepanel.MainGamePanel;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
+
+import com.example.mfa.gamepanel.MGP;
 
 
 public class PowerUp
@@ -29,9 +29,9 @@ public class PowerUp
     public PowerUp(int t)
     {
        type=t;
-       x+=generator.nextInt(MainGamePanel.deviceWidth)+(MainGamePanel.deviceWidth*2);
-   	   x+=MainGamePanel.deviceWidth;
-       y=generator.nextInt(MainGamePanel.deviceHeight);
+       x+=generator.nextInt(MGP.deviceWidth)+(MGP.deviceWidth*2);
+   	   x+=MGP.deviceWidth;
+       y=generator.nextInt(MGP.deviceHeight);
        type=t;
    	   if(type==4)
    	   {
@@ -44,9 +44,9 @@ public class PowerUp
     
     public PowerUp(int t,Bitmap img)
     {	
-    	x+=generator.nextInt(MainGamePanel.deviceWidth)+(MainGamePanel.deviceWidth*2);
-    	x+=MainGamePanel.deviceWidth;
-        y=generator.nextInt(MainGamePanel.deviceHeight);
+    	x+=generator.nextInt(MGP.deviceWidth)+(MGP.deviceWidth*2);
+    	x+=MGP.deviceWidth;
+        y=generator.nextInt(MGP.deviceHeight);
     	this.img=img;
         type=t;
     	if(type==4)
@@ -64,7 +64,7 @@ public class PowerUp
           if(unlocked&&!active) 
           {
        	          x-=2; 
-       	          x-=MainGamePanel.totalSpeed;
+       	          x-=MGP.totalSpeed;
        	          
        	          //if it is out of the screen move it back to the other side
                   if(x<=-100)
@@ -76,9 +76,9 @@ public class PowerUp
           {
         	  //if its unlocked but its already on screen we want to move it out of screen
         	  //before locking it
-              if(x<MainGamePanel.deviceWidth+100)
+              if(x<MGP.deviceWidth+100)
             {
-               	x-=MainGamePanel.totalSpeed;
+               	x-=MGP.totalSpeed;
                 x-=10; //move the powerUp
                if(x<-100)
                     {
@@ -121,20 +121,20 @@ public class PowerUp
     	switch(type)
     	{
     	case(1):
-    		canvas.drawOval(shape,MainGamePanel.bluePaint);
-//    	    canvas.drawText("Spread Shot", x, y,MainGamePanel.textPaint ); 
+    		canvas.drawOval(shape,MGP.bluePaint);
+//    	    canvas.drawText("Spread Shot", x, y,MGP.textPaint ); 
     		break;
         case(2):
-        	canvas.drawOval(shape,MainGamePanel.redPaint);
-           // canvas.drawText("Shoot Faster", x, y,MainGamePanel.textPaint ); 
+        	canvas.drawOval(shape,MGP.redPaint);
+           // canvas.drawText("Shoot Faster", x, y,MGP.textPaint ); 
     		break;
         case(3):
-        	canvas.drawOval(shape,MainGamePanel.yellowPaint);
-            //canvas.drawText("SlowMo", x, y,MainGamePanel.textPaint ); 
+        	canvas.drawOval(shape,MGP.yellowPaint);
+            //canvas.drawText("SlowMo", x, y,MGP.textPaint ); 
 	       break;
         case(4):
-        	canvas.drawOval(shape,MainGamePanel.greenPaint);
-            canvas.drawText("Nuke", x, y,MainGamePanel.textPaint ); 
+        	canvas.drawOval(shape,MGP.greenPaint);
+            canvas.drawText("Nuke", x, y,MGP.textPaint ); 
 	      break;
     	}
 	} 
@@ -142,13 +142,13 @@ public class PowerUp
     
     public void moveBack()
     {
-    	x+=generator.nextInt(MainGamePanel.deviceWidth*5)+MainGamePanel.deviceWidth;
-        y=generator.nextInt(MainGamePanel.deviceHeight);
+    	x+=generator.nextInt(MGP.deviceWidth*5)+MGP.deviceWidth;
+        y=generator.nextInt(MGP.deviceHeight);
     } 
   
     public void unlock()
     {
-    	x+=generator.nextInt(MainGamePanel.deviceWidth*5)+MainGamePanel.deviceWidth;
+    	x+=generator.nextInt(MGP.deviceWidth*5)+MGP.deviceWidth;
     	unlocked=true;
     }
       public void activate()

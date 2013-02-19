@@ -2,11 +2,10 @@ package com.example.objects;
 
 import java.util.Random;
 
-import com.example.mfa.gamepanel.MainGamePanel;
-
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+
+import com.example.mfa.gamepanel.MGP;
 public class Alien 
 { 
 	public int x,cx,cy;
@@ -61,7 +60,7 @@ public class Alien
     	}
     	else  
     	{
-    		if(x<MainGamePanel.deviceWidth+100)
+    		if(x<MGP.deviceWidth+100)
     			x+=5;
     	}
     	 cx=x + (alien.getWidth() / 2);
@@ -196,8 +195,8 @@ public class Alien
     
     public void moveBack() 
 	{
-		this.y = generator.nextInt(MainGamePanel.deviceHeight);
-		this.x = MainGamePanel.deviceWidth-generator.nextInt((MainGamePanel.deviceWidth)*8);
+		this.y = generator.nextInt(MGP.deviceHeight);
+		this.x = MGP.deviceWidth-generator.nextInt((MGP.deviceWidth)*8);
 	}
 }
 

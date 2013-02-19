@@ -1,9 +1,9 @@
 package com.example.objects;
 
-import com.example.mfa.gamepanel.MainGamePanel;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+
+import com.example.mfa.gamepanel.MGP;
 
 public class Shot 
 {
@@ -16,9 +16,26 @@ public class Shot
     private int lifeLeft; 
     private Bitmap bitmap;	// the actual bitmap
     int ps, sine=15;
+    int dir =0;
+	
+	public Shot(double x, double y, double angle, int lifeLeft, int shotSpeed, Bitmap bitmap,int dir) 
+	{
+		this.dir=dir;
+		this.x=x; 
+        this.y=y; 
+        ps=(int)y;
+        this.angle=angle;
+        xVelocity=shotSpeed*Math.cos(angle); 
+        yVelocity=shotSpeed*Math.sin(angle); 
+        this.bitmap = bitmap;
+        // the number of frames the shot will last for before disappearing if it doesn't hit anything 
+        this.lifeLeft=lifeLeft;  
+        this.shotSpeed = shotSpeed;
+	}
 	
 	public Shot(double x, double y, double angle, int lifeLeft, int shotSpeed, Bitmap bitmap) 
 	{
+		this.dir=dir;
 		this.x=x; 
         this.y=y; 
         ps=(int)y;
@@ -33,13 +50,15 @@ public class Shot
 	
 	public void move()
     { 
-        lifeLeft--; // used to make shot disappear if it goes too long 
-                    // without hitting anything
+        lifeLeft--; // make shot disappear if it goes for too long 
+     if(dir==0){
         x+=xVelocity;
-       // if(MainGamePanel.powerUps.spreadShot.active)
-        y+=yVelocity;
+        y+=yVelocity;}
+     else if(dir==1){
+        x-=xVelocity;
+        y-=yVelocity;}
         
-        if(x>MainGamePanel.deviceWidth)
+        if(x>MGP.deviceWidth||x<0)
         	lifeLeft=0;
     }
 	

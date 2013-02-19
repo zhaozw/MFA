@@ -53,7 +53,7 @@ public class MainThread extends Thread {
 	private SurfaceHolder surfaceHolder;
 	// The actual view that handles inputs
 	// and draws to the surface
-	private MainGamePanel gamePanel;
+	private MGP gamePanel;
 
 	// flag to hold game state
 	private boolean running;
@@ -61,7 +61,7 @@ public class MainThread extends Thread {
 		this.running = running;
 	}
 
-	public MainThread(SurfaceHolder surfaceHolder, MainGamePanel gamePanel) {
+	public MainThread(SurfaceHolder surfaceHolder, MGP gamePanel) {
 		super();
 		this.surfaceHolder = surfaceHolder;
 		this.gamePanel = gamePanel;
@@ -153,7 +153,7 @@ public class MainThread extends Thread {
 
 		if (statusIntervalTimer >= lastStatusStore + STAT_INTERVAL) {
 			// calculate the actual frames pers status check interval
-			double actualFps = frameCountPerStatCycle / (STAT_INTERVAL / 1000);
+			double actualFps = (frameCountPerStatCycle / (STAT_INTERVAL / 1000));
 
 			//stores the latest fps in the array
 			fpsStore[(int) statsCount % FPS_HISTORY_NR] = actualFps;

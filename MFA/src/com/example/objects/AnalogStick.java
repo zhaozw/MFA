@@ -1,8 +1,8 @@
 package com.example.objects;
-import com.example.mfa.gamepanel.MainGamePanel;
-
 import android.graphics.Canvas;
 import android.graphics.RectF;
+
+import com.example.mfa.gamepanel.MGP;
 public class AnalogStick {
 	
 	
@@ -31,7 +31,7 @@ public class AnalogStick {
 		this.size=s;
 		analogSize=as;
 		this.x =0;
-		this.y =MainGamePanel.deviceHeight-size;
+		this.y =MGP.deviceHeight-size;
 	    fullPad = new RectF(x,y,x+size,y+size);
 	    cx=(x+(size/2));
 	    cy=(y+(size/2));
@@ -43,9 +43,9 @@ public class AnalogStick {
 
 	public void draw(Canvas canvas)
 	{
-		canvas.drawOval(fullPad,MainGamePanel.s1); 
-		canvas.drawLine(cx, cy, acx, acy, MainGamePanel.blackPaint);
-		canvas.drawOval(activeLocation,MainGamePanel.s2);
+		canvas.drawOval(fullPad,MGP.s1); 
+		canvas.drawLine(cx, cy, acx, acy, MGP.blackPaint);
+		canvas.drawOval(activeLocation,MGP.s2);
 	}
 	public RectF getFullPad()
 	{	
@@ -57,16 +57,16 @@ public class AnalogStick {
 	
 	public void GetInputAndDisplay(Canvas canvas)
 	{	
-		 canvas.drawText("ACTIVE lOCATION X "+ activeLocation.left, 15, 200,MainGamePanel.WPaint); 
-		 canvas.drawText("ACTIVE lOCATION y "+ activeLocation.top, 15, 210,MainGamePanel.WPaint); 
-		 canvas.drawText("ACTIVE lOCATION BOTTOM  "+activeLocation.bottom, 15, 220,MainGamePanel.WPaint); 
-		 canvas.drawText("ACTIVE lOCATION RIGHT SIDE "+activeLocation.right, 15, 230,MainGamePanel.WPaint);
-		 canvas.drawText("ACTIVE lOCATION CENTER X "+ acx, 15, 240,MainGamePanel.WPaint); 
-		 canvas.drawText("ACTIVE lOCATION CENTER y "+ acy, 15, 250,MainGamePanel.WPaint); 
-		 canvas.drawText("xDiff "+ xDiff, 15, 260,MainGamePanel.WPaint); 
-		 canvas.drawText("yDiff "+ yDiff, 15, 270,MainGamePanel.WPaint); 
-		 canvas.drawText("STANDARD CENTER X "+ cx, 15, 280,MainGamePanel.WPaint);  
-		 canvas.drawText("STANDARD CENTER y "+ cy, 15, 290,MainGamePanel.WPaint); 
+		 canvas.drawText("ACTIVE lOCATION X "+ activeLocation.left, 15, 200,MGP.WPaint); 
+		 canvas.drawText("ACTIVE lOCATION y "+ activeLocation.top, 15, 210,MGP.WPaint); 
+		 canvas.drawText("ACTIVE lOCATION BOTTOM  "+activeLocation.bottom, 15, 220,MGP.WPaint); 
+		 canvas.drawText("ACTIVE lOCATION RIGHT SIDE "+activeLocation.right, 15, 230,MGP.WPaint);
+		 canvas.drawText("ACTIVE lOCATION CENTER X "+ acx, 15, 240,MGP.WPaint); 
+		 canvas.drawText("ACTIVE lOCATION CENTER y "+ acy, 15, 250,MGP.WPaint); 
+		 canvas.drawText("xDiff "+ xDiff, 15, 260,MGP.WPaint); 
+		 canvas.drawText("yDiff "+ yDiff, 15, 270,MGP.WPaint); 
+		 canvas.drawText("STANDARD CENTER X "+ cx, 15, 280,MGP.WPaint);  
+		 canvas.drawText("STANDARD CENTER y "+ cy, 15, 290,MGP.WPaint); 
 	}
     
 	

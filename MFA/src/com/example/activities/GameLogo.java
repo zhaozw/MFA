@@ -7,19 +7,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.mfa.R;
-import com.example.mfa.networking.JSONPaser;
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import com.example.mfa.R;
+import com.example.mfa.networking.JSONPaser;
 
 public class GameLogo extends Activity {
 	private Object data = null;

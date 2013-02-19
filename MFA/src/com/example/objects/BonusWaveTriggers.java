@@ -1,11 +1,11 @@
 package com.example.objects;
 import java.util.Random;
 
-import com.example.mfa.gamepanel.MainGamePanel;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
+
+import com.example.mfa.gamepanel.MGP;
 
 
 public class BonusWaveTriggers
@@ -27,9 +27,9 @@ public class BonusWaveTriggers
     
     public BonusWaveTriggers(int t,Bitmap img)
     {	
-    	x+=generator.nextInt(MainGamePanel.deviceWidth)+(MainGamePanel.deviceWidth*2);
-    	x+=MainGamePanel.deviceWidth;
-        y=generator.nextInt(MainGamePanel.deviceHeight);
+    	x+=generator.nextInt(MGP.deviceWidth)+(MGP.deviceWidth*2);
+    	x+=MGP.deviceWidth;
+        y=generator.nextInt(MGP.deviceHeight);
     	this.img=img;
         shape = new RectF(x,y, x+width, y+height);
     }
@@ -40,7 +40,7 @@ public class BonusWaveTriggers
           if(unlocked) 
           {
        	          x-=5; 
-       	          x-=MainGamePanel.totalSpeed;
+       	          x-=MGP.totalSpeed;
        	          
        	          //if it is out of the screen move it back to the other side
                   if(x<=-100)
@@ -53,9 +53,9 @@ public class BonusWaveTriggers
           {
         	  //if its unlocked but its already on screen we want to move it out of screen
         	  //before locking it
-              if(x<MainGamePanel.deviceWidth+100)
+              if(x<MGP.deviceWidth+100)
             {
-               	x-=MainGamePanel.totalSpeed;
+               	x-=MGP.totalSpeed;
                 x-=10; //move the powerUp
                if(x<-100)
                     {
@@ -89,13 +89,13 @@ public class BonusWaveTriggers
     
     public void draw2(Canvas canvas) 
     {
-    		canvas.drawOval(shape,MainGamePanel.yellowPaint);
+    		canvas.drawOval(shape,MGP.yellowPaint);
 	} 
 
     public void moveBack()
     {
-    	x+=generator.nextInt(MainGamePanel.deviceWidth*5)+MainGamePanel.deviceWidth;
-        y=generator.nextInt(MainGamePanel.deviceHeight);
+    	x+=generator.nextInt(MGP.deviceWidth*5)+MGP.deviceWidth;
+        y=generator.nextInt(MGP.deviceHeight);
     } 
     
 

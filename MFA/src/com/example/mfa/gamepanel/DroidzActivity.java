@@ -11,7 +11,7 @@ public class DroidzActivity extends Activity {
     /** Called when the activity is first created. */
 	
 	private static final String TAG = DroidzActivity.class.getSimpleName();
-    public MainGamePanel gamePanel;
+    public MGP gamePanel;
 	public static AssetManager assets;
     
     @Override
@@ -26,7 +26,7 @@ public class DroidzActivity extends Activity {
         // making it full screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         
-        gamePanel = new MainGamePanel(this);
+        gamePanel = new MGP(this);
         
         // set our MainGamePanel as the View
         setContentView(gamePanel);

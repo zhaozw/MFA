@@ -135,6 +135,7 @@ public final class R {
         public static final int sh3=0x7f04000e;
     }
     public static final class string {
+        public static final int Christian=0x7f06001b;
         public static final int app_name=0x7f060000;
         public static final int choose_rival_activity_player_select=0x7f060012;
         public static final int choose_rival_hit_type=0x7f06000d;

@@ -4,20 +4,7 @@
 package com.example.mfa.gamepanel;
 
 import java.util.Random;
-import com.example.mfa.R;
-import com.example.mfa.OldMenus_JustForReference.MainGameVisuals;
-import com.example.mfa.OldMenus_JustForReference.MainMenuVisuals;
-import com.example.objects.Alien;
-import com.example.objects.AnalogStick;
-import com.example.objects.Asteroid;
-import com.example.objects.Explosion;
-import com.example.objects.HitGiantBoss;
-import com.example.objects.InteractiveSong;
-import com.example.objects.LightBackground;
-import com.example.objects.Player;
-import com.example.objects.PowerUpsAll;
-import com.example.objects.SoundEffectsManager;
-import com.example.objects.Thrusters;
+
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,32 +13,48 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.graphics.RectF;
+
+import com.example.HitsObjects.HitGiantBoss;
+import com.example.activities.NewGameOptions;
+import com.example.mfa.R;
+import com.example.objects.Alien;
+import com.example.objects.AnalogStick;
+import com.example.objects.Asteroid;
+import com.example.objects.Explosion;
+import com.example.objects.InteractiveSong;
+import com.example.objects.LightBackground;
+import com.example.objects.Player;
+import com.example.objects.PowerUpsAll;
+import com.example.objects.SoundEffectsManager;
+import com.example.objects.Thrusters;
+import com.example.objects.TouchButton;
 
 /**
  * @author impaler
  * This is the main surface that handles the ontouch events and draws
  * the image to the screen.
  */
-public class MainGamePanel extends SurfaceView implements
+public class MGP extends SurfaceView implements
 		SurfaceHolder.Callback{
 
-	private static final String TAG = MainGamePanel.class.getSimpleName();
+	private static final String TAG = MGP.class.getSimpleName();
 	
+	
+	
+    public static double[] dp;
+	
+
 	
 	
 	private MainThread thread;		
-//
-//    public MainMenuVisuals mainMenu;
-//    public OptionsVisuals options;
-    public MainGameVisuals mainGame;
-//    public GameOverVisuals gameOverMenu;
     
 	DisplayMetrics metrics = this.getResources().getDisplayMetrics();
     int dh = metrics.heightPixels;
@@ -65,10 +68,10 @@ public class MainGamePanel extends SurfaceView implements
 	
 	boolean createBitmap=false;
 	
-	//this will be for the options/start/whatever menu
-	//0 is main menu/1 is game start/2 is options/3 is hits/4 is exit
-    public int menuState=0,previousMenuState,previousGameState;
+	public TouchButton shootButton,quitButton;
 	
+
+    
     Bitmap myBitmap =null;
     
     public int optionsChoice=0;
@@ -77,9 +80,7 @@ public class MainGamePanel extends SurfaceView implements
     private Bitmap[] lifeBar = new Bitmap[4];
     public static int life;
 
-
-
-public int barY;
+    public int barY;
     
     private Bitmap bar;
 
@@ -98,7 +99,7 @@ public int barY;
     private Thrusters shipThrusters;
     
     //0 = game just begun ,  1 = wave ongoing , 2 = between waves, 3 = paused, 4 = gameOver, 5= game has not yet started,6= close game
-    public static int state =5;
+    public static int state =0;
     
     //the time that counts down when the waves finish before starting a new wave
     public static int waveDelay = 600;
@@ -127,7 +128,7 @@ public int barY;
     public static Paint textPaint,WPaint,redPaint,bluePaint,greenPaint,yellowPaint,greyPaint,blackPaint,orangePaint,purplePaint,pinkPaint,s1,s2,blueT,redT,orangeT,yellowT;
 
     //the player
-    Player ship = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.ship),BitmapFactory.decodeResource(getResources(), R.drawable.laser),-200,-200);
+    Player ship;
     
     //the player
 //    Player ship = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.bs65),
@@ -162,35 +163,44 @@ public int barY;
     
     AnalogStick analog;
 
-	public MainGamePanel(Context context) 
+    
+	public MGP(Context context) 
 	{
 		super(context);
 		// adding the callback (this) to the surface holder to intercept events
 		getHolder().addCallback(this);
 
+	
+		
+
+		 dp = new double[1000];
 		
 		
+		 for(int k=0;k<dp.length;k++)
+		 {
+			 dp[k]=TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, k, NewGameOptions.dm); 
+		 }
+	
+			
+		 
           deviceWidth  = dw;
           deviceHeight = dh;
 		
-          screenShape= new RectF(0,0,deviceWidth,deviceHeight);
+      
           
-          analog = new AnalogStick(115,75);
-//          mainMenu = new MainMenuVisuals(BitmapFactory.decodeResource(getResources(), R.drawable.logo), 
-//        		  BitmapFactory.decodeResource(getResources(), R.drawable.startgamebtn),
-//        		  BitmapFactory.decodeResource(getResources(), R.drawable.optionsbtn),
-//        		  BitmapFactory.decodeResource(getResources(), R.drawable.hitsbtn),
-//        		  BitmapFactory.decodeResource(getResources(), R.drawable.exitbtn));
-//          
-//
-//          options = new OptionsVisuals(BitmapFactory.decodeResource(getResources(), R.drawable.ast));
-          mainGame = new MainGameVisuals(BitmapFactory.decodeResource(getResources(), R.drawable.pause),BitmapFactory.decodeResource(getResources(), R.drawable.pause),BitmapFactory.decodeResource(getResources(), R.drawable.pause));
-//          gameOverMenu = new GameOverVisuals(BitmapFactory.decodeResource(getResources(), R.drawable.ast));
+          screenShape= new RectF(0,0,deviceWidth,deviceHeight);
+         
+      	  shootButton = new TouchButton(MGP.deviceWidth-MGP.dp[70],MGP.deviceHeight-MGP.dp[70],MGP.dp[70]);
+      	  quitButton = new TouchButton(MGP.deviceWidth-MGP.dp[40],0,MGP.dp[40]);
+          ship = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.ship),BitmapFactory.decodeResource(getResources(), R.drawable.laser),200,200);
+          
+         analog = new AnalogStick((int)dp[115],(int)dp[75]);
+
           powerUps= new PowerUpsAll(BitmapFactory.decodeResource(getResources(), R.drawable.bomb));
           
           for(int j=0;j<enemies.length;j++)  
               enemies[j] = new Alien(BitmapFactory.decodeResource(getResources(), R.drawable.alien),BitmapFactory.decodeResource(getResources(), 
-              		R.drawable.fireball),deviceWidth*2,deviceHeight/2,30,70);
+              		R.drawable.fireball),deviceWidth*2,deviceHeight/2,dp[30],(int) dp[70]);
 
 
 	         gameSoundtrack = new InteractiveSong(this.getContext());
@@ -200,7 +210,7 @@ public int barY;
 	
 	         //initialize asteroids
 	          for(int i=0;i<asteroids.length;i++) 
-	           asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.ast), 40, .5, 4,deviceWidth,deviceHeight);
+	           asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.ast), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
 	         
 	          explo1 = new Explosion();
 	          explo2 = new Explosion();
@@ -276,7 +286,11 @@ public int barY;
 		switch (action) 
         {
 	      case (MotionEvent.ACTION_DOWN): 
-				if(mainGame.shootButton.touchLocation.contains(event.getX(),event.getY()))
+	    	  
+	    	  if(quitButton.touchLocation.contains(event.getX(),event.getY()))
+	    		  closeGame();
+	      
+				if(shootButton.touchLocation.contains(event.getX(),event.getY()))
 				{
 					if(life>0&&bonusWaveOngoing==false){ 
 			    		   if(ship.shooting==true) 
@@ -286,6 +300,9 @@ public int barY;
 				      }
 				}
 	        	
+		      if(powerUps.nuke.shape.contains(event.getX(),event.getY()))
+	    	      collision(4,(int)event.getX(),(int)event.getY());
+		      
 				if(bonusWaveOngoing)
 				{	
 					for(int k = 0 ;k<asteroids.length;k++){
@@ -299,7 +316,7 @@ public int barY;
 				    }
 				}
 				
-				if(analog.fullPad.contains(event.getX(),event.getY()))
+				if(analog.fullPad.contains(event.getX(),event.getY())&&life>0)
 				{
 					analog.SetActiveLocation(event.getX(),event.getY());
 				}
@@ -308,7 +325,7 @@ public int barY;
 				
         case (MotionEvent.ACTION_POINTER_DOWN): 
         	
-        	if(mainGame.shootButton.touchLocation.contains(event.getX(),event.getY()))
+        	if(shootButton.touchLocation.contains(event.getX(),event.getY()))
 			{
 				if(life>0&&bonusWaveOngoing==false){ 
 		    		   if(ship.shooting==true) 
@@ -318,7 +335,7 @@ public int barY;
 			      }
 			}   
         	
-        	if(analog.fullPad.contains(event.getX(),event.getY())&&menuState==1)
+        	if(analog.fullPad.contains(event.getX(),event.getY())&&life>0)
 			{
 				analog.SetActiveLocation(event.getX(),event.getY());
 			}
@@ -327,7 +344,7 @@ public int barY;
 
         case MotionEvent.ACTION_MOVE: 
         {
-			if(analog.fullPad.contains(event.getX(),event.getY())&&menuState==1)
+			if(analog.fullPad.contains(event.getX(),event.getY())&&life>0)
 			{
 				analog.SetActiveLocation(event.getX(),event.getY());
 	        }
@@ -406,13 +423,12 @@ public int barY;
 	        enemies[i].draw(canvas);
 
 		if(ship.unlocked)
-			analog.draw(canvas);
+			
 			canvas.drawBitmap(bar, 0, barY, null);
-			textPaint.setTextSize(25.0f);
-			canvas.drawText("score is: " + score, 155, 25,textPaint );
+			textPaint.setTextSize((float) MGP.dp[25]);
+			canvas.drawText("score is: " + score, (float) MGP.dp[155], (float) MGP.dp[25],textPaint );
 	   
 			
-			drawHits(canvas);
 			
 			
 		   if(life==3){
@@ -428,11 +444,38 @@ public int barY;
             
             if(state!=4)
    		 {
-   			 
+            	analog.draw(canvas);
    		        ship.draw(canvas);
    		        shipThrusters.Draw(canvas);
    		 }
-       
+            
+            MGP.textPaint.setTextSize((float) MGP.dp[100]);
+ 		   if(MGP.state==0&&MGP.waveDelay<300&&MGP.waveDelay>200) { 
+ 			 canvas.drawText("Ready",(int)dp[50], (int)dp[200],MGP.textPaint ); 
+ 		   }  
+ 		   else if(MGP.state==0&&MGP.waveDelay<200&&MGP.waveDelay>100){
+ 			 canvas.drawText("Set",(int)dp[50], (int)dp[200],MGP.textPaint ); 
+ 		   }
+ 		   else if(MGP.state==0&&MGP.waveDelay<100&&MGP.waveDelay>0){
+ 			 canvas.drawText("Destroy",(int)dp[50], (int)dp[200],MGP.textPaint ); 
+ 		   }	
+ 		   
+ 		  MGP.bluePaint.setTextSize((float) MGP.dp[50]);
+		   if(MGP.state==2&&MGP.waveDelay<300&&MGP.waveDelay>200) { 
+				 canvas.drawText("Wave "+MGP.wave+" Completed", (int)dp[10], (int)dp[200],MGP.bluePaint ); 
+		 }  
+		 else if(MGP.state==2&&MGP.waveDelay<200&&MGP.waveDelay>100){
+		 canvas.drawText("You Killed "+MGP.astKilledThisWave +" Asteroids", (int)dp[10], (int)dp[200],MGP.bluePaint ); 
+		 }
+		 else if(MGP.state==2&&MGP.waveDelay<100&&MGP.waveDelay>0){
+		 canvas.drawText("Wave "+(MGP.wave+1)+" will begin",(int)dp[10], (int)dp[200],MGP.bluePaint ); 
+		 }
+	     else if(MGP.state==2&&MGP.waveDelay<50&&MGP.waveDelay>0){
+	     canvas.drawText("Go ", (int)dp[10], (int)dp[200],MGP.bluePaint ); 
+	     }
+ 		   
+ 		  NewGameOptions.hitsAllInfo.DrawHits(canvas);
+ 		   
             explo1.draw(canvas);
   		  // canvas.drawText("1" , explo1.startX, explo1.startY, redPaint);
   		   explo2.draw(canvas);
@@ -441,70 +484,21 @@ public int barY;
   		  // canvas.drawText("3", explo3.startX, explo3.startY, redPaint);
             
   		   
-  		 if(life==0)
-		   {
-		   canvas.drawBitmap(myBitmap,0,0,null);
-		   }
+  		   
+  		   
+  		   shootButton.draw(canvas);
+  		   quitButton.draw(canvas);
+  		   
+ 
+  		 
+  		 NewGameOptions.hitsAllInfo.drawHitInfo(canvas);
+  		 
+  		//visualTest.draw(canvas);
+  		 
 			// display fps
 			displayFps(canvas, avgFps);
-			
-//		//0 is main menu/1 is game start/2 is options/3 is hits/4 is exit
-//		switch(menuState)
-//		{
-//		case(0):
-//		mainMenu.draw(canvas,ship);
-//		break;
-//		case(1):
-//			if(state!=4)
-//			{
-//              if(ship.unlocked)
-//				analog.draw(canvas);
-//				canvas.drawBitmap(bar, 0, barY, null);
-//				textPaint.setTextSize(25.0f);
-//				canvas.drawText("score is: " + score, 155, 25,textPaint );
-//		   
-//				
-//				drawHits(canvas);
-//				
-//				
-//			   if(life==3){
-//				   canvas.drawBitmap(lifeBar[0], 0, barY, null);
-//			   }else if(life==2){
-//				   canvas.drawBitmap(lifeBar[1], 0, barY, null);
-//			   } else if(life==1) {
-//				   canvas.drawBitmap(lifeBar[2], 0, barY, null); 
-//			   }
-//		        mainGame.draw(canvas); 
-//		        textPaint.setTextSize(10.0f);
-//                powerUps.draw(canvas);
-//			}
-//		   else
-//		   {
-//			  gameOverMenu.draw(canvas); 
-//		   }
-//	    break;
-//		case(2):
-//	    options.draw(canvas);
-//			break;
-//		case(3):
-//		  
-//			break;
-//		case(4):
-//			
-//			break;
-//		}
-            
-		if(MainMenuVisuals.logoCount > 15)
-		{	
-		
-		   
-		 
 
-	
-		   
-		  
-		}
-		   
+			//visualTest.draw(canvas);
 	}
 
 	/**
@@ -516,7 +510,6 @@ public int barY;
 	{
 		//Log.d(TAG, "updating");
 	    updateGameState();
-	    updateMenuState();
 	    updateBar();
 		updateObjects();
 		updateAudio();
@@ -526,7 +519,7 @@ public int barY;
    public void updateAudio()
 		{
 	   
-	         Log.d(TAG, "starting effects ");
+	         //Log.d(TAG, "starting effects ");
 	         soundEffects.playSounds();
 	   
 		     if(startMusic){
@@ -570,12 +563,12 @@ public int barY;
 		   updateEnemies();
 		   
 		   //if game is ongoing then run the asteroids
-		   if(menuState==1){
+		  
 		    updateAsteroids();
 		    updateShots(); 
-		   powerUps.Update(ship);
+		    powerUps.Update(ship);
 		   //updateEnemies();
-		   }
+		   
 		 		   
 		   if(powerUps.shootFaster.shipCollision(ship)){
              powerUps.shootFaster.activate();
@@ -584,12 +577,12 @@ public int barY;
 		   if(powerUps.spreadShot.shipCollision(ship))
 			   powerUps.spreadShot.activate();
 			   
-//		   if(powerUps.slowMo.shipCollision(ship)){ 
-//			   powerUps.slowMo.activate();
-//		       MainThread.MAX_FPS=24;
-//		       MainThread.FRAME_PERIOD = 1000 /  MainThread.MAX_FPS;
-//		       slowMoAudio();
-//		      }
+		   if(powerUps.slowMo.shipCollision(ship)){ 
+			   powerUps.slowMo.activate();
+		       MainThread.MAX_FPS=24;
+		       MainThread.FRAME_PERIOD = 1000 /  MainThread.MAX_FPS;
+		       slowMoAudio();
+		      }
 		   
 		   if(powerUps.shootFaster.active==false)   
 			   ship.shotDelay=12;
@@ -602,82 +595,25 @@ public int barY;
 		   
 //		   if(powerUps.shootMassive.shipCollision(ship))
 //		   if(powerUps.spreadShot.shipCollision(ship))
+		   
+			//r=Generator.nextInt(28);
+//			  if(r==1){ 
+//				   powerUps.slowMo.activate(40);
+//			       MainThread.MAX_FPS=24;
+//			       MainThread.FRAME_PERIOD = 1000 /  MainThread.MAX_FPS;
+//			       slowMoAudio();
+//			      }
+//			  else if (r==7){
+//			     powerUps.slowMo.activate(130);
+//			       MainThread.MAX_FPS=24;
+//			       MainThread.FRAME_PERIOD = 1000 /  MainThread.MAX_FPS;
+//			       slowMoAudio();
+//		          }
 	 }    
 	
-	public void updateMenuState()
-	{
-		//0 is main menu/1 is game start/2 is options/3 is hits/4 is exit
 
-          switch(menuState)
-		   {
-		   case(0):
-			   //where the game currently is so nothing required to do
-			   break;
-		   case(1):
-			   //start the game so we set the state to 
-			   if(state==5||state==3)
-				   state=previousGameState;
-			   break;
-		   case(2):
-			   //boot up options 
-			   break;
-		   case(3):
-			   //will be for hits menu
-			   break;
-		   case(4):
-			   // exits the game
-			   closeGame();
-			   break;
-		   }      
-	}
-	
-	
-//	public void updateOptionsMenu(float x, float y)
-//	{
-//		 //check for collision with the user shots.
-//   
-//          optionsChoice = options.updateOptionsCollision(x,y);     
-// 
-//    	//0 = nothing, 1 = explosion color, 2= light color, 3 =exit Options Menu
-//        switch(optionsChoice)
-//		   {
-//		   case(0):
-//			   
-//			   break;
-//		   case(1):
-//			   MainGamePanel.explodeColor+=1;
-//		     if(MainGamePanel.explodeColor==11)
-//		    	 MainGamePanel.explodeColor=0;
-//			   break;
-//		   case(2):
-//	            lightColor+=1;
-//		     if(lightColor==8)
-//		        lightColor=0;
-//			   break;
-//		   case(3):
-//			   menuState=previousMenuState;
-//			   break;
-//		   case(4):
-//			   ResetGame();
-//			   break;
-//		   case(5):
-//			   closeGame();
-//			   break;	
-//		   case(6):
-//			   ship.imgChoice+=1;
-//		     if(ship.imgChoice==6)
-//		    	 ship.imgChoice=1;
-//			   break;
-//		   }
-//
-//	}
-//	
-	
 	private void updateShots()
-    { 
-		//move all the shots
-		ship.moveShots();
-		
+    { 	
 		//set the trigger to play the laser to 0
 				if(ship.checkForNewShots())
 				    soundEffects.laserST=0;
@@ -695,34 +631,16 @@ public int barY;
 		 }
      }
 	
-
-	
 	private void collision(int type,int x,int y)
 	{
 		 triggerExplosions(x,y); 
 		
-		r=Generator.nextInt(28);
-		  if(r==1){ 
-			   powerUps.slowMo.activate(40);
-		       MainThread.MAX_FPS=24;
-		       MainThread.FRAME_PERIOD = 1000 /  MainThread.MAX_FPS;
-		       slowMoAudio();
-		      }
-		  else if (r==7){
-		     powerUps.slowMo.activate(130);
-		       MainThread.MAX_FPS=24;
-		       MainThread.FRAME_PERIOD = 1000 /  MainThread.MAX_FPS;
-		       slowMoAudio();
-	          }
+//
 
 	   switch(type){
 		 case(1):
-		       playerHitST=0;
-			if(life==1)
-          	{
-          		createBitmap=true;
-          	    Log.d("Collision","Starting bitmap");
-          	}
+		       soundEffects.playerHitST=0;
+			
 	          	if(life>0)
 	    	    {
 		        life--;
@@ -768,7 +686,7 @@ public int barY;
 	            		  enemies[i].moveBack();
 	            }
 	            powerUps.nuke.unlocked=false;
-	    		powerUps.nuke.x=MainGamePanel.deviceWidth*5+MainGamePanel.deviceWidth;
+	    		powerUps.nuke.x=MGP.deviceWidth*5+MGP.deviceWidth;
 		    
 			break;
 	    	
@@ -801,7 +719,7 @@ public int barY;
           asteroids[i].move(); 
           
           //check for collisions with the ship
-          if(asteroids[i].shipCollision(ship)&&life>0&&ship.unlocked){ 
+          if(asteroids[i].shipCollision(ship)&&life>0){ 
               asteroids[i].moveBack();
               collision(1,ship.x,ship.y);
              } 
@@ -831,7 +749,7 @@ public int barY;
              enemies[i].move(enemies[i-1].x, enemies[i-1].y); 
              
               //check for physical collisions with the ship.
-            if(enemies[i].shipCollision(ship)&& life > 0&&ship.unlocked){
+            if(enemies[i].shipCollision(ship)&& life > 0&&life>0){
                     collision(1,ship.x, ship.y);
               	    enemies[i].unlocked=false;
               	    enemies[i].moveBack();
@@ -844,7 +762,7 @@ public int barY;
             		}
            
            //checking shot collision against the enemies with the players shots
-           if(enemies[i].updateShipShotCollision(ship)&&ship.unlocked) {
+           if(enemies[i].updateShipShotCollision(ship)&&life>0) {
         	    collision(3,enemies[i].x, enemies[i].y);
         	    enemies[i].unlocked=false;
         	    enemies[i].moveBack();
@@ -955,11 +873,11 @@ public int barY;
 		      if(asteroidsUnlocked>=asteroids.length)
 		    	  asteroidsUnlocked=asteroids.length-1;
 		      
-		      if(wave%2==0&&wave>1)
-		      enemiesUnlocked+=1;
-		      if(enemiesUnlocked>=enemies.length)
-		    	    enemiesUnlocked=enemies.length-1;
-		      
+//		      if(wave%2==0&&wave>1)
+//		      enemiesUnlocked+=1;
+//		      if(enemiesUnlocked>=enemies.length)
+//		    	    enemiesUnlocked=enemies.length-1;
+//		      
 		      stopMusic=true;
 		      
 		      //change state to in between
@@ -978,10 +896,7 @@ public int barY;
 	    {    
 	    	 Log.d(TAG, "starting wave");
 	    	 
-	    	  //release said number of asteroids
-	    	
-	    	 createBossHit();
-	    	 
+  	 
 		          for(int k=0;k<asteroidsUnlocked;k++) {
 	               asteroids[k].unlocked=true;    
 	              }
@@ -992,11 +907,14 @@ public int barY;
 			          totalSpeed+=1;          
 
 	          
+		          
 	          //change game state to wave ongoing
 	          state=1;	         
 	         
 	          //add one to wave
 	          wave++;       
+	          
+	          NewGameOptions.hitsAllInfo.checkStartHit(this.getContext());
 	          
 	          if(wave<4)
 	        	  gameSoundtrack.setIntensity(wave, this.getContext());
@@ -1079,27 +997,44 @@ public int barY;
 	 	
 	     public void updateHits()
 	     {	 
-	    		if(bossHit!=null)
-	    		{
-	    		bossHit.Move(ship.cx,ship.cy);	
-	    		} 
+	    	 
+	    	 NewGameOptions.hitsAllInfo.MoveHits(ship);
+	    	 NewGameOptions.hitsAllInfo.checkHitFailure();
+	    	 
+	         switch(NewGameOptions.hitsAllInfo.currentlyActivatedHit){
+		         
+	         case(0):
+	        	 
+	        	 if(NewGameOptions.hitsAllInfo.hit0.checkForNewShots()){
+	        		 soundEffects.laserST=1;
+	        		 
+	        	 }
+	        	 
+	        	 
+		        		 if(NewGameOptions.hitsAllInfo.hit0.updateShotCollision(ship)&&life>0)
+		        		 {
+		        			 Log.d("MGP", "Got to collision");
+		        			  collision(1,ship.x,ship.y);
+		        		 }
+		        		 else if(NewGameOptions.hitsAllInfo.hit0.updateShotCollision(ship)==false)
+		        		  Log.d("MGP", "came up false");
+		        	 
+		        	 break;
+		         case(1):
+		        	if(NewGameOptions.hitsAllInfo.hit1.shipCollision(ship)&&life>0)
+		        	 collision(1,ship.cx,ship.cy);
+		         
+			         for(int j=0;j<ship.numUserShots;j++){
+			           if(NewGameOptions.hitsAllInfo.hit1.shotCollision(ship.shots[j])){
+			        	   NewGameOptions.hitsAllInfo.hit1.wasHit();
+			        	   collision(0,(int)ship.shots[j].x,(int)ship.shots[j].y);
+			        	   }
+		               
+		         }  
+		         	break;         
+	         }	 
 	     }
 	     
-	     public void drawHits(Canvas canvas)
-	     {
-	    	 if(bossHit!=null)	    
- 	     	{
-	    	 bossHit.Draw(canvas);
- 	     	}
-	     }
-	     
-	     public void createBossHit(){ 
-//	    	 if(bossHit!=null)
-//	    	 {
-	    	  bossHit = new HitGiantBoss();	 
-	    	  bossHit.setImages(BitmapFactory.decodeResource(getResources(), R.drawable.sheephead), BitmapFactory.decodeResource(getResources(), R.drawable.sheepleg), BitmapFactory.decodeResource(getResources(), R.drawable.sheepleg));
-//	    	 }
-	     }
 
 	 	private void displayFps(Canvas canvas, String fps) 
 	 	{
@@ -1124,5 +1059,7 @@ public int barY;
 	 		Log.d("creating bitmap "," create bitmap");
 	 		
 	 	}
-	 	
+		
+	
+	//	
 }
