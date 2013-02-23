@@ -15,4 +15,16 @@
         <item>Random</item>
     </string-array>
     
+      <string-array name="colors">
+        <item>Blue</item>
+        <item>Red</item>
+        <item>Green</item>
+        <item>Black</item>
+        <item>Yellow</item>
+        <item>Purple</item>
+        <item>Pink</item>
+        <item>Grey</item>
+        <item>White</item>
+    </string-array>
+    
 </resources>

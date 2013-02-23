@@ -9,6 +9,7 @@ package com.example.mfa;
 
 public final class R {
     public static final class array {
+        public static final int colors=0x7f050002;
         public static final int hit_types=0x7f050001;
         public static final int player_choice_array=0x7f050000;
     }
@@ -37,36 +38,43 @@ public final class R {
         public static final int hits=0x7f020013;
         public static final int hitsbtn=0x7f020014;
         public static final int ic_launcher=0x7f020015;
-        public static final int icon=0x7f020016;
-        public static final int laser=0x7f020017;
-        public static final int life1=0x7f020018;
-        public static final int life2=0x7f020019;
-        public static final int life3=0x7f02001a;
-        public static final int life4=0x7f02001b;
-        public static final int list_selector=0x7f02001c;
-        public static final int logo=0x7f02001d;
-        public static final int newgame=0x7f02001e;
-        public static final int options=0x7f02001f;
-        public static final int optionsbtn=0x7f020020;
-        public static final int org1r=0x7f020021;
-        public static final int os=0x7f020022;
-        public static final int osl=0x7f020023;
-        public static final int pause=0x7f020024;
-        public static final int ps=0x7f020025;
-        public static final int rs=0x7f020026;
-        public static final int sheephead=0x7f020027;
-        public static final int sheepleg=0x7f020028;
-        public static final int ship=0x7f020029;
-        public static final int shoot=0x7f02002a;
-        public static final int signin=0x7f02002b;
-        public static final int startgamebtn=0x7f02002c;
-        public static final int untitled=0x7f02002d;
+        public static final int icelarge=0x7f020016;
+        public static final int icemedium=0x7f020017;
+        public static final int icesmall=0x7f020018;
+        public static final int icon=0x7f020019;
+        public static final int iicelarge=0x7f02001a;
+        public static final int laser=0x7f02001b;
+        public static final int life1=0x7f02001c;
+        public static final int life2=0x7f02001d;
+        public static final int life3=0x7f02001e;
+        public static final int life4=0x7f02001f;
+        public static final int list_selector=0x7f020020;
+        public static final int logo=0x7f020021;
+        public static final int logoold=0x7f020022;
+        public static final int newgame=0x7f020023;
+        public static final int options=0x7f020024;
+        public static final int optionsbtn=0x7f020025;
+        public static final int org1r=0x7f020026;
+        public static final int os=0x7f020027;
+        public static final int osl=0x7f020028;
+        public static final int pause=0x7f020029;
+        public static final int ps=0x7f02002a;
+        public static final int rs=0x7f02002b;
+        public static final int sheephead=0x7f02002c;
+        public static final int sheepleg=0x7f02002d;
+        public static final int ship=0x7f02002e;
+        public static final int shoot=0x7f02002f;
+        public static final int signin=0x7f020030;
+        public static final int startgamebtn=0x7f020031;
+        public static final int tinyship1=0x7f020032;
+        public static final int untitled=0x7f020033;
     }
     public static final class id {
         public static final int Cost=0x7f090014;
+        public static final int ExpColors1=0x7f09001a;
         public static final int FBID=0x7f09000e;
         public static final int HitsList=0x7f090011;
-        public static final int IHA=0x7f09001b;
+        public static final int IHA=0x7f09001c;
         public static final int Name=0x7f09000f;
         public static final int PlayerType=0x7f090001;
         public static final int PlayersList=0x7f090007;
@@ -83,8 +91,8 @@ public final class R {
         public static final int imageButton4=0x7f090018;
         public static final int imageButton5=0x7f090019;
         public static final int imageView1=0x7f090008;
-        public static final int menu_settings=0x7f09001c;
-        public static final int name=0x7f09001a;
+        public static final int menu_settings=0x7f09001d;
+        public static final int name=0x7f09001b;
         public static final int playerMessage=0x7f090005;
         public static final int purchase=0x7f090015;
         public static final int textView1=0x7f090004;

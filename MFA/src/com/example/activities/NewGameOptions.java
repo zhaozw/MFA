@@ -94,87 +94,37 @@ public class NewGameOptions extends Activity {
 		
 				
 				
-				// Storing each json item in variable
+//				// Storing each json item in variable
+//
+//				String hit0bool = s.getString("Hit0Active");
+//				String hit0from = s.getString("Hit0From");
+//				String hit0msg = s.getString("Hit0Msg");
+//				
+//				String hit1bool = s.getString("Hit1Bool");
+//				String hit1from =s.getString("Hit1From");
+//				String hit1msg =s.getString("Hit1Msg");
 
-				String hit0bool = s.getString("Hit0Bool");
-				String hit0from = s.getString("Hit0From");
-				String hit0msg = s.getString("Hit0Msg");
 				
-				String hit1bool = s.getString("Hit1Bool");
-				String hit1from =s.getString("Hit1From");
-				String hit1msg =s.getString("Hit1Msg");
-
-				String hit2bool = s.getString("Hit2Bool");
-				String hit2from =s.getString("Hit2From");
-				String hit2msg =s.getString("Hit2Msg");
-				
-				String hit3bool = s.getString("Hit3Bool");
-				String hit3from =s.getString("Hit3From");
-				String hit3msg =s.getString("Hit3Msg");
-				
-				String hit4bool = s.getString("Hit4Bool");
-				String hit4from =s.getString("Hit4From");
-				String hit4msg =s.getString("Hit4Msg");
-				
-				String hit5bool = s.getString("Hit5Bool");
-				String hit5from =s.getString("Hit5From");
-				String hit5msg =s.getString("Hit5Msg");
-				
-				String hit6bool = s.getString("Hit6Bool");
-				String hit6from =s.getString("Hit6From");
-				String hit6msg =s.getString("Hit6Msg");
-				
-				String hit7bool = s.getString("Hit7Bool");
-				String hit7from =s.getString("Hit7From");
-				String hit7msg =s.getString("Hit7Msg");
-				
-				String hit8bool = s.getString("Hit8Bool");
-				String hit8from =s.getString("Hit8From");
-				String hit8msg =s.getString("Hit8Msg");
-				
-				String hit9bool = s.getString("Hit9Bool");
-				String hit9from =s.getString("Hit9From");
-				String hit9msg =s.getString("Hit9Msg");
-				
-				String hit10bool = s.getString("Hit10Bool");
-				String hit10from =s.getString("Hit10From");
-				String hit10msg =s.getString("Hit10Msg");
-				
-				String hit11bool = s.getString("Hit11Bool");
-				String hit11from =s.getString("Hit11From");
-				String hit11msg =s.getString("Hit11Msg");
-				
-				String hit12bool = s.getString("Hit12Bool");
-				String hit12from =s.getString("Hit12From");
-				String hit12msg =s.getString("Hit12Msg");
-				
-				String hit13bool = s.getString("Hit13Bool");
-				String hit13from =s.getString("Hit13From");
-				String hit13msg =s.getString("Hit13Msg");
-				
-				String hit14bool = s.getString("Hit14Bool");
-				String hit14from =s.getString("Hit14From");
-				String hit14msg =s.getString("Hit14Msg");
-				
-				String hit15bool = s.getString("Hit15Bool");
-				String hit15from =s.getString("Hit15From");
-				String hit15msg =s.getString("Hit15Msg");
-
-	
-
-				Log.d("New Game Options", "Adding to map");
-				// adding each child node to HashMap key => value
 				map.put("HitsID", hitid);
-				map.put("Hit0Bool", hit0bool);
-				map.put("Hit0From", hit0from);
-				map.put("Hit0Msg", hit0msg);
 				
-				map.put("Hit1Bool", hit1bool);
-				map.put("Hit1From", hit1from);
-				map.put("Hit1Msg", hit1msg);
+				Log.d("New Game Options", "initializing map");
+				for(int k =0;k<=15;k++){
+					
+					
+					map.put("Hit"+k+"From",   s.getString("Hit"+k+"From"));
+					map.put("Hit"+k+"Active", s.getString("Hit"+k+"Active"));
+					map.put("Hit"+k+"Msg", s.getString("Hit"+k+"Msg"));
+					
+					
+					Log.d("NewGameOptions ", "jsonArray  "+ k+ s.getString("Hit"+k+"From"));
+					Log.d("NewGameOptions ", "jsonArray  "+ k+ s.getString("Hit"+k+"Msg"));
+					Log.d("NewGameOptions ", "jsonArray "+ k+ s.getString("Hit"+k+"Active"));
+					
+					Log.d("NewGameOptions ", "Map "+ k+ map.get("Hit"+k+"From"));
+					Log.d("NewGameOptions ", "Map "+ k+ map.get("Hit"+k+"Active"));
+					Log.d("NewGameOptions ", "Map "+ k+ map.get("Hit"+k+"Msg"));
+				}
 				
-				
-
 				Log.d("New Game Options", "Done");
 			}
 		} catch (JSONException e) {

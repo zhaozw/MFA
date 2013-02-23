@@ -9,7 +9,9 @@ import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
 
+
 public class Options extends Activity {
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +22,17 @@ public class Options extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		
 		setContentView(R.layout.activity_options);
+		
 	}
-
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_options, menu);
 		return true;
 	}
+
+
 
 }
