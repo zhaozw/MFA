@@ -33,7 +33,7 @@ public class AsteroidHitSmall
     	this.bitmap = bitmap;
     	this.radius=(bitmap.getWidth()/2);  
         this.y = generator.nextInt(scrnH); 
-        this.x= generator.nextInt(scrnW)+scrnW+(int) MGP.dp[150]; 
+        this.x= generator.nextInt(scrnW)+scrnW*5+(int) MGP.dp[150]; 
         IMG= generator.nextInt(3)+1;   
         
         //calculates a random direction and a random 

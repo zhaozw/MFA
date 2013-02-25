@@ -441,7 +441,7 @@ public void drawExplosions10(Canvas canvas)
            X-=MGP.dp[10];Y-=MGP.dp[15];
              break;
         } 
-       if(X<0||Y<0||Y>MGP.deviceWidth||X>MGP.deviceHeight)
+       if(X<0||Y<0||Y>MGP.deviceHeight||X>MGP.deviceWidth)
        {
             explode=false;
             HEIGHT=0;

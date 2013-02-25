@@ -44,14 +44,14 @@ public class HitGiantBossIndividualParts
    {
 	   canvas.drawBitmap(img, x , y , null);
 	   
-	   if(drawOutlines)
-	   {
-		   canvas.drawLine(x,y,x+width,y,MGP.greenPaint);
-		   canvas.drawLine(x,y+height,x+width,y+height,MGP.greenPaint); 
-		   canvas.drawLine(x,y,x,y+height,MGP.greenPaint);
-		   canvas.drawLine(x+width,y,x+width,y+height,MGP.greenPaint);
-		   canvas.drawLine(x,cy,cx,cy,MGP.greenPaint);
-	   }
+//	   if(drawOutlines)
+//	   {
+//		   canvas.drawLine(x,y,x+width,y,MGP.greenPaint);
+//		   canvas.drawLine(x,y+height,x+width,y+height,MGP.greenPaint); 
+//		   canvas.drawLine(x,y,x,y+height,MGP.greenPaint);
+//		   canvas.drawLine(x+width,y,x+width,y+height,MGP.greenPaint);
+//		   canvas.drawLine(x,cy,cx,cy,MGP.greenPaint);
+//	   }
 	   
    }
    

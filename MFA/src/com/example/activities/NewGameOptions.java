@@ -89,21 +89,8 @@ public class NewGameOptions extends Activity {
 				Log.d("New Game Options", "Starting Parse");
 				
 		   		String hitid = s.getString("HitsID");
-				
-				
-		
-				
-				
-//				// Storing each json item in variable
-//
-//				String hit0bool = s.getString("Hit0Active");
-//				String hit0from = s.getString("Hit0From");
-//				String hit0msg = s.getString("Hit0Msg");
-//				
-//				String hit1bool = s.getString("Hit1Bool");
-//				String hit1from =s.getString("Hit1From");
-//				String hit1msg =s.getString("Hit1Msg");
 
+//				// Storing each json item in variable
 				
 				map.put("HitsID", hitid);
 				

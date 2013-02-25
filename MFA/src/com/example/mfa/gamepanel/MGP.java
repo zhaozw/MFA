@@ -29,6 +29,7 @@ import com.example.objects.Alien;
 import com.example.objects.AnalogStick;
 import com.example.objects.Asteroid;
 import com.example.objects.Explosion;
+import com.example.objects.FlyingMessage;
 import com.example.objects.InteractiveSong;
 import com.example.objects.LightBackground;
 import com.example.objects.Player;
@@ -69,7 +70,7 @@ public class MGP extends SurfaceView implements
 	boolean createBitmap=false;
 	
 	public TouchButton shootButton,quitButton;
-	
+	public FlyingMessage message;
 
     
     Bitmap myBitmap =null;
@@ -94,6 +95,7 @@ public class MGP extends SurfaceView implements
     int r;
     
     PowerUpsAll powerUps;
+    
     
     private Explosion explo1,explo2,explo3;
     private Thrusters shipThrusters;
@@ -140,9 +142,9 @@ public class MGP extends SurfaceView implements
    
    
     //the array of asteroids
-    Asteroid[] asteroids = new Asteroid[15];
+    Asteroid[] asteroids = new Asteroid[18];
     
-    Alien[] enemies = new Alien[10];
+    //Alien[] enemies = new Alien[10];
 
     //the number that is solely responsible for
     int asteroidsUnlocked=2,enemiesUnlocked=0;
@@ -186,21 +188,21 @@ public class MGP extends SurfaceView implements
           deviceWidth  = dw;
           deviceHeight = dh;
 		
-      
+           message = new FlyingMessage();
           
           screenShape= new RectF(0,0,deviceWidth,deviceHeight);
          
       	  shootButton = new TouchButton(MGP.deviceWidth-MGP.dp[70],MGP.deviceHeight-MGP.dp[70],MGP.dp[70]);
       	  quitButton = new TouchButton(MGP.deviceWidth-MGP.dp[40],0,MGP.dp[40]);
-          ship = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.ship),BitmapFactory.decodeResource(getResources(), R.drawable.laser),200,200);
+          ship = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.rs80),BitmapFactory.decodeResource(getResources(), R.drawable.laser),200,200);
           
          analog = new AnalogStick((int)dp[115],(int)dp[75]);
 
-          powerUps= new PowerUpsAll(BitmapFactory.decodeResource(getResources(), R.drawable.bomb));
+          powerUps= new PowerUpsAll(BitmapFactory.decodeResource(getResources(), R.drawable.bomb),BitmapFactory.decodeResource(getResources(), R.drawable.slowmotion),BitmapFactory.decodeResource(getResources(), R.drawable.sinewave),BitmapFactory.decodeResource(getResources(), R.drawable.shootfaster));
           
-          for(int j=0;j<enemies.length;j++)  
-              enemies[j] = new Alien(BitmapFactory.decodeResource(getResources(), R.drawable.alien),BitmapFactory.decodeResource(getResources(), 
-              		R.drawable.fireball),deviceWidth*2,deviceHeight/2,dp[30],(int) dp[70]);
+//          for(int j=0;j<enemies.length;j++)  
+//              enemies[j] = new Alien(BitmapFactory.decodeResource(getResources(), R.drawable.alien),BitmapFactory.decodeResource(getResources(), 
+//              		R.drawable.fireball),deviceWidth*2,deviceHeight/2,dp[30],(int) dp[70]);
 
 
 	         gameSoundtrack = new InteractiveSong(this.getContext());
@@ -209,9 +211,21 @@ public class MGP extends SurfaceView implements
 	
 	
 	         //initialize asteroids
-	          for(int i=0;i<asteroids.length;i++) 
-	           asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.ast), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
-	         
+	          for(int i=0;i<asteroids.length;i++){
+	           
+	            if(i<3)
+	            	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a1), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
+	            else if(i<6)
+	            	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a5), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
+	            else  if(i<9)
+	            	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a3), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
+	            else  if(i<12)
+	            	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a6), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
+	            else  if(i<15)
+	            	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a4), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
+	            else  if(i<18)
+	            	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a2), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
+	          }
 	          explo1 = new Explosion();
 	          explo2 = new Explosion();
 	          explo3 = new Explosion();
@@ -253,7 +267,7 @@ public class MGP extends SurfaceView implements
             lifeBar[2] = BitmapFactory.decodeResource(getResources(), R.drawable.life3);
             lifeBar[3] = BitmapFactory.decodeResource(getResources(), R.drawable.life4);
 
-            life = 3;
+            life = 20;
   
 		// create the game loop thread
 		thread = new MainThread(getHolder(), this);
@@ -409,22 +423,24 @@ public class MGP extends SurfaceView implements
 		 
 		ltBackground.draw(canvas); 
 		
+		 NewGameOptions.hitsAllInfo.DrawMessage(canvas);
+		
 		  //draw the asteroids
-		   for(int i=0;i<asteroidsUnlocked;i++) 
+		   for(int i=0;i<asteroids.length;i++) 
 	           asteroids[i].draw(canvas);   
 
 		   ship.drawShots(canvas);
-		   
-		   for(int k=0;k<enemiesUnlocked;k++)
-		      enemies[k].drawShots(canvas); 
-     
-        //draw the enemies
-		for(int i=0;i<enemiesUnlocked;i++) 
-	        enemies[i].draw(canvas);
-
-		if(ship.unlocked)
+//		   
+//		   for(int k=0;k<enemies.length;k++)
+//		      enemies[k].drawShots(canvas); 
+//     
+//        //draw the enemies
+//		for(int i=0;i<enemies.length;i++) 
+//	        enemies[i].draw(canvas);
+////
+//		if(ship.unlocked)
 			
-			canvas.drawBitmap(bar, 0, barY, null);
+//			canvas.drawBitmap(bar, 0, barY, null);
 			textPaint.setTextSize((float) MGP.dp[25]);
 			canvas.drawText("score is: " + score, (float) MGP.dp[155], (float) MGP.dp[25],textPaint );
 	   
@@ -449,31 +465,7 @@ public class MGP extends SurfaceView implements
    		        shipThrusters.Draw(canvas);
    		 }
             
-            MGP.textPaint.setTextSize((float) MGP.dp[100]);
- 		   if(MGP.state==0&&MGP.waveDelay<300&&MGP.waveDelay>200) { 
- 			 canvas.drawText("Ready",(int)dp[50], (int)dp[200],MGP.textPaint ); 
- 		   }  
- 		   else if(MGP.state==0&&MGP.waveDelay<200&&MGP.waveDelay>100){
- 			 canvas.drawText("Set",(int)dp[50], (int)dp[200],MGP.textPaint ); 
- 		   }
- 		   else if(MGP.state==0&&MGP.waveDelay<100&&MGP.waveDelay>0){
- 			 canvas.drawText("Destroy",(int)dp[50], (int)dp[200],MGP.textPaint ); 
- 		   }	
- 		   
- 		  MGP.bluePaint.setTextSize((float) MGP.dp[50]);
-		   if(MGP.state==2&&MGP.waveDelay<300&&MGP.waveDelay>200) { 
-				 canvas.drawText("Wave "+MGP.wave+" Completed", (int)dp[10], (int)dp[200],MGP.bluePaint ); 
-		 }  
-		 else if(MGP.state==2&&MGP.waveDelay<200&&MGP.waveDelay>100){
-		 canvas.drawText("You Killed "+MGP.astKilledThisWave +" Asteroids", (int)dp[10], (int)dp[200],MGP.bluePaint ); 
-		 }
-		 else if(MGP.state==2&&MGP.waveDelay<100&&MGP.waveDelay>0){
-		 canvas.drawText("Wave "+(MGP.wave+1)+" will begin",(int)dp[10], (int)dp[200],MGP.bluePaint ); 
-		 }
-	     else if(MGP.state==2&&MGP.waveDelay<50&&MGP.waveDelay>0){
-	     canvas.drawText("Go ", (int)dp[10], (int)dp[200],MGP.bluePaint ); 
-	     }
- 		   
+
  		  NewGameOptions.hitsAllInfo.DrawHits(canvas);
  		   
             explo1.draw(canvas);
@@ -483,7 +475,7 @@ public class MGP extends SurfaceView implements
   		   explo3.draw(canvas);
   		  // canvas.drawText("3", explo3.startX, explo3.startY, redPaint);
             
-  		   
+  		 message.draw(canvas);
   		   
   		   
   		   shootButton.draw(canvas);
@@ -569,6 +561,7 @@ public class MGP extends SurfaceView implements
 		    powerUps.Update(ship);
 		   //updateEnemies();
 		   
+		    message.move();
 		 		   
 		   if(powerUps.shootFaster.shipCollision(ship)){
              powerUps.shootFaster.activate();
@@ -595,20 +588,7 @@ public class MGP extends SurfaceView implements
 		   
 //		   if(powerUps.shootMassive.shipCollision(ship))
 //		   if(powerUps.spreadShot.shipCollision(ship))
-		   
-			//r=Generator.nextInt(28);
-//			  if(r==1){ 
-//				   powerUps.slowMo.activate(40);
-//			       MainThread.MAX_FPS=24;
-//			       MainThread.FRAME_PERIOD = 1000 /  MainThread.MAX_FPS;
-//			       slowMoAudio();
-//			      }
-//			  else if (r==7){
-//			     powerUps.slowMo.activate(130);
-//			       MainThread.MAX_FPS=24;
-//			       MainThread.FRAME_PERIOD = 1000 /  MainThread.MAX_FPS;
-//			       slowMoAudio();
-//		          }
+
 	 }    
 	
 
@@ -623,12 +603,12 @@ public class MGP extends SurfaceView implements
 				 else
 				   ship.moveShots();		 
             
-		 for(int k=0;k<enemies.length;k++){
-			   enemies[k].moveShots();  
-			   enemies[k].setAngle(ship.x, ship.y);
-			 if(enemies[k].checkForNewShots())
-				 soundEffects.laserST=0; 
-		 }
+//		 for(int k=0;k<enemies.length;k++){
+//			   enemies[k].moveShots();  
+//			   enemies[k].setAngle(ship.x, ship.y);
+//			 if(enemies[k].checkForNewShots())
+//				 soundEffects.laserST=0; 
+//		 }
      }
 	
 	private void collision(int type,int x,int y)
@@ -674,17 +654,17 @@ public class MGP extends SurfaceView implements
 	               else
 	            	   asteroids[i].moveBack();	              
 	           }
-	            for(int i=0;i<enemies.length;i++)
-	            { 
-	            	if(screenShape.contains(enemies[i].x,enemies[i].y)){
-	            		  totalAliensKilled+=1;
-	        	          aliensKilledThisWave+=1;
-	                      score+=100;
-	                      enemies[i].moveBack();
-	            	  }
-	            	else
-	            		  enemies[i].moveBack();
-	            }
+//	            for(int i=0;i<enemies.length;i++)
+//	            { 
+//	            	if(screenShape.contains(enemies[i].x,enemies[i].y)){
+//	            		  totalAliensKilled+=1;
+//	        	          aliensKilledThisWave+=1;
+//	                      score+=100;
+//	                      enemies[i].moveBack();
+//	            	  }
+//	            	else
+//	            		  enemies[i].moveBack();
+//	            }
 	            powerUps.nuke.unlocked=false;
 	    		powerUps.nuke.x=MGP.deviceWidth*5+MGP.deviceWidth;
 		    
@@ -740,34 +720,34 @@ public class MGP extends SurfaceView implements
 	
 	private void updateEnemies()
     { 
-        for(int i=0;i<enemies.length;i++)
-        { 
-           //Moving enemies.  
-           if(i==0)
-             enemies[i].move(ship.x, ship.y); 
-           else if(i!=0)
-             enemies[i].move(enemies[i-1].x, enemies[i-1].y); 
-             
-              //check for physical collisions with the ship.
-            if(enemies[i].shipCollision(ship)&& life > 0&&life>0){
-                    collision(1,ship.x, ship.y);
-              	    enemies[i].unlocked=false;
-              	    enemies[i].moveBack();
-            		}
-  
-       	 //and update collision against the ship with enemies shots 
-           if(enemies[i].updateShotCollision(ship)&& life > 0){ 
-                    explo1.triggerExplosions(ship.x, ship.y);
-                    collision(1,ship.x, ship.y);
-            		}
-           
-           //checking shot collision against the enemies with the players shots
-           if(enemies[i].updateShipShotCollision(ship)&&life>0) {
-        	    collision(3,enemies[i].x, enemies[i].y);
-        	    enemies[i].unlocked=false;
-        	    enemies[i].moveBack();
-               }  
-          }
+//        for(int i=0;i<enemies.length;i++)
+//        { 
+//           //Moving enemies.  
+//           if(i==0)
+//             enemies[i].move(ship.x, ship.y); 
+//           else if(i!=0)
+//             enemies[i].move(enemies[i-1].x, enemies[i-1].y); 
+//             
+//              //check for physical collisions with the ship.
+//            if(enemies[i].shipCollision(ship)&& life > 0&&life>0){
+//                    collision(1,ship.x, ship.y);
+//              	    enemies[i].unlocked=false;
+//              	    enemies[i].moveBack();
+//            		}
+//  
+//       	 //and update collision against the ship with enemies shots 
+//           if(enemies[i].updateShotCollision(ship)&& life > 0){ 
+//                    explo1.triggerExplosions(ship.x, ship.y);
+//                    collision(1,ship.x, ship.y);
+//            		}
+//           
+//           //checking shot collision against the enemies with the players shots
+//           if(enemies[i].updateShipShotCollision(ship)&&life>0) {
+//        	    collision(3,enemies[i].x, enemies[i].y);
+//        	    enemies[i].unlocked=false;
+//        	    enemies[i].moveBack();
+//               }  
+//          }
      }
 	
 	
@@ -781,9 +761,22 @@ public class MGP extends SurfaceView implements
 			    // 0 is paused, 1 is ongoing , 2 between, 3 is game over
 				
 				
-				//if the game is in between waves, and there is still wave delay left
-				if((state==2&&waveDelay>=0)||state==0&&waveDelay>=0)
-			       waveDelay-=1;
+				 //if the game is in between waves, and there is still wave delay left
+				 if((state==2&&waveDelay>=0)||state==0&&waveDelay>=0)
+			          waveDelay-=1;
+				
+				
+				  if(MGP.state==0&&MGP.waveDelay==300) { 
+		 			  message.activate(1, 10, "Ready       Set      Go");
+				  }
+				  
+				  if(MGP.state==2&&MGP.waveDelay==300) { 
+					  message.activate(1, 10,"Wave "+MGP.wave+" Completed +" +
+					   		    "You Killed "+MGP.astKilledThisWave +" Asteroids" 
+							      +" Wave "+(MGP.wave+1)+" will begin"); 
+				  }  
+				
+			 		   
 				
 				//game over if the ship is dead
 				if(life==0)
@@ -839,9 +832,9 @@ public class MGP extends SurfaceView implements
 		bonusWavePassLimit=asteroidPassLimit*2;
 		ship.exit=true;
 		ship.unlocked=false;
-		 for(int k=0;k<enemiesUnlocked;k++) {
-			  enemies[k].unlocked=false;
-		     }
+//		 for(int k=0;k<enemiesUnlocked;k++) {
+//			  enemies[k].unlocked=false;
+//		     }
 		powerUps.nuke.unlocked=false;
 	    powerUps.shootFaster.unlocked=false;
 	    powerUps.spreadShot.unlocked=false;
@@ -858,9 +851,9 @@ public class MGP extends SurfaceView implements
               asteroids[k].unlocked=false;     
              }
 		      
-		     for(int k=0;k<enemiesUnlocked;k++) {
-			  enemies[k].unlocked=false;
-		     }
+//		     for(int k=0;k<enemiesUnlocked;k++) {
+//			  enemies[k].unlocked=false;
+//		     }
 		     
 		      // increase number of asteroids to pass next wave
 		      asteroidPassLimit+=(asteroidPassLimit)/2;
@@ -900,9 +893,9 @@ public class MGP extends SurfaceView implements
 		          for(int k=0;k<asteroidsUnlocked;k++) {
 	               asteroids[k].unlocked=true;    
 	              }
-		          for(int k=0;k<enemiesUnlocked;k++){
-					     enemies[k].unlocked=true;
-				  }
+//		          for(int k=0;k<enemiesUnlocked;k++){
+//					     enemies[k].unlocked=true;
+//				  }
 		          if(wave>0)
 			          totalSpeed+=1;          
 
@@ -916,8 +909,10 @@ public class MGP extends SurfaceView implements
 	          
 	          NewGameOptions.hitsAllInfo.checkStartHit(this.getContext());
 	          
-	          if(wave<4)
+	          if(wave<5)
 	        	  gameSoundtrack.setIntensity(wave, this.getContext());
+	          else if(wave>4)
+	        	  gameSoundtrack.setIntensity(4, this.getContext());
 	          
 	          waveDelay-=1;
 	          
@@ -959,11 +954,11 @@ public class MGP extends SurfaceView implements
 		     asteroids[k].moveBack();
 	         asteroids[k].unlocked=false;
 	        }
-		    for(int k=0;k<enemies.length;k++)
-	        {
-		     enemies[k].moveBack();
-	         enemies[k].unlocked=false;
-	        }
+//		    for(int k=0;k<enemies.length;k++)
+//	        {
+//		     enemies[k].moveBack();
+//	         enemies[k].unlocked=false;
+//	        }
 		    powerUps.nuke.unlocked=false;
 		    powerUps.shootFaster.unlocked=false;
 		    powerUps.spreadShot.unlocked=false;
@@ -1005,19 +1000,16 @@ public class MGP extends SurfaceView implements
 		         
 	         case(0):
 	        	 
-	        	 if(NewGameOptions.hitsAllInfo.hit0.checkForNewShots()){
-	        		 soundEffects.laserST=1;
-	        		 
-	        	 }
-	        	 
-	        	 
+			        	 if(NewGameOptions.hitsAllInfo.hit0.checkForNewShots()){
+			        		 soundEffects.laserST=1;	 
+			        	 }
 		        		 if(NewGameOptions.hitsAllInfo.hit0.updateShotCollision(ship)&&life>0)
 		        		 {
 		        			 Log.d("MGP", "Got to collision");
 		        			  collision(1,ship.x,ship.y);
 		        		 }
 		        		 else if(NewGameOptions.hitsAllInfo.hit0.updateShotCollision(ship)==false)
-		        		  Log.d("MGP", "came up false");
+		        		//  Log.d("MGP", "came up false");
 		        	 
 		        	 break;
 		         case(1):
@@ -1028,8 +1020,7 @@ public class MGP extends SurfaceView implements
 			           if(NewGameOptions.hitsAllInfo.hit1.shotCollision(ship.shots[j])){
 			        	   NewGameOptions.hitsAllInfo.hit1.wasHit();
 			        	   collision(0,(int)ship.shots[j].x,(int)ship.shots[j].y);
-			        	   }
-		               
+			        	   }    
 		         }  
 		         	break;         
 	         }	 

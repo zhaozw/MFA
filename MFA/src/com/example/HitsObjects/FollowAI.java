@@ -12,8 +12,6 @@ import com.example.objects.Shot;
 
 public class FollowAI
 {
-	
-	
    public int radius;
 
    Random generator = new Random();
@@ -35,7 +33,7 @@ public boolean failed=false;
    {
        width = 25;
        height = 25;
-       x = 500;
+       x = 200;
        y = 300;
        active=false;   
        this.shotDelay=shotDelay; // # of frames between shots
@@ -95,13 +93,13 @@ public boolean failed=false;
       
     public void MoveAI2(int shipY, int shipX)
    {     
-      if(shipY>300&&y>200)
+      if(shipY>200&&y>100)
           y-=4;
-      else  if(shipY<300&&y<400)
+      else  if(shipY<200&&y<300)
           y+=4;
-      if(shipX>600&&x>500)
+      if(shipX>300&&x>100)
           x-=4;
-      else if(shipX<600&&x<700)
+      else if(shipX<300&&x<400)
           x+=4; 
    }
    

@@ -23,6 +23,7 @@ public class Player
 	 public int shotDelay, shotDelayLeft;
      public int numUserShots;
 	 public boolean unlocked=true;   
+	 
 	 public Player(Bitmap i1,Bitmap i2,Bitmap i3,Bitmap i4,Bitmap i5, Bitmap shotImg, int x, int y)         
 	    { 
 		    this.img1 = i1;
@@ -223,9 +224,7 @@ public class Player
 		public boolean shotCollision(Shot shot)
 	    { 
 	        // Uses the distance formula to check for collisions with other shots.
-	        if(Math.pow(radius,2) > Math.pow(shot.x-x,2)+ Math.pow(shot.y-y,2))
-	          return true; 
-	        return false; 
+	          return (Math.pow(radius,2) > Math.pow(shot.x-cx,2)+ Math.pow(shot.y-cy,2));
 	    }
 
 	    public boolean canShoot()

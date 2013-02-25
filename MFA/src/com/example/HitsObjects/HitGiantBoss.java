@@ -111,6 +111,7 @@ public class HitGiantBoss {
 	        numUserShots++; 
 	        return true;
 	      } 
+        else
         return false;
 	 }
 	 

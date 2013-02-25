@@ -22,20 +22,20 @@ public class PowerUpsAll {
 		nuke = new PowerUp(4);
 	}
 	
-	public PowerUpsAll(Bitmap bomb)
+	public PowerUpsAll(Bitmap bomb,Bitmap sine,Bitmap slow,Bitmap fast)
 	{
-		spreadShot = new PowerUp(1);
-		shootFaster = new PowerUp(2);
-		slowMo= new PowerUp(3);
+		spreadShot = new PowerUp(1,sine);
+		shootFaster = new PowerUp(2,fast);
+		slowMo= new PowerUp(3,slow);
 		nuke = new PowerUp(4,bomb);
 	}
 	
 	
 	public void draw(Canvas canvas)
 	{
-		spreadShot.draw2(canvas);
-		shootFaster.draw2(canvas);
-		slowMo.draw2(canvas);
+		spreadShot.draw(canvas);
+		shootFaster.draw(canvas);
+		slowMo.draw(canvas);
 		nuke.draw(canvas);	
 	}
 	

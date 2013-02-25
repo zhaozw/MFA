@@ -99,7 +99,7 @@ public class Asteroid
     public void draw(Canvas canvas) 
     {
 		canvas.drawBitmap(bitmap, x , y , null);
-		canvas.drawLine(cx,cy,(float) (cx-radius),cy,MGP.redPaint);
+		//canvas.drawLine(cx,cy,(float) (cx-radius),cy,MGP.redPaint);
 	}
     
     public boolean getLockedState()
