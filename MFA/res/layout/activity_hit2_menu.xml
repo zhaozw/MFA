@@ -1,0 +1,97 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/space"
+    tools:context=".Hit2Menu" >
+
+    <Button
+        android:id="@+id/PrevButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:onClick="onClick"
+        android:text="@string/all_hits_menus_prev_hit" />
+
+    <Button
+        android:id="@+id/NextButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:onClick="onClick"
+        android:text="@string/all_hits_menus_next_hit" />
+
+    <TextView
+        android:id="@+id/Hit2Description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/PrevButton"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="25dp"
+        android:maxWidth="170dp"
+        android:text="@string/hits_2_description"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/Hit2Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/Hit2Description"
+        android:layout_marginLeft="70dp"
+        android:layout_toRightOf="@+id/Hit2Description"
+        android:src="@drawable/ab165" />
+
+    <Button
+        android:id="@+id/Purchase"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:onClick="onClick"
+        android:text="@string/all_hits_menus_purchase" />
+
+    <TextView
+        android:id="@+id/Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/hits_2_name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/Cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Hit2Description"
+        android:layout_alignLeft="@+id/Hit2Image"
+        android:text="@string/hits_2_cost"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/CashWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Cost"
+        android:layout_alignLeft="@+id/Hit2Image"
+        android:text="@string/all_hits_menus_cash_word"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/CashAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/CashWord"
+        android:layout_alignBottom="@+id/CashWord"
+        android:layout_toRightOf="@+id/CashWord"
+        android:text="@string/all_hits_menus_cash_amount"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

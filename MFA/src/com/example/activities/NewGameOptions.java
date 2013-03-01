@@ -17,6 +17,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -35,8 +36,9 @@ public class NewGameOptions extends Activity {
     public static float dpWidth;
     public static DisplayMetrics dm;
     public static HitsAllInfo hitsAllInfo;
-
+    public static int lightColor;
     private PowerManager.WakeLock wl;
+    public static final String PREFS_NAME = "MyPrefsFile";
 
 	String url = "http://cofactor1-unbrandedtech.dotcloud.com/Get_Hits.php?hits=";
 	public HashMap<String, String> map = new HashMap<String, String>();
@@ -44,6 +46,10 @@ public class NewGameOptions extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+	    lightColor = settings.getInt("lightColor", 0);
+	    Log.d("NewGameOptions: ", "Light Color ="+lightColor);
 		
 		PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "DoNotDimScreen");

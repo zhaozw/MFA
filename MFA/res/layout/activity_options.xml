@@ -32,12 +32,12 @@
         android:layout_alignLeft="@+id/textView2"
         android:layout_below="@+id/textView2"
         android:layout_marginTop="14dp"
-        android:text="Explosion Colors"
+        android:text="Light Colors"
         android:textAppearance="?android:attr/textAppearanceSmall"
         tools:listitem="@android:layout/simple_spinner_dropdown_item" />
 
     <Spinner
-        android:id="@+id/ExpColors1"
+        android:id="@+id/LightColors"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView4"

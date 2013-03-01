@@ -13,8 +13,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="High Scores"
-        android:textColor="#FF0000" 
-        android:textSize="40dp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FF0000"
+        android:textSize="40dp" />
 
 </RelativeLayout>

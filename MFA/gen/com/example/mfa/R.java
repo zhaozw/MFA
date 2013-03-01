@@ -82,38 +82,45 @@ public final class R {
         public static final int signin=0x7f02003f;
         public static final int sinewave=0x7f020040;
         public static final int slowmotion=0x7f020041;
-        public static final int startgamebtn=0x7f020042;
-        public static final int tinyship1=0x7f020043;
-        public static final int uj=0x7f020044;
-        public static final int uj300=0x7f020045;
-        public static final int untitled=0x7f020046;
+        public static final int space=0x7f020042;
+        public static final int startgamebtn=0x7f020043;
+        public static final int tinyship1=0x7f020044;
+        public static final int uj=0x7f020045;
+        public static final int uj300=0x7f020046;
+        public static final int untitled=0x7f020047;
     }
     public static final class id {
+        public static final int CashAmount=0x7f090016;
+        public static final int CashWord=0x7f090015;
         public static final int Cost=0x7f090014;
-        public static final int ExpColors1=0x7f09001a;
         public static final int FBID=0x7f09000e;
-        public static final int HitsList=0x7f090011;
-        public static final int IHA=0x7f09001c;
-        public static final int Name=0x7f09000f;
+        public static final int Hit2Description=0x7f090011;
+        public static final int Hit2Image=0x7f090012;
+        public static final int HitsList=0x7f090018;
+        public static final int IHA=0x7f090022;
+        public static final int LightColors=0x7f090020;
+        public static final int Name=0x7f090013;
+        public static final int NextButton=0x7f090010;
         public static final int PlayerType=0x7f090001;
         public static final int PlayersList=0x7f090007;
+        public static final int PrevButton=0x7f09000f;
         public static final int Purchase=0x7f090006;
         public static final int SendMessageCheckBox=0x7f090003;
-        public static final int cash=0x7f090010;
+        public static final int cash=0x7f090017;
         public static final int checkBox1=0x7f090002;
-        public static final int description=0x7f090012;
-        public static final int hit_image=0x7f090013;
+        public static final int description=0x7f090019;
+        public static final int hit_image=0x7f09001a;
         public static final int hit_type=0x7f090000;
         public static final int imageButton1=0x7f09000d;
-        public static final int imageButton2=0x7f090016;
-        public static final int imageButton3=0x7f090017;
-        public static final int imageButton4=0x7f090018;
-        public static final int imageButton5=0x7f090019;
+        public static final int imageButton2=0x7f09001c;
+        public static final int imageButton3=0x7f09001d;
+        public static final int imageButton4=0x7f09001e;
+        public static final int imageButton5=0x7f09001f;
         public static final int imageView1=0x7f090008;
-        public static final int menu_settings=0x7f09001d;
-        public static final int name=0x7f09001b;
+        public static final int menu_settings=0x7f090023;
+        public static final int name=0x7f090021;
         public static final int playerMessage=0x7f090005;
-        public static final int purchase=0x7f090015;
+        public static final int purchase=0x7f09001b;
         public static final int textView1=0x7f090004;
         public static final int textView2=0x7f090009;
         public static final int textView3=0x7f09000a;
@@ -126,11 +133,14 @@ public final class R {
         public static final int activity_credits=0x7f030002;
         public static final int activity_game_logo=0x7f030003;
         public static final int activity_high_scores=0x7f030004;
-        public static final int activity_hits=0x7f030005;
-        public static final int activity_main_menu=0x7f030006;
-        public static final int activity_new_game_options=0x7f030007;
-        public static final int activity_options=0x7f030008;
-        public static final int list_item=0x7f030009;
+        public static final int activity_hit0_menu=0x7f030005;
+        public static final int activity_hit1_menu=0x7f030006;
+        public static final int activity_hit2_menu=0x7f030007;
+        public static final int activity_hits=0x7f030008;
+        public static final int activity_main_menu=0x7f030009;
+        public static final int activity_new_game_options=0x7f03000a;
+        public static final int activity_options=0x7f03000b;
+        public static final int list_item=0x7f03000c;
     }
     public static final class menu {
         public static final int activity_choose_rival=0x7f080000;
@@ -138,11 +148,14 @@ public final class R {
         public static final int activity_credits=0x7f080002;
         public static final int activity_game_logo=0x7f080003;
         public static final int activity_high_scores=0x7f080004;
-        public static final int activity_hits=0x7f080005;
-        public static final int activity_light_thread=0x7f080006;
-        public static final int activity_main_menu=0x7f080007;
-        public static final int activity_new_game_options=0x7f080008;
-        public static final int activity_options=0x7f080009;
+        public static final int activity_hit0_menu=0x7f080005;
+        public static final int activity_hit1_menu=0x7f080006;
+        public static final int activity_hit2_menu=0x7f080007;
+        public static final int activity_hits=0x7f080008;
+        public static final int activity_light_thread=0x7f080009;
+        public static final int activity_main_menu=0x7f08000a;
+        public static final int activity_new_game_options=0x7f08000b;
+        public static final int activity_options=0x7f08000c;
     }
     public static final class raw {
         public static final int exp1=0x7f040000;
@@ -163,6 +176,12 @@ public final class R {
     }
     public static final class string {
         public static final int Christian=0x7f06001b;
+        public static final int all_hits_menus_cash_amount=0x7f060021;
+        public static final int all_hits_menus_cash_word=0x7f060020;
+        public static final int all_hits_menus_next_hit=0x7f06001c;
+        public static final int all_hits_menus_prev_hit=0x7f06001d;
+        public static final int all_hits_menus_purchase=0x7f06001e;
+        public static final int all_hits_menus_send=0x7f06001f;
         public static final int app_name=0x7f060000;
         public static final int choose_rival_activity_player_select=0x7f060012;
         public static final int choose_rival_hit_type=0x7f06000d;
@@ -173,6 +192,15 @@ public final class R {
         public static final int choose_rival_send_hit=0x7f060011;
         public static final int desc=0x7f060003;
         public static final int hello_world=0x7f060005;
+        public static final int hits_0_cost=0x7f060024;
+        public static final int hits_0_description=0x7f060022;
+        public static final int hits_0_name=0x7f060023;
+        public static final int hits_1_cost=0x7f060027;
+        public static final int hits_1_description=0x7f060025;
+        public static final int hits_1_name=0x7f060026;
+        public static final int hits_2_cost=0x7f06002a;
+        public static final int hits_2_description=0x7f060028;
+        public static final int hits_2_name=0x7f060029;
         public static final int hits_cash=0x7f060015;
         public static final int hits_hit_type=0x7f060018;
         public static final int hits_hits=0x7f060014;
@@ -185,6 +213,9 @@ public final class R {
         public static final int title_activity_credits=0x7f060009;
         public static final int title_activity_game_logo=0x7f060002;
         public static final int title_activity_high_scores=0x7f060007;
+        public static final int title_activity_hit0_menu=0x7f06002b;
+        public static final int title_activity_hit1_menu=0x7f06002c;
+        public static final int title_activity_hit2_menu=0x7f06002d;
         public static final int title_activity_hits=0x7f060008;
         public static final int title_activity_light_thread=0x7f06000c;
         public static final int title_activity_main_menu=0x7f060004;
@@ -195,11 +226,13 @@ public final class R {
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
         
          */
         public static final int AppBaseTheme=0x7f070000;

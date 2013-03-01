@@ -4,14 +4,14 @@
     android:layout_height="match_parent"
     android:background="#000000"
     tools:context=".MainMenu" >
-    
+
     <ImageButton
         android:id="@+id/imageButton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/imageButton2"
         android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@+id/imageButton2"
         android:contentDescription="@string/desc"
         android:onClick="onClick"
         android:src="@drawable/newgame" />
@@ -66,9 +66,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="MainMenu"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#FF0000"
-        android:textSize="40dp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textSize="40dp" />
 
     <TextView
         android:id="@+id/FBID"

@@ -3,16 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Hits" >
-
-   <TextView
-       android:id="@+id/textView1"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_margin="5dp"
-       android:layout_marginLeft="18dp"
-       android:text="@string/hits_hits"
-       android:textAppearance="?android:attr/textAppearanceLarge"
-       android:typeface="serif" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginLeft="18dp"
+        android:text="@string/hits_hits"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:typeface="serif" />
 
     <TextView
         android:id="@+id/Name"
@@ -37,7 +37,7 @@
         android:text="blah blah blah blah blahblah blah blah blah blahblah blah blah blah blahblah blah blah blah blahblah blah blah blah blahblah blah blah blah blahblah blah blah blah blahblah blah blah blah blah"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:typeface="serif" />
-
+
     <TextView
         android:id="@+id/cash"
         android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
         android:text="@string/hits_cash"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:typeface="serif" />
-
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -78,7 +78,7 @@
         android:text="Cost : 1200"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:typeface="serif" />
-
+
     <ListView
         android:id="@+id/HitsList"
         android:layout_width="80dp"
@@ -88,7 +88,6 @@
         android:layout_below="@+id/textView1"
         android:layout_marginLeft="2dp"
         tools:listitem="@android:layout/simple_gallery_item" >
-
     </ListView>
 
     <Button
@@ -97,8 +96,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/hit_image"
         android:layout_below="@+id/hit_image"
+        android:onClick="purchase"
         android:text="@string/hits_purchase_hit"
-        android:visibility="visible"
-        android:onClick="purchase" />
+        android:visibility="visible" />
 
 </RelativeLayout>

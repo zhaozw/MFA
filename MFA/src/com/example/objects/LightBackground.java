@@ -47,14 +47,14 @@ public class LightBackground {
 		   case(0):
 			   for(int r=0; r<lights2.length; r++)
 		          {for(int c = 0; c < lights2[r].length; c++){    
-		            canvas.drawOval(lights2[r][c].shape,MGP.WPaint);    
+		            canvas.drawOval(lights2[r][c].shape,MGP.bluePaint);    
 		            }   
 		        }
 			   break;
 		   case(1):
 			   for(int r=0; r<lights2.length; r++)
 		          {for(int c = 0; c < lights2[r].length; c++){    
-		            canvas.drawOval(lights2[r][c].shape,MGP.bluePaint);    
+		            canvas.drawOval(lights2[r][c].shape,MGP.redPaint);    
 		            }   
 		        }
 			   break;
@@ -68,7 +68,7 @@ public class LightBackground {
 		   case(3):
 			   for(int r=0; r<lights2.length; r++)
 		          {for(int c = 0; c < lights2[r].length; c++){    
-		            canvas.drawOval(lights2[r][c].shape,MGP.redPaint);    
+		            canvas.drawOval(lights2[r][c].shape,MGP.blackPaint);    
 		            }   
 		        }
 			   break; 
@@ -82,21 +82,28 @@ public class LightBackground {
 		   case(5):
 			   for(int r=0; r<lights2.length; r++)
 		          {for(int c = 0; c < lights2[r].length; c++){    
-		            canvas.drawOval(lights2[r][c].shape,MGP.orangePaint);    
+		            canvas.drawOval(lights2[r][c].shape,MGP.purplePaint);    
 		            }   
 		        }
 			   break;	
 		   case(6):
 			   for(int r=0; r<lights2.length; r++)
 		          {for(int c = 0; c < lights2[r].length; c++){    
-		            canvas.drawOval(lights2[r][c].shape,MGP.purplePaint);    
+		            canvas.drawOval(lights2[r][c].shape,MGP.pinkPaint);    
 		            }   
 		        }
 			   break;
 		   case(7):
 			   for(int r=0; r<lights2.length; r++)
 		          {for(int c = 0; c < lights2[r].length; c++){    
-		            canvas.drawOval(lights2[r][c].shape,MGP.pinkPaint);    
+		            canvas.drawOval(lights2[r][c].shape,MGP.orangePaint);    
+		            }   
+		        }
+			   break;
+		   case(8):
+			   for(int r=0; r<lights2.length; r++)
+		          {for(int c = 0; c < lights2[r].length; c++){    
+		            canvas.drawOval(lights2[r][c].shape,MGP.WPaint);    
 		            }   
 		        }
 			   break;

@@ -2,6 +2,7 @@ package com.example.activities;
 
 import java.util.HashMap;
 
+
 import com.example.mfa.R;
 
 import android.app.Activity;
@@ -54,7 +55,7 @@ public class MainMenu extends Activity {
 		}
 			break;
 		case R.id.imageButton4: {
-			Intent i = new Intent(MainMenu.this, Hits.class);
+			Intent i = new Intent(MainMenu.this, Hit1Menu.class);
 			startActivity(i);
 		}
 			break;
