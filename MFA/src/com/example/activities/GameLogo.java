@@ -16,10 +16,13 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mfa.R;
-import com.example.mfa.networking.JSONPaser;
+import com.example.mfa.networking.*;
 
 public class GameLogo extends Activity {
 	private Object data = null;
@@ -28,15 +31,17 @@ public class GameLogo extends Activity {
 	// JSON Node names
 	final String TAG_GAME = "Game";
 	final String TAG_FBID = "FBID";
-	final String TAG_FIRST = "First_Name";
-	final String TAG_LAST = "Last_Name";
+	final String TAG_NAME = "Name";
 	final String TAG_HIGHSCORE = "Highscore";
 	final String TAG_MONEY = "Money";
 	final String TAG_HITS = "Hits";
 	public HashMap<String, String> map = new HashMap<String, String>();
 	public ArrayList<HashMap<String, String>> Players;
 	public TextView FBID;
-
+	public ImageButton FBLogin;
+	public Button btnLogout, btnLogin;
+	UserFunctions userFunctions;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,7 +53,21 @@ public class GameLogo extends Activity {
 
 		setContentView(R.layout.activity_game_logo);
 		Log.d("GameLogo: ", "Setting content view");
+		
 		FBID = (TextView)findViewById(R.id.FBID);
+		
+		btnLogout = (Button)findViewById(R.id.btnLogout);
+		btnLogin = (Button)findViewById(R.id.btnLogin);
+		
+		FBLogin = (ImageButton)findViewById(R.id.FBLogin);
+		
+        userFunctions = new UserFunctions();
+        
+        if(!userFunctions.isUserLoggedIn(getApplicationContext())){
+        	btnLogout=(Button)findViewById(R.id.btnLogout);
+        	btnLogout.setVisibility(View.GONE);
+        }
+        
 		JSONArray search = null;
 
 		// Creating JSON Parser instance
@@ -68,22 +87,19 @@ public class GameLogo extends Activity {
 
 				// Storing each json item in variable
 				String fbid = s.getString(TAG_FBID);
-				String first = s.getString(TAG_FIRST);
-				String last = s.getString(TAG_LAST);
+				String name = s.getString(TAG_NAME);
 				String highscore = s.getString(TAG_HIGHSCORE);
 				String money = s.getString(TAG_MONEY);
 				String hits = s.getString(TAG_HITS);
 				
 				Log.d("GameLogo: ", "String" + fbid);
-				Log.d("GameLogo: ", "String" + first);
-				Log.d("GameLogo: ", "String" + last);
+				Log.d("GameLogo: ", "String" + name);
 				Log.d("GameLogo: ", "String" + highscore);
 				Log.d("GameLogo: ", "String" + money);
 				Log.d("GameLogo: ", "String" + hits);
 				// adding each child node to HashMap key => value
 				map.put(TAG_FBID, fbid);
-				map.put(TAG_FIRST, first);
-				map.put(TAG_LAST, last);
+				map.put(TAG_NAME, name);
 				map.put(TAG_HIGHSCORE, highscore);
 				map.put(TAG_MONEY, money);
 				map.put(TAG_HITS, hits);
@@ -96,12 +112,39 @@ public class GameLogo extends Activity {
 
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.imageButton1: {
+		case R.id.FBLogin: {
 			Log.d("GameLogo: ", map.get(TAG_FBID).toString());
+        	FBID.setVisibility(View.VISIBLE);
 			FBID.setText(map.get(TAG_FBID).toString());
 			Intent intent = new Intent(this, MainMenu.class);
 			intent.putExtra("map", map);
 			startActivity(intent);
+			break;
+		}
+		case R.id.btnLogout: {
+			Log.d("Button Pressed","Log Out Button");
+	        if(userFunctions.isUserLoggedIn(getApplicationContext())){
+	            userFunctions.logoutUser(getApplicationContext());
+	        }
+	        Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+	        login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        startActivity(login);
+	        finish();
+	        break;
+		}
+		case R.id.btnLogin: {
+			Log.d("Button Pressed","Log In");
+			if(userFunctions.isUserLoggedIn(getApplicationContext())){
+				Intent intent = new Intent(this, MainMenu.class);
+				startActivity(intent);
+				break;
+	        }else{
+			Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+	        login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        startActivity(login);
+	        finish();
+	        break;
+			}
 		}
 		}
 	}

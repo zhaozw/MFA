@@ -5,23 +5,45 @@
     android:background="@drawable/gamelogo"
     tools:context=".GameLogo" >
 
-    <ImageButton
-        android:id="@+id/imageButton1"
+    <Button
+        android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:contentDescription="@string/desc"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="48dp"
         android:onClick="onClick"
-        android:src="@drawable/signin" />
+        android:text="Sign In Without Facebook" />
 
     <TextView
         android:id="@+id/FBID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/imageButton1"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:onClick="onClick"
+        android:text="logout" />
+
+    <ImageButton
+        android:id="@+id/FBLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="21dp"
+        android:contentDescription="@string/desc"
+        android:onClick="onClick"
+        android:src="@drawable/signin" />
 
 </RelativeLayout>

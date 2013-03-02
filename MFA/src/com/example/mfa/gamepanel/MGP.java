@@ -25,7 +25,6 @@ import android.view.View;
 import com.example.HitsObjects.HitGiantBoss;
 import com.example.activities.NewGameOptions;
 import com.example.mfa.R;
-import com.example.objects.Alien;
 import com.example.objects.AnalogStick;
 import com.example.objects.Asteroid;
 import com.example.objects.Explosion;

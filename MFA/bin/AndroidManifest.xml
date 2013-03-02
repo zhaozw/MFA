@@ -72,6 +72,8 @@
             android:name="com.example.activities.Hit2Menu"
             android:label="@string/title_activity_hit2_menu" >
         </activity>
+        <activity android:name="com.example.activities.RegisterActivity"></activity>
+        <activity android:name="com.example.activities.LoginActivity"></activity>
     </application>
 
 </manifest>

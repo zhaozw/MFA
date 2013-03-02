@@ -4,8 +4,6 @@ package com.example.objects;
 //this class is to be used to make multiple lights to move quickly 
 //across the screen to create the appearence of motion
 import java.util.Random;
-import java.awt.*;
-
 import com.example.mfa.gamepanel.MGP;
 
 import android.graphics.Canvas;

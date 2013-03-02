@@ -1,9 +1,6 @@
 package com.example.activities;
 
 import com.example.mfa.R;
-import com.example.mfa.R.layout;
-import com.example.mfa.R.menu;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
