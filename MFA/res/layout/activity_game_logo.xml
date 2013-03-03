@@ -5,23 +5,13 @@
     android:background="@drawable/gamelogo"
     tools:context=".GameLogo" >
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="48dp"
-        android:onClick="onClick"
-        android:text="Sign In Without Facebook" />
-
     <TextView
         android:id="@+id/FBID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Large Text"
+        android:text="james0123"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white"
         android:visibility="gone" />
@@ -39,11 +29,19 @@
         android:id="@+id/FBLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnLogin"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="21dp"
+        android:layout_centerVertical="true"
         android:contentDescription="@string/desc"
         android:onClick="onClick"
         android:src="@drawable/signin" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/FBLogin"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClick"
+        android:text="Sign In Without Facebook" />
 
 </RelativeLayout>

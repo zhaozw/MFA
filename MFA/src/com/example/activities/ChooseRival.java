@@ -31,7 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mfa.R;
-import com.example.mfa.networking.JSONPaser;
+import com.example.mfa.networking.JSONParser;
 import com.example.mfa.networking.PlayerStatsObject;
 
 public class ChooseRival extends Activity implements OnItemSelectedListener {
@@ -85,7 +85,7 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
    Players = new ArrayList<HashMap<String, String>>();
 
 	// Creating JSON Parser instance
-	JSONPaser jParser = new JSONPaser();
+	JSONParser jParser = new JSONParser();
 
 	// getting JSON string from URL
 	JSONObject json = jParser.getJSONFromUrl(url);

@@ -95,8 +95,8 @@ public final class R {
         public static final int CashAmount=0x7f090018;
         public static final int CashWord=0x7f090017;
         public static final int Cost=0x7f090016;
-        public static final int FBID=0x7f09000e;
-        public static final int FBLogin=0x7f090010;
+        public static final int FBID=0x7f09000d;
+        public static final int FBLogin=0x7f09000f;
         public static final int FormRegister=0x7f09002e;
         public static final int Hit2Description=0x7f090013;
         public static final int Hit2Image=0x7f090014;
@@ -112,8 +112,8 @@ public final class R {
         public static final int SendMessageCheckBox=0x7f090003;
         public static final int btnLinkToLoginScreen=0x7f09002d;
         public static final int btnLinkToRegisterScreen=0x7f090021;
-        public static final int btnLogin=0x7f09000d;
-        public static final int btnLogout=0x7f09000f;
+        public static final int btnLogin=0x7f090010;
+        public static final int btnLogout=0x7f09000e;
         public static final int btnRegister=0x7f09002c;
         public static final int cash=0x7f090019;
         public static final int checkBox1=0x7f090002;

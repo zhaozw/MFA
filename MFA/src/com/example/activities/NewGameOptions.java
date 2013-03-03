@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import com.example.mfa.R;
 import com.example.mfa.gamepanel.MGP;
-import com.example.mfa.networking.JSONPaser;
+import com.example.mfa.networking.JSONParser;
 import com.example.objects.HitsAllInfo;
 
 import android.os.Bundle;
@@ -76,7 +76,7 @@ public class NewGameOptions extends Activity {
 	    JSONArray Hits = null;
 
 		// Creating JSON Parser instance
-		JSONPaser jParser = new JSONPaser();
+		JSONParser jParser = new JSONParser();
 
 		// getting JSON string from URL
 		JSONObject json = jParser.getJSONFromUrl(url + hit);

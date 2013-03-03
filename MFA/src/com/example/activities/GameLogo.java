@@ -26,7 +26,7 @@ import com.example.mfa.networking.*;
 
 public class GameLogo extends Activity {
 	private Object data = null;
-	String url = "http://cofactor1-unbrandedtech.dotcloud.com/Player_Info.php?FBID=james0123";
+	String url = "http://cofactor1-unbrandedtech.dotcloud.com/Player_Info.php?FBID=";
 
 	// JSON Node names
 	final String TAG_GAME = "Game";
@@ -41,16 +41,17 @@ public class GameLogo extends Activity {
 	public ImageButton FBLogin;
 	public Button btnLogout, btnLogin;
 	UserFunctions userFunctions;
+	DatabaseHandler db;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		Intent intent = getIntent();
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // no title
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+		WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
 		setContentView(R.layout.activity_game_logo);
 		Log.d("GameLogo: ", "Setting content view");
 		
@@ -62,52 +63,60 @@ public class GameLogo extends Activity {
 		FBLogin = (ImageButton)findViewById(R.id.FBLogin);
 		
         userFunctions = new UserFunctions();
+        db = new DatabaseHandler(getApplicationContext());
+        if(intent.hasExtra("name")){
+        	intent.getExtras();
+        	FBID.setText(intent.getStringExtra("uid"));
+        }
         
         if(!userFunctions.isUserLoggedIn(getApplicationContext())){
         	btnLogout=(Button)findViewById(R.id.btnLogout);
         	btnLogout.setVisibility(View.GONE);
-        }
-        
-		JSONArray search = null;
+        }else{
+        	FBID.setText(db.getUserDetails().get("name").toString());
+        	
+        	JSONArray search = null;
 
-		// Creating JSON Parser instance
-		JSONPaser jParser = new JSONPaser();
+    		// Creating JSON Parser instance
+    		JSONParser jParser = new JSONParser();
+    		
+    		// getting JSON string from URL
+    		Log.d("GameLogo: ", "Sending Request" + url + db.getUserDetails().get("email").toString());
+    		JSONObject json = jParser.getJSONFromUrl(url + db.getUserDetails().get("email").toString());
+    		
+    		Log.d("GameLogo: ", "Starting JSON Try Loop");
+    		try {
+    			// Getting Array of Contacts
+    			search = json.getJSONArray(TAG_GAME);
 
-		// getting JSON string from URL
-		JSONObject json = jParser.getJSONFromUrl(url);
+    			// looping through All Contacts
+    			for (int i = 0; i < search.length(); i++) {
+    				JSONObject s = search.getJSONObject(i);
 
-		Log.d("GameLogo: ", "Starting JSON Try Loop");
-		try {
-			// Getting Array of Contacts
-			search = json.getJSONArray(TAG_GAME);
+    				// Storing each json item in variable
+    				String fbid = s.getString(TAG_FBID);
+    				String name = s.getString(TAG_NAME);
+    				String highscore = s.getString(TAG_HIGHSCORE);
+    				String money = s.getString(TAG_MONEY);
+    				String hits = s.getString(TAG_HITS);
+    				
+    				Log.d("GameLogo: ", "String" + fbid);
+    				Log.d("GameLogo: ", "String" + name);
+    				Log.d("GameLogo: ", "String" + highscore);
+    				Log.d("GameLogo: ", "String" + money);
+    				Log.d("GameLogo: ", "String" + hits);
+    				// adding each child node to HashMap key => value
+    				map.put(TAG_FBID, fbid);
+    				map.put(TAG_NAME, name);
+    				map.put(TAG_HIGHSCORE, highscore);
+    				map.put(TAG_MONEY, money);
+    				map.put(TAG_HITS, hits);
 
-			// looping through All Contacts
-			for (int i = 0; i < search.length(); i++) {
-				JSONObject s = search.getJSONObject(i);
-
-				// Storing each json item in variable
-				String fbid = s.getString(TAG_FBID);
-				String name = s.getString(TAG_NAME);
-				String highscore = s.getString(TAG_HIGHSCORE);
-				String money = s.getString(TAG_MONEY);
-				String hits = s.getString(TAG_HITS);
-				
-				Log.d("GameLogo: ", "String" + fbid);
-				Log.d("GameLogo: ", "String" + name);
-				Log.d("GameLogo: ", "String" + highscore);
-				Log.d("GameLogo: ", "String" + money);
-				Log.d("GameLogo: ", "String" + hits);
-				// adding each child node to HashMap key => value
-				map.put(TAG_FBID, fbid);
-				map.put(TAG_NAME, name);
-				map.put(TAG_HIGHSCORE, highscore);
-				map.put(TAG_MONEY, money);
-				map.put(TAG_HITS, hits);
-
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+    			}
+    		} catch (JSONException e) {
+    			e.printStackTrace();
+    		}
+            }
 	}
 
 	public void onClick(View v) {
@@ -115,7 +124,6 @@ public class GameLogo extends Activity {
 		case R.id.FBLogin: {
 			Log.d("GameLogo: ", map.get(TAG_FBID).toString());
         	FBID.setVisibility(View.VISIBLE);
-			FBID.setText(map.get(TAG_FBID).toString());
 			Intent intent = new Intent(this, MainMenu.class);
 			intent.putExtra("map", map);
 			startActivity(intent);
@@ -135,7 +143,11 @@ public class GameLogo extends Activity {
 		case R.id.btnLogin: {
 			Log.d("Button Pressed","Log In");
 			if(userFunctions.isUserLoggedIn(getApplicationContext())){
+				Log.d("GameLogo: ", map.get(TAG_FBID).toString());
+	        	FBID.setVisibility(View.VISIBLE);
+				FBID.setText(map.get(TAG_FBID).toString());
 				Intent intent = new Intent(this, MainMenu.class);
+				intent.putExtra("map", map);
 				startActivity(intent);
 				break;
 	        }else{

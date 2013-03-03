@@ -46,7 +46,7 @@ public class one extends ListActivity {
 		Players = new ArrayList<HashMap<String, String>>();
 
 		// Creating JSON Parser instance
-		JSONPaser jParser = new JSONPaser();
+		JSONParser jParser = new JSONParser();
 
 		// getting JSON string from URL
 		JSONObject json = jParser.getJSONFromUrl(url);
