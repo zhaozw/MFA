@@ -8,7 +8,9 @@ import org.json.JSONObject;
 
 import com.example.mfa.R;
 import com.example.mfa.gamepanel.MGP;
+import com.example.mfa.networking.DatabaseHandler;
 import com.example.mfa.networking.JSONParser;
+import com.example.mfa.networking.UserFunctions;
 import com.example.objects.HitsAllInfo;
 
 import android.os.Bundle;
@@ -25,6 +27,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class NewGameOptions extends Activity {
 	public MGP gamePanel;
@@ -45,7 +49,7 @@ public class NewGameOptions extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 	    lightColor = settings.getInt("lightColor", 0);
 	    Log.d("NewGameOptions: ", "Light Color ="+lightColor);
 		
@@ -63,16 +67,21 @@ public class NewGameOptions extends Activity {
 		
 	    dm = getResources().getDisplayMetrics();
 		
-		
-	    
+		DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+	    UserFunctions userFunctions = new UserFunctions();
 		
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE); 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 		WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_new_game_options);
-	    Intent intent = getIntent();
-	    String hit = intent.getStringExtra("hits");
+		
+        if(!userFunctions.isUserLoggedIn(getApplicationContext())){
+        	Toast toast = Toast.makeText(getApplicationContext(), "Please Log in", Toast.LENGTH_LONG);
+        	toast.show();
+        }else{
+        	
+        String hit = db.getUserDetails().get("uid").toString().trim();
 	    JSONArray Hits = null;
 
 		// Creating JSON Parser instance
@@ -80,11 +89,14 @@ public class NewGameOptions extends Activity {
 
 		// getting JSON string from URL
 		JSONObject json = jParser.getJSONFromUrl(url + hit);
-
+		
+		Log.d("NewGameOptions",hit);
+		
 		Log.d("NewGameOptions: ", "Starting JSON Try Loop");
 		try {
 			// Getting Array of Contacts
 			Hits = json.getJSONArray("Hits");
+			Log.d("NewGameOptions","Getting Json Array");
 
 			// looping through All Contacts
 			for (int i = 0; i < Hits.length(); i++) {
@@ -127,6 +139,7 @@ public class NewGameOptions extends Activity {
 		 hitsAllInfo.initialize(map);
 		
 		
+	}
 	}
 
 	public void BeginCustomGame(View v) {

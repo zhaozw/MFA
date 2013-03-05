@@ -71,9 +71,6 @@ public class LoginActivity extends Activity {
  
                             // Launch Dashboard Screen
                             Intent Gamelogo = new Intent(getApplicationContext(), GameLogo.class);
-            				Gamelogo.putExtra(KEY_UID, json.getString(KEY_UID));
-            				Gamelogo.putExtra(KEY_NAME, json.getString(KEY_NAME));
-            				Gamelogo.putExtra(KEY_EMAIL, json.getString(KEY_EMAIL));
 
                             // Close all views before launching Dashboard
                             Gamelogo.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

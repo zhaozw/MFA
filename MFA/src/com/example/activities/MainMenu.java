@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
@@ -39,8 +40,11 @@ public class MainMenu extends Activity {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.imageButton1: {
+			Log.d("Main Menu","Starting Intent");
 			Intent i = new Intent(MainMenu.this, NewGameOptions.class);
+			Log.d("Main Menu","Intent Made");
 			i.putExtra("hits", hits);
+			Log.d("Main Menu","starting activity");
 			startActivity(i);
 		}
 			break;

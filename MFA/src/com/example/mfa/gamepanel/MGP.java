@@ -172,7 +172,7 @@ public class MGP extends SurfaceView implements
 		getHolder().addCallback(this);
 
 	
-		
+		lightColor=NewGameOptions.lightColor;
 
 		 dp = new double[1000];
 		

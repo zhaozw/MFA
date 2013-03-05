@@ -74,15 +74,15 @@ public class GameLogo extends Activity {
         	btnLogout.setVisibility(View.GONE);
         }else{
         	FBID.setText(db.getUserDetails().get("name").toString());
-        	
+         	
         	JSONArray search = null;
 
     		// Creating JSON Parser instance
     		JSONParser jParser = new JSONParser();
     		
     		// getting JSON string from URL
-    		Log.d("GameLogo: ", "Sending Request" + url + db.getUserDetails().get("email").toString());
-    		JSONObject json = jParser.getJSONFromUrl(url + db.getUserDetails().get("email").toString());
+    		Log.d("GameLogo: ", "Sending Request " + url + db.getUserDetails().get("email").toString());
+    		JSONObject json = jParser.getJSONFromUrl((url + db.getUserDetails().get("email").toString()).trim());
     		
     		Log.d("GameLogo: ", "Starting JSON Try Loop");
     		try {
