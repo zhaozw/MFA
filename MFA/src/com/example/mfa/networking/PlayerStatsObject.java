@@ -3,21 +3,21 @@ package com.example.mfa.networking;
 public class PlayerStatsObject {
 
 	public String name; 
-	public int hitActive;
+	public String hitID;
+	
 	
 	
 	
  public	PlayerStatsObject()
  {
-	 
-	 
+	super(); 
  }
 	
- public	PlayerStatsObject(String name, int hitActive)
+ public	PlayerStatsObject(String name, String hitID)
  {
-	 this.name=name;
-	 this.hitActive=hitActive;
-	 
+	super();
+	this.name=name;
+	this.hitID=hitID;
  }
 		
  

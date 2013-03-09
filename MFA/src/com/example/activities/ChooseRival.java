@@ -12,9 +12,11 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -31,20 +33,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mfa.R;
+import com.example.mfa.networking.DatabaseHandler;
 import com.example.mfa.networking.JSONParser;
 import com.example.mfa.networking.PlayerStatsObject;
+import com.example.objects.RivalAdapter;
 
 public class ChooseRival extends Activity implements OnItemSelectedListener {
 
 	
 	
 	// url to make request
-	private static String url = "http://www.acsii-inc.net/php/hhemployeescan.php?EMPID=1048&DATES=09/17/2012&DATEE=09/17/2012";
+	private static String getRivals = "http://cofactor1-unbrandedtech.dotcloud.com/Rivals.php?HitsID=";
+	private static String setHit = "http://cofactor1-unbrandedtech.dotcloud.com/Set_Hit.php?";
 	
 	// JSON Node names
-	private static final String TAG_SEARCH = "SEARCH";
-	private static final String TAG_CREW = "Crew";
-	private static final String TAG_LUNCH = "Lunch";
+	private static final String TAG_RIVALS = "Rivals";
+	private static final String TAG_HITID = "HitsID";
+	private static final String TAG_RIVAL0HITSID = "Rival0HitsID";
+	private static final String TAG_RIVAL0NAME = "Rival0Name";
+	private static final String TAG_RIVAL1HITSID = "Rival1HitsID";
+	private static final String TAG_RIVAL1NAME = "Rival1Name";
+	private static final String TAG_RIVAL2HITSID = "Rival2HitsID";
+	private static final String TAG_RIVAL2NAME = "Rival2Name";
 	
 	// contacts JSONArray
 	JSONArray search = null;
@@ -65,7 +75,7 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
 	 int duration = Toast.LENGTH_LONG;
 //	
   	String currentlySelectedPlayerName;
-	int currentlySelectedPlayerHitActive;
+	String currentlySelectedPlayerHitID;
 	 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,7 +88,7 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     	playerStatsArray = new PlayerStatsObject[1000];
 
-        
+	DatabaseHandler db = new DatabaseHandler(getApplicationContext());
     setContentView(R.layout.activity_choose_rival);
     context = getApplicationContext();
     
@@ -88,29 +98,34 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
 	JSONParser jParser = new JSONParser();
 
 	// getting JSON string from URL
-	JSONObject json = jParser.getJSONFromUrl(url);
+	JSONObject json = jParser.getJSONFromUrl(getRivals + db.getUserDetails().get("uid").toString().trim());
 
 	try {
 		// Getting Array of Contacts
-		search = json.getJSONArray(TAG_SEARCH);
+		search = json.getJSONArray(TAG_RIVALS);
 		
 		// looping through All Contacts
 		for(int i = 0; i < search.length(); i++){
 			JSONObject s = search.getJSONObject(i);
 			
-			// Storing each json item in variable
-			String crew = s.getString(TAG_CREW);
-			String lunch = s.getString(TAG_LUNCH);
-			Log.d("crew" , crew );
-			Log.d("lunch" , lunch );
 			// creating new HashMap
 			HashMap<String, String> map = new HashMap<String, String>();
 			
-			// adding each child node to HashMap key => value
-			map.put(TAG_LUNCH, lunch);
-			map.put(TAG_CREW, crew);
+			Log.d("New Game Options", "initializing map");
+			for(int k =0;k<=2;k++){
+				
+				
+				map.put("Rival"+k+"Name",   s.getString("Rival"+k+"Name"));
+				map.put("Rival"+k+"HitsID", s.getString("Rival"+k+"HitsID"));
+					
+				Log.d("NewGameOptions ", "jsonArray  "+ k+ s.getString("Rival"+k+"Name"));
+				Log.d("NewGameOptions ", "jsonArray  "+ k+ s.getString("Rival"+k+"HitsID"));
+				
+				Log.d("NewGameOptions ", "Map "+ k+ map.get("Rival"+k+"Name"));
+				Log.d("NewGameOptions ", "Map "+ k+ map.get("Rival"+k+"HitsID"));
 			
-			playerStatsArray[i]= new PlayerStatsObject(crew,Integer.parseInt(lunch));
+				playerStatsArray[i]= new PlayerStatsObject(map.get("Rival"+k+"Name"),map.get("Rival"+k+"HitsID"));
+			}
 			
 			Players.add(map);
 		}
@@ -120,10 +135,7 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
 	/**
 	 * Updating parsed JSON data into ListView
 	 * */
-	ListAdapter adapter = new SimpleAdapter(this, Players,
-			R.layout.list_item,
-			new String[] {TAG_CREW,TAG_LUNCH}, new int[] {
-					R.id.name, R.id.IHA });
+	RivalAdapter adapter = new RivalAdapter(getApplicationContext(), R.layout.activity_choose_rival, playerStatsArray) ;
 	
 	
 	
@@ -182,29 +194,29 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
         	
         	 
         	 currentlySelectedPlayerName=playerStatsArray[position].name;
-        	 currentlySelectedPlayerHitActive=playerStatsArray[position].hitActive;
+        	 currentlySelectedPlayerHitID=playerStatsArray[position].hitID;
         	 
 
-        	 if( currentlySelectedPlayerHitActive==0)
-        	 {
-        			messageCheckBoxView.setVisibility(View.GONE);  
-        		    enterMessageView.setVisibility(View.GONE);  
-        		    purchaseView.setVisibility(View.GONE); 	 
-        		    sendHitView.setVisibility(View.INVISIBLE); 
-                    Title.setText("Hit Not Available");
-        	 }
-        	 else if(currentlySelectedPlayerHitActive==1)
-        	 {
-        		 Title.setText("Hit Available");
-        		 if(((CompoundButton) messageBox).isChecked()){
-             		enterMessageView.setVisibility(View.VISIBLE);  
-             	}
-             	else if(((CompoundButton) messageBox).isChecked()==false){
-             		enterMessageView.setVisibility(View.GONE);  	
-             	}
-     		    sendHitView.setVisibility(View.VISIBLE); 
-        		 
-        	 }
+//        	 if( currentlySelectedPlayerHitActive==0)
+//        	 {
+//        			messageCheckBoxView.setVisibility(View.GONE);  
+//        		    enterMessageView.setVisibility(View.GONE);  
+//        		    purchaseView.setVisibility(View.GONE); 	 
+//        		    sendHitView.setVisibility(View.INVISIBLE); 
+//                    Title.setText("Hit Not Available");
+//        	 }
+//        	 else if(currentlySelectedPlayerHitActive==1)
+//        	 {
+//        		 Title.setText("Hit Available");
+//        		 if(((CompoundButton) messageBox).isChecked()){
+//             		enterMessageView.setVisibility(View.VISIBLE);  
+//             	}
+//             	else if(((CompoundButton) messageBox).isChecked()==false){
+//             		enterMessageView.setVisibility(View.GONE);  	
+//             	}
+//     		    sendHitView.setVisibility(View.VISIBLE); 
+//        		 
+//        	 }
         	 
         }
     };
@@ -289,7 +301,7 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
     OnClickListener purchaseButtonListener = new OnClickListener() {
         public void onClick(View v) {
 	
-       	CharSequence text = "You just sent a hit out on "+ currentlySelectedPlayerName + currentlySelectedPlayerHitActive +"";
+       	CharSequence text = "You just sent a hit out on "+ currentlySelectedPlayerName + currentlySelectedPlayerHitID +"";
     	Toast hitSentToast = Toast.makeText( context, text, duration);
         hitSentToast.show();
         	
@@ -305,5 +317,3 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
 
 	
 }
-
-
