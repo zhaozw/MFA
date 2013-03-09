@@ -50,7 +50,7 @@ public class FlyingMessage {
       if(active)
 		 if(dir==1){
 			    X-=speed;
-			 if(X<-1000){
+			 if(X<-5000){
 				active=false;
 				X = MGP.deviceWidth*2;
 			 } 

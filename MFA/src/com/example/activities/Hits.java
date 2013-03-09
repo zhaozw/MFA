@@ -52,16 +52,6 @@ public class Hits extends Activity {
          }
     };
     
-    
-    
-    
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_options, menu);
-        return true;
-    }
-    
-    
     public void startChooseRivalsActivity(View v) {
         Intent intent = new Intent(Hits.this, ChooseRival.class);
         startActivity(intent);
@@ -69,6 +59,5 @@ public class Hits extends Activity {
 
     public void finishActivityA(View v) {
     	Hits.this.finish();
-    }
-    
+    } 
 }

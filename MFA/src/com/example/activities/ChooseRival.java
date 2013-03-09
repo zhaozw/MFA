@@ -283,27 +283,18 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
         		enterMessageView.setVisibility(View.GONE);  	
         	}   		 
         }
-  
     };
     
-    OnClickListener purchaseButtonListener = new OnClickListener() {
-        public void onClick(View v) {
-	
-       	CharSequence text = "You just sent a hit out on "+ currentlySelectedPlayerName + currentlySelectedPlayerHitActive +"";
-    	Toast hitSentToast = Toast.makeText( context, text, duration);
-        hitSentToast.show();
+    OnClickListener purchaseButtonListener = new OnClickListener() 
+    {
+        public void onClick(View v) 
+        {
+	       	CharSequence text = "You just sent a hit out on "+ currentlySelectedPlayerName + currentlySelectedPlayerHitActive +"";
+	    	Toast hitSentToast = Toast.makeText( context, text, duration);
+	        hitSentToast.show();
         	
         }
-    };
-    
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_choose_rival, menu);
-        return true;
-    }
-
-
-	
+    };	
 }
 
 

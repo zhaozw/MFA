@@ -49,20 +49,8 @@ public class Options extends Activity implements OnItemSelectedListener {
 		 // Apply the adapter to the spinner
 		 
 		 lightColorSpinner.setAdapter(playerTypeAdapter); 
-		 lightColorSpinner.setOnItemSelectedListener(this);
-//		 
-		
+		 lightColorSpinner.setOnItemSelectedListener(this);	
 	}
-	
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_options, menu);
-		return true;
-	}
-
-
     // SELECTION CHOICE FOR LIGHT COLOR 
     public void onItemSelected(AdapterView<?> parent, View view, int pos,
 			long id) {

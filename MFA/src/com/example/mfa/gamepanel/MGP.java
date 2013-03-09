@@ -65,7 +65,8 @@ public class MGP extends SurfaceView implements
     public static int deviceHeight;
 	public RectF screenShape;
     public int currentHit=-1;
-
+    
+    boolean pause;
 	private boolean debugInfo=false; 	
 	boolean createBitmap=false;	
 	private int pointerIndex;
@@ -137,6 +138,8 @@ public class MGP extends SurfaceView implements
 		getHolder().addCallback(this);
 
 		lightColor=NewGameOptions.lightColor;
+		
+		pause = false;
 
 		dp = new double[1000];
 		
@@ -263,7 +266,13 @@ public class MGP extends SurfaceView implements
 			  }
 	    	  else if(quitButton.touchLocation.contains(event.getX(),event.getY()))
 	    	  {
-	    		  closeGame();
+	    		  if(!pause)
+	    		  {
+	    			  pause=true;
+	    		  }
+	    		  else
+	    			  pause = false;
+	    		  //closeGame();
 	    	  }
 	    	  else if(powerUps.nuke.shape.contains(event.getX(),event.getY()))
 		      {
@@ -426,9 +435,7 @@ public class MGP extends SurfaceView implements
 //      //draw the enemies
 //		for(int i=0;i<enemies.length;i++) 
 //	        enemies[i].draw(canvas);
-
-
-			
+	    
 	    textPaint.setTextSize((float) MGP.dp[20]);
 	    canvas.drawText("score: " + score, (float) MGP.dp[140], (float) (deviceHeight-MGP.dp[5]),textPaint );
 
@@ -473,34 +480,40 @@ public class MGP extends SurfaceView implements
 	 */
 	public void update() 
 	{
-		//Log.d(TAG, "updating");
-	    updateGameState();
-		updateObjects();
-		updateAudio();
-		updateHits();
+		if(!pause)
+		{
+			//Log.d(TAG, "updating");
+		    updateGameState();
+			updateObjects();
+			updateAudio();
+			updateHits();
+		}
     }
-
+	
    public void updateAudio()
 		{
 	   
 	         //Log.d(TAG, "starting effects ");
 	         soundEffects.playSounds();
 	   
-		     if(startMusic){
+		     if(startMusic)
+		     {
 		    	 Log.d(TAG, "starting track "+wave);
 		    	 gameSoundtrack.startMusic();	
 		         startMusic=false; 
 		         musicPlaying=true;
 	       	 }
 		     
-		     if(stopMusic){
+		     if(stopMusic)
+		     {
 		    	 Log.d(TAG, "stopping music");
 		        gameSoundtrack.endWave();	 
 		        stopMusic=false;
 		        musicPlaying=false;
 		     }
 		     
-		     if(stopKick) {
+		     if(stopKick) 
+		     {
 		    	 stopKick=false;
 		    	 Log.d(TAG, "stopping Kick");
 		    	 gameSoundtrack.startWave(); 
@@ -892,14 +905,32 @@ public class MGP extends SurfaceView implements
 	          powerUps.slowMo.unlock();
 	          astKilledThisWave=0;
 	    }
-	     	
+	     
+	    public void pauseGame()
+	    {
+	    	stopMusic=true;
+	 		stopKick=true;
+	 		startMusic=false;
+	    	thread.setRunning(false);
+	    }
+	    
+	    public void setPause(boolean p)
+	    {
+	    	pause = p;
+	    }
+	    
+	    public boolean getPause()
+	    {
+	    	return pause;
+	    }
+	    
 	 	public void ResetGame()
 		{   
 	 		stopMusic=true;
 	 		stopKick=true;
 	 		startMusic=false;
 	 		totalAsteroidsKilled=0;
-	 		asteroidsUnlocked=2;
+	 		asteroidsUnlocked=5;
 	 		totalAliensKilled=0;
 	 		aliensKilledThisWave=0;
 	 		astKilledThisWave=0;
@@ -911,15 +942,15 @@ public class MGP extends SurfaceView implements
 		    asteroidPassLimit=15;   
 		    asteroidsPassed = 0;  
 		    score = 0; 	
-		    life=3;
+		    life = 20;
 		    ship.x=100;
 		    ship.y=100;
 		    enemiesUnlocked=0;
 			//shootingEnemies = false;
 		    for(int k=0;k<asteroids.length;k++)
 	        {
-		     asteroids[k].moveBack();
-	         asteroids[k].unlocked=false;
+			     asteroids[k].moveBack();
+		         asteroids[k].unlocked=false;
 	        }
 //		    for(int k=0;k<enemies.length;k++)
 //	        {
@@ -951,15 +982,14 @@ public class MGP extends SurfaceView implements
 	     {
 	    	 ResetGame();
 	    	 updateAudio();
-	 		//code to end activity if you want an exit button
-				thread.setRunning(false);
-				((Activity)getContext()).finish();
-		
+	    	 
+	 		 //code to end activity if you want an exit button
+			 thread.setRunning(false);
+			((Activity)getContext()).finish();
 	     }
 	 	
 	     public void updateHits()
-	     {	 
-	    	 
+	     {	  
 	    	 NewGameOptions.hitsAllInfo.MoveHits(ship);
 	    	 NewGameOptions.hitsAllInfo.checkHitFailure();
 	    	 
@@ -1013,6 +1043,5 @@ public class MGP extends SurfaceView implements
 	 		
 	 		createBitmap=false;
 	 		Log.d("creating bitmap "," create bitmap");
-	 		
 	 	}
 }
