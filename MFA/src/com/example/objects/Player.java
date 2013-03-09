@@ -100,7 +100,6 @@ public class Player
 	                 // the shot shifted up is not skipped
 	        } 
 	      }
-	    
 	 }
 	 
 	 public boolean checkForNewShots()
@@ -164,12 +163,12 @@ public class Player
 			 
 	 }
 
-	 public void move2(int xDiff,int yDiff)
+	 public void move(int xDiff,int yDiff)
 	    {  
 		 if(unlocked)
 		 {
 			 //ship will move forward
-			 if(xDiff/6>0&&x<MGP.deviceWidth-15)
+			 if(xDiff/6>0&&x<MGP.deviceWidth-50)
 				 x+=(xDiff/6);
 			 
 			 //ship will move backwards	 
@@ -177,41 +176,49 @@ public class Player
 		    	 x+=(xDiff/6);
 		     
 		     //ship will move down	 
-			 if(yDiff/6>0&&y<MGP.deviceHeight-15)
+			 if(yDiff/6>0&&y<MGP.deviceHeight-50)
 				  y+=(yDiff/6); 
 			 
 			 //ship will move up	 
-			 if(yDiff/6<0&&y>25)
+			 if(yDiff/6<0&&y>0)
 				  y+=(yDiff/6);		
 		 }
 		 else if(enter)
 		 {
-			 if(x>=MGP.deviceHeight/8&&y>=MGP.deviceHeight/2)
+			 if(x > (MGP.deviceHeight/8))
+				 x-=2;
+			 else
 			 {
 				 unlocked=true;
 			     enter=false;
 			 }
-			 else
-			 {
-				 if(x<MGP.deviceHeight/8)
-				 {
-				     x+=1;
-				 } 
-			     if(y<MGP.deviceHeight/2)
-				     y+=1;
-			 }
 		 }
 		 else if(exit)
 		 {
-			
-			 if(x>-200&&y>-200)
+			 if(x >= (MGP.deviceWidth/2) - 5 && x <= (MGP.deviceWidth/2) + 5 && y >= (MGP.deviceHeight/2) - 5 && y <= (MGP.deviceHeight/2) + 5)
 			 {
-				 x-=1;
-				 y-=1; 
+				 exit = false;
+				 unlocked = false;
 			 }
 			 else
 			 {
-					exit=false; 
+				 unlocked = false;
+				 if(x < MGP.deviceWidth/2)
+				 {
+					 x+=2;
+				 }
+				 else
+				 {
+					 x-=2;
+				 }
+				 if(y < MGP.deviceHeight/2)
+				 {
+					 y+=2;
+				 }
+				 else
+				 {
+					 y-=2;
+				 }
 			 }
 		 }
 	     

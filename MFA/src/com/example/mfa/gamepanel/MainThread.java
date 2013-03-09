@@ -80,7 +80,6 @@ public class MainThread extends Thread {
 		int framesSkipped;	// number of frames being skipped 
 
 		sleepTime = 0;
-
 		while (running) {
 			beginTime = System.currentTimeMillis();
 			canvas = null;

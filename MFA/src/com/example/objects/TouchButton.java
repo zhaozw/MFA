@@ -1,17 +1,18 @@
 package com.example.objects;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.graphics.RectF;
 
 import com.example.mfa.gamepanel.MGP;
 
-public class TouchButton {
-
+public class TouchButton 
+{
 	int size;	 
 	public int x,y,h,w;
-	public RectF touchLocation;
+	public RectF touchLocation, shadow;
     private Bitmap bitmap;	// the actual bitmap
-	public boolean active=false;
+	public boolean active=false,shade;
     
 	public TouchButton(Bitmap b,int x,int y,int h,int w)
 	{
@@ -44,13 +45,20 @@ public class TouchButton {
 		touchLocation = new RectF(x,y,w,h);
 	}
 	
-	public TouchButton(double x, double y, double size) {
+	public TouchButton(double x, double y, double size, boolean shade) 
+	{
 		this.x=(int) x;
 		this.y=(int) y;
 		this.w=(int) (x+size);
 		this.h=(int) (y+size);
 		this.size=(int) size;
 		touchLocation = new RectF(this.x,this.y,w,h);
+		this.shade=shade;
+		
+		if(shade)
+		{
+			shadow = new RectF((int)x,MGP.deviceHeight-20,(int)(x+size),MGP.deviceHeight-5);
+		}
 	}
 
 	public boolean getActiveState()
@@ -73,7 +81,10 @@ public class TouchButton {
 		if(bitmap!=null)
 			canvas.drawBitmap(bitmap, x , y, null);
 		else
+		{
+			if(shade)
+			canvas.drawOval(shadow,MGP.blackPaint);
 			canvas.drawOval(touchLocation, MGP.redPaint);
+		}
 	}
-
 }

@@ -4,8 +4,6 @@
 package com.example.mfa.gamepanel;
 
 import java.util.Random;
-
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -30,6 +28,7 @@ import com.example.objects.Asteroid;
 import com.example.objects.Explosion;
 import com.example.objects.FlyingMessage;
 import com.example.objects.InteractiveSong;
+import com.example.objects.LifeBar;
 import com.example.objects.LightBackground;
 import com.example.objects.Player;
 import com.example.objects.PowerUpsAll;
@@ -37,25 +36,28 @@ import com.example.objects.SoundEffectsManager;
 import com.example.objects.Thrusters;
 import com.example.objects.TouchButton;
 
-/**
- * @author impaler
- * This is the main surface that handles the ontouch events and draws
- * the image to the screen.
- */
+
 public class MGP extends SurfaceView implements
 		SurfaceHolder.Callback{
 
 	private static final String TAG = MGP.class.getSimpleName();
 	
+	private MainThread thread;
+	private LifeBar bar;
+	private TouchButton shootButton,quitButton;
+	private FlyingMessage message;
+	private Explosion explo1,explo2,explo3;
+    private Thrusters shipThrusters;
+    private InteractiveSong gameSoundtrack;
+    private SoundEffectsManager soundEffects;    
+    private Player ship;
+    private LightBackground ltBackground;
+    private AnalogStick analog;
+    private PowerUpsAll powerUps;
+    HitGiantBoss bossHit;
 	
+    public static double[] dp; //DP units
 	
-    public static double[] dp;
-	
-
-	
-	
-	private MainThread thread;		
-    
 	DisplayMetrics metrics = this.getResources().getDisplayMetrics();
     int dh = metrics.heightPixels;
     int dw = metrics.widthPixels;
@@ -64,25 +66,16 @@ public class MGP extends SurfaceView implements
 	public RectF screenShape;
     public int currentHit=-1;
 
-	private boolean debugInfo=false; 
-	
-	boolean createBitmap=false;
-	
-	public TouchButton shootButton,quitButton;
-	public FlyingMessage message;
-
+	private boolean debugInfo=false; 	
+	boolean createBitmap=false;	
+	private int pointerIndex;
+	boolean pointerAnalog1 = false, pointerAnalog2 = false;
+	boolean pointerShoot1 = false, pointerShoot2 = false;   
+    Bitmap dock,myBitmap = null;
     
-    Bitmap myBitmap =null;
-    
-    public int optionsChoice=0;
-
-    //images of life bar
-    private Bitmap[] lifeBar = new Bitmap[4];
+    public int optionsChoice = 0;
     public static int life;
-
-    public int barY;
-    
-    private Bitmap bar;
+    private double initialLife;
 
     //what wave the game is currently on
     public static int wave = 0;
@@ -92,13 +85,7 @@ public class MGP extends SurfaceView implements
     //for random numbers
     Random Generator = new Random();
     int r;
-    
-    PowerUpsAll powerUps;
-    
-    
-    private Explosion explo1,explo2,explo3;
-    private Thrusters shipThrusters;
-    
+
     //0 = game just begun ,  1 = wave ongoing , 2 = between waves, 3 = paused, 4 = gameOver, 5= game has not yet started,6= close game
     public static int state =0;
     
@@ -111,35 +98,21 @@ public class MGP extends SurfaceView implements
     //using this as opposed to asteroids killed allows for variable amounts of points
     //each wave
     public static int asteroidPassLimit=5; 
-    
     public static int asteroidsPassed = 0,totalSpeed=-1,astKilledThisWave,totalAsteroidsKilled;
     public static int  totalAliensKilled=0,aliensKilledThisWave=0;
-   
-    HitGiantBoss bossHit;
+    public static int score = 0; //the points the player has received;
     
-    //the points the player has recieved;
-    public static int score = 0; 
-    
-    public InteractiveSong gameSoundtrack;
-    public SoundEffectsManager soundEffects;
-    
-    // to draw anything in android you need to create a color
-    //this is a transparent red, and a white
-    //I am going to use t so signify transparency in the color
-    public static Paint textPaint,WPaint,redPaint,bluePaint,greenPaint,yellowPaint,greyPaint,blackPaint,orangePaint,purplePaint,pinkPaint,s1,s2,blueT,redT,orangeT,yellowT;
+    //Colors
+    public static Paint textPaint,WPaint,redPaint,bluePaint,greenPaint,yellowPaint,greyPaint,
+    blackPaint,orangePaint,purplePaint,pinkPaint,s1,s2,blueT,redT,orangeT,yellowT;
 
-    //the player
-    Player ship;
-    
-    //the player
 //    Player ship = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.bs65),
 //    						BitmapFactory.decodeResource(getResources(), R.drawable.gps65),
 //    						BitmapFactory.decodeResource(getResources(),R.drawable.grs65),
 //    						BitmapFactory.decodeResource(getResources(),R.drawable.ship),
 //    						BitmapFactory.decodeResource(getResources(), R.drawable.ps),
 //    						BitmapFactory.decodeResource(getResources(), R.drawable.laser),100,100);
-   
-   
+      
     //the array of asteroids
     Asteroid[] asteroids = new Asteroid[18];
     
@@ -147,148 +120,117 @@ public class MGP extends SurfaceView implements
 
     //the number that is solely responsible for
     int asteroidsUnlocked=2,enemiesUnlocked=0;
-
-    //lights
-    LightBackground ltBackground;
-    
+       
     // the fps to be displayed
 	private String avgFps;
 	
-
 	//exp cycle for switching through the different 3 explosions objects
     int expCycle=1;
     boolean startMusic=false, stopMusic=false,stopKick=false,musicPlaying;
 	public int laserST=-1,playerHitST=-1,bonusWavePassLimit;
-
 	boolean bonusWaveStart=false,bonusWaveOngoing=false;
-    
-    AnalogStick analog;
 
-    
 	public MGP(Context context) 
 	{
 		super(context);
 		// adding the callback (this) to the surface holder to intercept events
 		getHolder().addCallback(this);
 
-	
 		lightColor=NewGameOptions.lightColor;
 
-		 dp = new double[1000];
+		dp = new double[1000];
 		
 		
-		 for(int k=0;k<dp.length;k++)
-		 {
+		for(int k=0;k<dp.length;k++)
+		{
 			 dp[k]=TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, k, NewGameOptions.dm); 
-		 }
+		}
 	
-			
-		 
-          deviceWidth  = dw;
-          deviceHeight = dh;
-		
-           message = new FlyingMessage();
-          
-          screenShape= new RectF(0,0,deviceWidth,deviceHeight);
-         
-      	  shootButton = new TouchButton(MGP.deviceWidth-MGP.dp[70],MGP.deviceHeight-MGP.dp[70],MGP.dp[70]);
-      	  quitButton = new TouchButton(MGP.deviceWidth-MGP.dp[40],0,MGP.dp[40]);
-          ship = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.rs80),BitmapFactory.decodeResource(getResources(), R.drawable.laser),200,200);
-          
-         analog = new AnalogStick((int)dp[115],(int)dp[75]);
+        deviceWidth  = dw;
+        deviceHeight = dh;
 
-          powerUps= new PowerUpsAll(BitmapFactory.decodeResource(getResources(), R.drawable.bomb),BitmapFactory.decodeResource(getResources(), R.drawable.slowmotion),BitmapFactory.decodeResource(getResources(), R.drawable.sinewave),BitmapFactory.decodeResource(getResources(), R.drawable.shootfaster));
+      	shootButton = new TouchButton(MGP.deviceWidth-MGP.dp[70],MGP.deviceHeight-MGP.dp[70],MGP.dp[60],true);
+      	quitButton = new TouchButton(MGP.deviceWidth-MGP.dp[40],0,MGP.dp[40],false);
+      	
+        ship = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.rs80),BitmapFactory.decodeResource(getResources(), R.drawable.laser),200,200);
+        analog = new AnalogStick((int)dp[115],(int)dp[75]);
+        powerUps= new PowerUpsAll(BitmapFactory.decodeResource(getResources(), R.drawable.bomb),BitmapFactory.decodeResource(getResources(), R.drawable.slowmotion),BitmapFactory.decodeResource(getResources(), R.drawable.sinewave),BitmapFactory.decodeResource(getResources(), R.drawable.shootfaster));
+        message = new FlyingMessage();
+        screenShape= new RectF(0,0,deviceWidth,deviceHeight);
+        gameSoundtrack = new InteractiveSong(this.getContext());	        
+        soundEffects = new SoundEffectsManager(this.getContext());
+        explo1 = new Explosion();
+        explo2 = new Explosion();
+        explo3 = new Explosion();
+        shipThrusters = new Thrusters();
+        ltBackground = new LightBackground(); 
+        bar = new LifeBar();
+        //initialize asteroids
+        for(int i=0;i<asteroids.length;i++)
+        {
+          if(i<3)
+          	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a1), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
+          else if(i<6)
+          	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a5), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
+          else  if(i<9)
+          	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a3), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
+          else  if(i<12)
+          	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a6), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
+          else  if(i<15)
+          	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a4), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
+          else  if(i<18)
+          	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a2), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
+        }
           
 //          for(int j=0;j<enemies.length;j++)  
 //              enemies[j] = new Alien(BitmapFactory.decodeResource(getResources(), R.drawable.alien),BitmapFactory.decodeResource(getResources(), 
 //              		R.drawable.fireball),deviceWidth*2,deviceHeight/2,dp[30],(int) dp[70]);
 
-
-	         gameSoundtrack = new InteractiveSong(this.getContext());
-	        
-	         soundEffects = new SoundEffectsManager(this.getContext());
-	
-	
-	         //initialize asteroids
-	          for(int i=0;i<asteroids.length;i++){
-	           
-	            if(i<3)
-	            	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a1), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
-	            else if(i<6)
-	            	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a5), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
-	            else  if(i<9)
-	            	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a3), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
-	            else  if(i<12)
-	            	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a6), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
-	            else  if(i<15)
-	            	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a4), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
-	            else  if(i<18)
-	            	asteroids[i] = new Asteroid(BitmapFactory.decodeResource(getResources(), R.drawable.a2), MGP.dp[1]/2,dp[4],deviceWidth,deviceHeight);
-	          }
-	          explo1 = new Explosion();
-	          explo2 = new Explosion();
-	          explo3 = new Explosion();
-	          shipThrusters = new Thrusters();
-	          
-	          ltBackground = new LightBackground(); 
-	    
-	          //create red paint  
-			    textPaint = new Paint(); textPaint.setARGB (150, 255,0 , 0); textPaint.setTextSize(11);textPaint.setAntiAlias(true);
-
-			    //create white paint
-			    WPaint = new Paint(); WPaint.setARGB (255, 255,255 , 255); WPaint.setTextSize(11);
-			    
-			    redPaint = new Paint();redPaint.setARGB (255, 255,0,0); redPaint.setTextSize(11);redPaint.setAntiAlias(true);
-			    bluePaint = new Paint(); bluePaint.setARGB (255, 0,0 , 255);bluePaint.setTextSize(11);bluePaint.setAntiAlias(true);
-			    greenPaint = new Paint();greenPaint.setARGB (255, 34,139 , 34);greenPaint.setTextSize(11);greenPaint.setAntiAlias(true);
-			    greyPaint = new Paint(); greyPaint.setARGB (255, 139,137 , 137);greyPaint.setTextSize(11);greyPaint.setAntiAlias(true);
-			    blackPaint = new Paint();blackPaint.setARGB (255, 0,0 , 0); blackPaint.setTextSize(11);blackPaint.setAntiAlias(true);
-			    yellowPaint = new Paint();yellowPaint.setARGB (255, 255,255 , 0); yellowPaint.setTextSize(11);yellowPaint.setAntiAlias(true);
-			    orangePaint = new Paint(); orangePaint.setARGB (255, 255,140 , 0);orangePaint.setTextSize(11);orangePaint.setAntiAlias(true);
-			    
-			    yellowT = new Paint();yellowT.setARGB (100, 255,255 , 0); yellowT.setTextSize(11);yellowT.setAntiAlias(true);
-			    blueT = new Paint(); blueT.setARGB (100, 0,0 , 255);blueT.setTextSize(11);blueT.setAntiAlias(true);
-			    orangeT = new Paint(); orangeT.setARGB (100, 255,140 , 0);orangeT.setTextSize(11);orangeT.setAntiAlias(true);
-			    redT = new Paint();redT.setARGB (100, 255,0,0); redT.setTextSize(11);redT.setAntiAlias(true);
-			    purplePaint= new Paint();purplePaint.setARGB (255, 51,0 , 102); purplePaint.setTextSize(11);purplePaint.setAntiAlias(true);
-			    pinkPaint = new Paint();pinkPaint.setARGB (255, 224,0 , 224); pinkPaint.setTextSize(11);pinkPaint.setAntiAlias(true);
-		        s1 = new Paint();s1.setARGB (90, 224,224 , 224); s1.setTextSize(11);s1.setAntiAlias(true);
-		        s2 = new Paint();s2.setARGB (255, 143,143 , 143); s2.setTextSize(11);s2.setAntiAlias(true);
-		    //user shots
-		    //userShots=new Shot[40];
-
-		    barY= -30;
-            
-            bar = BitmapFactory.decodeResource(getResources(), R.drawable.bar2);
-            
-            lifeBar[0] = BitmapFactory.decodeResource(getResources(), R.drawable.life1);
-            lifeBar[1] = BitmapFactory.decodeResource(getResources(), R.drawable.life2);
-            lifeBar[2] = BitmapFactory.decodeResource(getResources(), R.drawable.life3);
-            lifeBar[3] = BitmapFactory.decodeResource(getResources(), R.drawable.life4);
+	        //the bar image
+	  	    dock = BitmapFactory.decodeResource(getResources(), R.drawable.bar);
+	  	    
+	  	    //create Paints   
+			textPaint = new Paint(); textPaint.setARGB (150, 255,0 , 0); textPaint.setTextSize(11);textPaint.setAntiAlias(true); //red paint			
+			WPaint = new Paint(); WPaint.setARGB (255, 255,255 , 255); WPaint.setTextSize(11);
+			redPaint = new Paint();redPaint.setARGB (255, 255,0,0); redPaint.setTextSize(11);redPaint.setAntiAlias(true);
+		    bluePaint = new Paint(); bluePaint.setARGB (255, 0,0 , 255);bluePaint.setTextSize(11);bluePaint.setAntiAlias(true);
+		    greenPaint = new Paint();greenPaint.setARGB (255, 34,139 , 34);greenPaint.setTextSize(11);greenPaint.setAntiAlias(true);
+		    greyPaint = new Paint(); greyPaint.setARGB (255, 139,137 , 137);greyPaint.setTextSize(11);greyPaint.setAntiAlias(true);
+		    blackPaint = new Paint();blackPaint.setARGB (255, 0,0 , 0); blackPaint.setTextSize(11);blackPaint.setAntiAlias(true);
+		    yellowPaint = new Paint();yellowPaint.setARGB (255, 255,255 , 0); yellowPaint.setTextSize(11);yellowPaint.setAntiAlias(true);
+		    orangePaint = new Paint(); orangePaint.setARGB (255, 255,140 , 0);orangePaint.setTextSize(11);orangePaint.setAntiAlias(true);
+		    yellowT = new Paint();yellowT.setARGB (100, 255,255 , 0); yellowT.setTextSize(11);yellowT.setAntiAlias(true);
+		    blueT = new Paint(); blueT.setARGB (100, 0,0 , 255);blueT.setTextSize(11);blueT.setAntiAlias(true);
+		    orangeT = new Paint(); orangeT.setARGB (100, 255,140 , 0);orangeT.setTextSize(11);orangeT.setAntiAlias(true);
+		    redT = new Paint();redT.setARGB (100, 255,0,0); redT.setTextSize(11);redT.setAntiAlias(true);
+		    purplePaint= new Paint();purplePaint.setARGB (255, 51,0 , 102); purplePaint.setTextSize(11);purplePaint.setAntiAlias(true);
+		    pinkPaint = new Paint();pinkPaint.setARGB (255, 224,0 , 224); pinkPaint.setTextSize(11);pinkPaint.setAntiAlias(true);
+	        s1 = new Paint();s1.setARGB (90, 224,224 , 224); s1.setTextSize(11);s1.setAntiAlias(true);
+	        s2 = new Paint();s2.setARGB (255, 143,143 , 143); s2.setTextSize(11);s2.setAntiAlias(true);    
 
             life = 20;
-  
-		// create the game loop thread
-		thread = new MainThread(getHolder(), this);
+            initialLife = life;
+            
+		    // create the game loop thread
+		    thread = new MainThread(getHolder(), this);
 		
-		// make the GamePanel focusable so it can handle events
-		setFocusable(true);
-		Log.d(TAG, "set Focusable...");
-		//buildDrawingCache (true);
+		    // make the GamePanel focusable so it can handle events
+		    setFocusable(true);
+		    Log.d(TAG, "set Focusable...");
+		    //buildDrawingCache (true);
 	}
 
-	
 	  // Implement the OnClickListener callback
     public void onClick(View v) {
       // do something when the button is clicked
     }
  
-
-	
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
+	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height)		 
+	{
+		
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
@@ -300,90 +242,138 @@ public class MGP extends SurfaceView implements
         {
 	      case (MotionEvent.ACTION_DOWN): 
 	    	  
-	    	  if(quitButton.touchLocation.contains(event.getX(),event.getY()))
-	    		  closeGame();
-	      
-				if(shootButton.touchLocation.contains(event.getX(),event.getY()))
-				{
-					if(life>0&&bonusWaveOngoing==false){ 
-			    		   if(ship.shooting==true) 
+	    	  
+	    	  if(analog.fullPad.contains(event.getX(),event.getY())&&life>0)
+			  {
+					analog.SetActiveLocation(event.getX(),event.getY());
+					pointerAnalog1 = true;
+			  }	
+	    	  else if(shootButton.touchLocation.contains(event.getX(),event.getY()))
+			  {
+					if(life>0&&bonusWaveOngoing==false)
+					{ 
+						  
+			    		  if(ship.shooting==true) 
 	                     	 ship.shooting=false;
 	                      else 
 	                     	 ship.shooting=true;
-				      }
-				}
-	        	
-		      if(powerUps.nuke.shape.contains(event.getX(),event.getY()))
+			    		  
+			    		  pointerShoot1 = true;
+				    }
+			  }
+	    	  else if(quitButton.touchLocation.contains(event.getX(),event.getY()))
+	    	  {
+	    		  closeGame();
+	    	  }
+	    	  else if(powerUps.nuke.shape.contains(event.getX(),event.getY()))
+		      {
 	    	      collision(4,(int)event.getX(),(int)event.getY());
-		      
-				if(bonusWaveOngoing)
-				{	
-					for(int k = 0 ;k<asteroids.length;k++){
+		      }
+	      
+			  if(bonusWaveOngoing)
+			  {	
+					for(int k = 0 ;k<asteroids.length;k++)
+					{
 						
-						if(asteroids[k].touchCollision((int)event.getX(),(int)event.getY())){
-							asteroids[k].moveBack();
+						if(asteroids[k].touchCollision((int)event.getX(),(int)event.getY()))
+						{
+							asteroids[k].moveBackBonus();
+							//asteroids[k].moveBack();
 							collision(2,(int)event.getX(),(int)event.getY());
 						}
 						else
 							collision(0,(int)event.getX(),(int)event.getY());
 				    }
-				}
-				
-				if(analog.fullPad.contains(event.getX(),event.getY())&&life>0)
-				{
-					analog.SetActiveLocation(event.getX(),event.getY());
-				}
-				
+			  }
+							
 		  break;
 				
         case (MotionEvent.ACTION_POINTER_DOWN): 
         	
-        	if(shootButton.touchLocation.contains(event.getX(),event.getY()))
+        	 pointerIndex = (event.getAction() & MotionEvent.ACTION_POINTER_ID_MASK)
+        			>> MotionEvent.ACTION_POINTER_ID_SHIFT;
+
+			if(!pointerShoot1)
 			{
-				if(life>0&&bonusWaveOngoing==false){ 
-		    		   if(ship.shooting==true) 
-                     	 ship.shooting=false;
-                      else 
-                     	 ship.shooting=true;
-			      }
-			}   
-        	
-        	if(analog.fullPad.contains(event.getX(),event.getY())&&life>0)
+			    if(shootButton.touchLocation.contains(event.getX(pointerIndex),event.getY(pointerIndex)))
+				{
+			    	pointerShoot2 = true;
+					if(life>0&&bonusWaveOngoing==false)
+					{ 
+					     if(ship.shooting==true) 
+					     {
+			                 ship.shooting=false;
+					     }
+			             else 
+			             {
+			                 ship.shooting=true;
+			             }
+				    }
+				}
+			}	
+            if(!pointerAnalog1)
 			{
-				analog.SetActiveLocation(event.getX(),event.getY());
-			}
-    		    
+            	if(analog.fullPad.contains(event.getX(pointerIndex),event.getY(pointerIndex))&&life>0)
+            	{
+            		analog.SetActiveLocation(event.getX(pointerIndex),event.getY(pointerIndex));
+            		pointerAnalog2 = true;
+            	}
+			}    
          break;
 
         case MotionEvent.ACTION_MOVE: 
         {
-			if(analog.fullPad.contains(event.getX(),event.getY())&&life>0)
-			{
-				analog.SetActiveLocation(event.getX(),event.getY());
+	        if(pointerAnalog1) 
+	        {
+				if(analog.fullPad.contains(event.getX(),event.getY())&&life>0)
+				{
+					analog.SetActiveLocation(event.getX(),event.getY());
+		        }
 	        }
+	        
+	        if(pointerAnalog2)
+			{
+				if(analog.fullPad.contains(event.getX(pointerIndex),event.getY(pointerIndex))&&life>0)
+				{
+					analog.SetActiveLocation(event.getX(pointerIndex),event.getY(pointerIndex));
+		        }
+			}
 			break;		 
 		}
         
         case MotionEvent.ACTION_POINTER_UP: 
         {   
-			if(ship.shooting==true&&life>0&&bonusWaveOngoing==false)
-                ship.shooting=false;
+        	if(pointerShoot2)
+        	{
+        		ship.shooting=false;
+        		pointerShoot2=false;
+        	}
+			
+        	if(pointerAnalog2)
+        	{
+				analog.SetActiveLocation();
+				pointerAnalog2 = false;
+        	}
 			break;
 		}
         case MotionEvent.ACTION_UP: 
-        {
-                // defaults it back to the center
+        {       
+        	if(pointerAnalog1)
+        	{
+        		// defaults it back to the center
     			analog.SetActiveLocation();
-    			if (ship.shooting == true && life > 0)
-				{
-				    ship.shooting = false;
-				}
+    			pointerAnalog1 = false;
+        	}
+        	if(pointerShoot1)
+        	{
+				ship.shooting = false;
+				pointerShoot1 = false;
+        	}
                 break;
         }
       }
 		return true;
 	}
-	
 	
 	public void surfaceCreated(SurfaceHolder holder) 
 	{
@@ -392,7 +382,6 @@ public class MGP extends SurfaceView implements
 		thread.setRunning(true);
 		thread.start();
 	}
-
 
 	public void surfaceDestroyed(SurfaceHolder holder) 
 	{
@@ -412,9 +401,6 @@ public class MGP extends SurfaceView implements
 		Log.d(TAG, "Thread was shut down cleanly");
 	}
 	
-
-	
-
 	public void render(Canvas canvas) 
 	{
 		canvas.drawColor(Color.BLACK);
@@ -422,74 +408,62 @@ public class MGP extends SurfaceView implements
 		 
 		ltBackground.draw(canvas); 
 		
-		 NewGameOptions.hitsAllInfo.DrawMessage(canvas);
+		NewGameOptions.hitsAllInfo.DrawMessage(canvas);
 		
-		  //draw the asteroids
-		   for(int i=0;i<asteroids.length;i++) 
-	           asteroids[i].draw(canvas);   
+		//draw the asteroids
+		for(int i=0;i<asteroids.length;i++) 
+		{
+	        asteroids[i].draw(canvas);   
+	    }
 
-		   ship.drawShots(canvas);
-//		   
-//		   for(int k=0;k<enemies.length;k++)
-//		      enemies[k].drawShots(canvas); 
+		ship.drawShots(canvas);
+		   
+	    canvas.drawBitmap(dock, 0, deviceHeight-35, null);
+		   
+//		for(int k=0;k<enemies.length;k++)
+//		    enemies[k].drawShots(canvas); 
 //     
-//        //draw the enemies
+//      //draw the enemies
 //		for(int i=0;i<enemies.length;i++) 
 //	        enemies[i].draw(canvas);
-////
-//		if(ship.unlocked)
-			
-//			canvas.drawBitmap(bar, 0, barY, null);
-			textPaint.setTextSize((float) MGP.dp[25]);
-			canvas.drawText("score is: " + score, (float) MGP.dp[155], (float) MGP.dp[25],textPaint );
-	   
-			
-			
-			
-		   if(life==3){
-			   canvas.drawBitmap(lifeBar[0], 0, barY, null);
-		   }else if(life==2){
-			   canvas.drawBitmap(lifeBar[1], 0, barY, null);
-		   } else if(life==1) {
-			   canvas.drawBitmap(lifeBar[2], 0, barY, null); 
-		   }
-	        textPaint.setTextSize(10.0f);
-            powerUps.draw(canvas);
-            
-            
-            if(state!=4)
-   		 {
-            	analog.draw(canvas);
-   		        ship.draw(canvas);
-   		        shipThrusters.Draw(canvas);
-   		 }
-            
 
- 		  NewGameOptions.hitsAllInfo.DrawHits(canvas);
- 		   
-            explo1.draw(canvas);
-  		  // canvas.drawText("1" , explo1.startX, explo1.startY, redPaint);
-  		   explo2.draw(canvas);
-  		  // canvas.drawText("2", explo2.startX, explo2.startY, redPaint);
-  		   explo3.draw(canvas);
-  		  // canvas.drawText("3", explo3.startX, explo3.startY, redPaint);
+
+			
+	    textPaint.setTextSize((float) MGP.dp[20]);
+	    canvas.drawText("score: " + score, (float) MGP.dp[140], (float) (deviceHeight-MGP.dp[5]),textPaint );
+
+	    textPaint.setTextSize(10.0f);
+        powerUps.draw(canvas);
             
-  		 message.draw(canvas);
-  		   
-  		   
-  		   shootButton.draw(canvas);
-  		   quitButton.draw(canvas);
-  		   
- 
-  		 
-  		 NewGameOptions.hitsAllInfo.drawHitInfo(canvas);
+            
+        if(state!=4)
+   		{
+            analog.draw(canvas);
+   		    ship.draw(canvas);
+   		    shipThrusters.Draw(canvas);
+   		}
+            
+ 		NewGameOptions.hitsAllInfo.DrawHits(canvas);
+ 		   
+        explo1.draw(canvas);
+  	    // canvas.drawText("1" , explo1.startX, explo1.startY, redPaint);
+  	    explo2.draw(canvas);
+  		// canvas.drawText("2", explo2.startX, explo2.startY, redPaint);
+  		explo3.draw(canvas);
+  		// canvas.drawText("3", explo3.startX, explo3.startY, redPaint);
+            
+  		message.draw(canvas);
+  		shootButton.draw(canvas);
+  		quitButton.draw(canvas);
+
+  		NewGameOptions.hitsAllInfo.drawHitInfo(canvas);
   		 
   		//visualTest.draw(canvas);
   		 
-			// display fps
-			displayFps(canvas, avgFps);
-
-			//visualTest.draw(canvas);
+  		bar.draw(canvas);
+  		 
+	    // display fps
+	    displayFps(canvas, avgFps);
 	}
 
 	/**
@@ -501,7 +475,6 @@ public class MGP extends SurfaceView implements
 	{
 		//Log.d(TAG, "updating");
 	    updateGameState();
-	    updateBar();
 		updateObjects();
 		updateAudio();
 		updateHits();
@@ -533,28 +506,21 @@ public class MGP extends SurfaceView implements
 		    	 gameSoundtrack.startWave(); 
 		     }   
 		}
-	
-	public void updateBar()
-	{
-		if(barY<0)
-		   barY+=0.1;
-	}
-	
+
 	public void updateObjects()
 	{
 		   ltBackground.updateLights();
 		   
-		   ship.move2(analog.xDiff,analog.yDiff);
+		   //moves the user ship
+		   ship.move(analog.xDiff,analog.yDiff);
 
 		   //make the explosions explode
 		   explo1.updateExplosions();
 		   explo2.updateExplosions();
 		   explo3.updateExplosions();
 		   shipThrusters.Update(ship.cx, ship.cy);
-		   updateEnemies();
 		   
 		   //if game is ongoing then run the asteroids
-		  
 		    updateAsteroids();
 		    updateShots(); 
 		    powerUps.Update(ship);
@@ -587,20 +553,19 @@ public class MGP extends SurfaceView implements
 		   
 //		   if(powerUps.shootMassive.shipCollision(ship))
 //		   if(powerUps.spreadShot.shipCollision(ship))
-
 	 }    
 	
 
 	private void updateShots()
     { 	
 		//set the trigger to play the laser to 0
-				if(ship.checkForNewShots())
-				    soundEffects.laserST=0;
+	    if(ship.checkForNewShots())
+	    	soundEffects.laserST=0;
 		
-				 if(powerUps.spreadShot.active)
-		           ship.moveShotsSin();
-				 else
-				   ship.moveShots();		 
+		if(powerUps.spreadShot.active)
+			ship.moveShotsSin();
+		else
+		    ship.moveShots();		 
             
 //		 for(int k=0;k<enemies.length;k++){
 //			   enemies[k].moveShots();  
@@ -613,17 +578,21 @@ public class MGP extends SurfaceView implements
 	private void collision(int type,int x,int y)
 	{
 		 triggerExplosions(x,y); 
-		
-//
 
-	   switch(type){
+	   switch(type)
+	   {
 		 case(1):
 		       soundEffects.playerHitST=0;
 			
 	          	if(life>0)
 	    	    {
-		        life--;
-		         }	
+	          		life--;
+	          		bar.setBar((life/initialLife) * 200);
+	          		if((life/initialLife) <= 0.75 && (life/initialLife) > 0.25)
+	          			LifeBar.paint = yellowPaint;
+	          		else if(life/initialLife <= 0.25) 
+	          			LifeBar.paint = redPaint;
+		        }	
 	          
 	    	break;
 		 case(2):
@@ -672,9 +641,6 @@ public class MGP extends SurfaceView implements
 		}
 	   if(1!=type&&type!=4)
 	     soundEffects.expST = 0;  
-	   
-	  	
-	   
 	}
 	
 	public void triggerExplosions(int x, int y)
@@ -687,24 +653,32 @@ public class MGP extends SurfaceView implements
 		expCycle+=1;
 		if(expCycle==4)
 			expCycle=1;
-		
 	}
 	
 	private void updateAsteroids()
     { 
         for(int i=0;i<asteroids.length;i++)
         { 
-          // move each asteroid
-          asteroids[i].move(); 
+           // move each asteroid
+           if(bonusWaveOngoing)
+        	   asteroids[i].moveBonus();
+           else
+        	   asteroids[i].move();
           
-          //check for collisions with the ship
-          if(asteroids[i].shipCollision(ship)&&life>0){ 
-              asteroids[i].moveBack();
+           //check for collisions with the ship
+           if(asteroids[i].shipCollision(ship)&&life>0)
+           { 
+        	  if(bonusWaveOngoing)
+        		  asteroids[i].moveBackBonus();
+        	  else
+        		  asteroids[i].moveBack(); 
               collision(1,ship.x,ship.y);
-             } 
-          //check for collision with the user shots.
-          for(int j=0;j<ship.numUserShots;j++){
-        	  if(asteroids[i].shotCollision(ship.shots[j])){ 
+           } 
+           //check for collision with the user shots.
+           for(int j=0;j<ship.numUserShots;j++)
+           {
+        	  if(asteroids[i].shotCollision(ship.shots[j]))
+        	  { 
         		  collision(2,asteroids[i].x,asteroids[i].y);
                   ship.deleteShot(j); 
                   //delete the original asteroid
@@ -712,8 +686,8 @@ public class MGP extends SurfaceView implements
                  j=ship.numUserShots;//break out of inner loop - it has
                               //already been hit, don't need to check
                               //for collision with other shots
-            }      
-          } 
+              }      
+           } 
         } 
      }
 	
@@ -748,9 +722,7 @@ public class MGP extends SurfaceView implements
 //               }  
 //          }
      }
-	
-	
-	
+
 	public void updateGameState() 
 	{
 		        //this will be in charge of handling the games current state
@@ -765,26 +737,25 @@ public class MGP extends SurfaceView implements
 			          waveDelay-=1;
 				
 				
-				  if(MGP.state==0&&MGP.waveDelay==300) { 
-		 			  message.activate(1, 10, "Ready       Set      Go");
+				  if(MGP.state==0&&MGP.waveDelay==580) 
+				  { 
+		 			  message.activate(1, 10, "Ready     Set     Go");
 				  }
 				  
-				  if(MGP.state==2&&MGP.waveDelay==300) { 
-					  message.activate(1, 10,"Wave "+MGP.wave+" Completed +" +
-					   		    "You Killed "+MGP.astKilledThisWave +" Asteroids" 
-							      +" Wave "+(MGP.wave+1)+" will begin"); 
+				  if(MGP.state==2&&MGP.waveDelay==490) 
+				  { 
+					  message.activate(1, 10,"Wave "+MGP.wave+" Completed. " +
+					   		    "You Destroyed "+MGP.astKilledThisWave +" Asteroids" 
+							      +" Wave "+(MGP.wave+1)+" Will Begin"); 
 				  }  
-				
-			 		   
 				
 				//game over if the ship is dead
 				if(life==0)
 				{
 					state=4;
-				ship.shooting=false;
+					ship.shooting=false;
 				}
 
-			     
 			     //if the player died and the game is over then stop the music
 			     if(state==4&&stopMusic==false&&musicPlaying)
 			     {
@@ -808,9 +779,9 @@ public class MGP extends SurfaceView implements
 				//if it has it will call end wave to lock all asteroids after they exit 
 				//the screen and change the game state to in between waves which is state 2
 				if(asteroidsPassed>=asteroidPassLimit&&state==1&&!bonusWaveStart&&bonusWaveOngoing==false)
-			     {
-			       endWave(); 
-			     }	
+			    {
+			        endWave(); 
+			    }	
 				else if(asteroidsPassed>=asteroidPassLimit&&state==1&&bonusWaveStart)
 				{
 					startBonusWave();
@@ -897,9 +868,7 @@ public class MGP extends SurfaceView implements
 //				  }
 		          if(wave>0)
 			          totalSpeed+=1;          
-
-	          
-		          
+  
 	          //change game state to wave ongoing
 	          state=1;	         
 	         
@@ -916,8 +885,7 @@ public class MGP extends SurfaceView implements
 	          waveDelay-=1;
 	          
 	          stopKick=true;
-	          
-	         
+
 	          powerUps.nuke.unlock();
 	          powerUps.shootFaster.unlock();
 	          powerUps.spreadShot.unlock();
@@ -1025,7 +993,6 @@ public class MGP extends SurfaceView implements
 	         }	 
 	     }
 	     
-
 	 	private void displayFps(Canvas canvas, String fps) 
 	 	{
 	 		if (canvas != null && fps != null) 
@@ -1035,7 +1002,6 @@ public class MGP extends SurfaceView implements
 	 			canvas.drawText(fps, this.getWidth() - 50, 20, paint);
 	 		}
 	 	}
-	 	
 
 		public void createBitmap(Canvas canvas)
 	 	{
@@ -1049,7 +1015,4 @@ public class MGP extends SurfaceView implements
 	 		Log.d("creating bitmap "," create bitmap");
 	 		
 	 	}
-		
-	
-	//	
 }
