@@ -24,7 +24,7 @@ public class MainMenu extends Activity
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // no title
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 		WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.activity_main_menu);
+	    setContentView(R.layout.activity_main_menu);
 
 	}
 
@@ -56,6 +56,16 @@ public class MainMenu extends Activity
 			startActivity(i);
 		}
 			break;
+		case R.id.imageButton6: {
+			Intent i = new Intent(MainMenu.this, Market.class);
+			startActivity(i);
+		}
+			break;
+		case R.id.button1: {
+			Intent i = new Intent(MainMenu.this, GameLogo.class);
+			startActivity(i);
+		}
+			break;		
 		}
 	}
 

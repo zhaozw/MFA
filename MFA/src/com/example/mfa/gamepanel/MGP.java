@@ -6,6 +6,7 @@ package com.example.mfa.gamepanel;
 import java.util.Random;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -22,6 +23,7 @@ import android.view.View;
 
 import com.example.HitsObjects.HitGiantBoss;
 import com.example.activities.Game;
+import com.example.activities.GameOver;
 import com.example.mfa.R;
 import com.example.objects.AnalogStick;
 import com.example.objects.Asteroid;
@@ -75,6 +77,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
     public int optionsChoice = 0;
     public static int life;
     private double initialLife;
+    private Thread splashThread;
     
     
     
@@ -91,16 +94,16 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
     public static int state = 0;
     
     //the time that counts down when the waves finish before starting a new wave
-    public static int waveDelay = 600;
+    public static int waveDelay = 500;
     
     public static int lightColor=1,explodeColor=1;
     
     //the amount of asteroids that must pass before the wave finishes
     //using this as opposed to asteroids killed allows for variable amounts of points
     //each wave
-    public static int asteroidPassLimit=5; 
+    public static float waited = 0;
+    public static int asteroidPassLimit=5, countShots = 0; 
     public static int asteroidsPassed = 0,totalSpeed=-1,astKilledThisWave,totalAsteroidsKilled;
-    public static int  totalAliensKilled=0,aliensKilledThisWave=0;
     public static int score = 0; //the points the player has received;
     
     //Colors
@@ -141,6 +144,8 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 		
 		pause = false;
 
+		gameTimer();
+		
 		dp = new double[1000];
 		
 		
@@ -207,7 +212,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 	        s1 = new Paint();s1.setARGB (90, 224,224 , 224); s1.setTextSize(11);s1.setAntiAlias(true);
 	        s2 = new Paint();s2.setARGB (255, 143,143 , 143); s2.setTextSize(11);s2.setAntiAlias(true);    
 
-            life = 4;
+            life = 3;
             initialLife = life;
             
 		    // create the game loop thread
@@ -251,7 +256,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 			  {
 					if(life>0&&bonusWaveOngoing==false)
 					{ 
-						  
+						  countShots++;
 			    		  if(ship.shooting==true) 
 	                     	 ship.shooting=false;
 	                      else 
@@ -302,6 +307,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 			    if(shootButton.touchLocation.contains(event.getX(pointerIndex),event.getY(pointerIndex)))
 				{
 			    	pointerShoot2 = true;
+			    	countShots++;
 					if(life>0&&bonusWaveOngoing==false)
 					{ 
 					     if(ship.shooting==true) 
@@ -426,6 +432,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 	    
 	    textPaint.setTextSize((float) MGP.dp[20]);
 	    canvas.drawText("score: " + score, (float) MGP.dp[140], (float) (deviceHeight-MGP.dp[5]),textPaint );
+	    canvas.drawText("time: " + waited, (float) MGP.dp[150], (float) (deviceHeight-MGP.dp[20]),textPaint );
 
 	    textPaint.setTextSize(10.0f);
         powerUps.draw(canvas);
@@ -683,16 +690,17 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 			        waveDelay-=1;
 				
 				
-				if(MGP.state==0&&MGP.waveDelay==580) 
+				if(MGP.state==0&&MGP.waveDelay==490) 
 			    { 
 		 			message.activate(1, 10, "Ready     Set     Go");
 				}
 				  
-				if(MGP.state==2&&MGP.waveDelay==590) 
+				if(MGP.state==2&&MGP.waveDelay==490) 
 				{ 
-					message.activate(1, 10,"Wave "+MGP.wave+" Completed. " +
-					   		    "You Destroyed "+MGP.astKilledThisWave +" Asteroids" 
-							      +" Wave "+(MGP.wave+1)+" Will Begin"); 
+//					message.activate(1, 10,"Wave "+MGP.wave+" Completed. " +
+//					   		    "You Destroyed "+MGP.astKilledThisWave +" Asteroids" 
+//							      +" Wave "+(MGP.wave+1)+" Will Begin"); 
+					message.activate(1, 10,"Wave "+MGP.wave+" Completed");
 				}  
 				
 				//game over if the ship is dead
@@ -700,8 +708,9 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 				{
 					state = 4;
 					ship.shooting = false;
-					closeGame();
+					((Game) Game.activity).gameOver();
 					((Activity)getContext()).finish();
+					closeGame();
 				}
 
 			    //if the player died and the game is over then stop the music
@@ -850,6 +859,8 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 	    
 	 	public void ResetGame()
 		{   
+	 		waited = 0;
+	 		countShots = 0;
 	 		stopMusic=true;
 	 		stopKick=true;
 	 		startMusic=false;
@@ -859,11 +870,11 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 			totalSpeed=-1;
 			asteroidPassLimit=15; 
 		    wave = 0;    
-		    state =0;
-		    waveDelay = 600;  
+		    state = 0;
+		    waveDelay = 500;  
 		    asteroidsPassed = 0;  
 		    score = 0; 	
-		    life = 20;
+		    life = 3;
 		    ship.x=100;
 		    ship.y=100;
 		    enemiesUnlocked=0;
@@ -877,6 +888,33 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 		    powerUps.spreadShot.unlocked=false;
 		    powerUps.slowMo.unlocked=false;
 		}
+	 	
+	 	public void gameTimer()
+	 	{
+	 		//the timer of the game(runs on a separate thread)
+	 	    splashThread = new Thread() 
+	 	    {
+	 	       @Override
+	 	       public void run() 
+	 	       {
+	 	          try 
+	 	          {
+	 	             waited = 0;
+	 	             while (life > 0)
+	 	             { 
+	 	                sleep(100);
+	 	                if(!pause)
+	 	                	waited +=.1;
+	 	             } 
+	 	          } 
+	 	          catch (InterruptedException e)
+	 	          {
+	 	             // do nothing
+	 	          } 
+	 	       }
+	 	    };
+	 	    splashThread.start();	
+	 	}
 	 	
 	 	public void normalAudio()
 	 	{
@@ -894,10 +932,10 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 	   	}
          
 	     public void closeGame()
-	     {
-	    	 ResetGame();
+	     { 
 	    	 updateAudio();
 			 thread.setRunning(false);
+			 ResetGame();
 	     }
 	 	
 	     public void updateHits()

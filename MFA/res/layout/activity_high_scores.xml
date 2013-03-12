@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="@drawable/space1"
     tools:context=".HighScores" >
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_marginTop="20dp"
         android:text="High Scores"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#FF0000"
+        android:textColor="#FFFFFF"
         android:textSize="40dp" />
 
 </RelativeLayout>
