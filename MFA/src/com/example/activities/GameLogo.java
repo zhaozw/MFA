@@ -8,6 +8,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -35,6 +38,7 @@ public class GameLogo extends Activity {
 	final String TAG_HIGHSCORE = "Highscore";
 	final String TAG_MONEY = "Money";
 	final String TAG_HITS = "Hits";
+	boolean isInternetPresent;
 	public HashMap<String, String> map = new HashMap<String, String>();
 	public ArrayList<HashMap<String, String>> Players;
 	public TextView FBID;
@@ -42,6 +46,7 @@ public class GameLogo extends Activity {
 	public Button btnLogout, btnLogin;
 	UserFunctions userFunctions;
 	DatabaseHandler db;
+	ConnectionDetector cd;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +56,16 @@ public class GameLogo extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // no title
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 		WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		cd = new ConnectionDetector(getApplicationContext());
 		
+		isInternetPresent = cd.isConnectingToInternet();
+        
+        // check for Internet status
+        if (!isInternetPresent) {
+            showAlertDialog(GameLogo.this, "No Internet Connection", "You don't have internet connection.", false);
+        }
+        else{
+        	
 		setContentView(R.layout.activity_game_logo);
 		Log.d("GameLogo: ", "Setting content view");
 		
@@ -64,6 +78,7 @@ public class GameLogo extends Activity {
 		
         userFunctions = new UserFunctions();
         db = new DatabaseHandler(getApplicationContext());
+        Log.d("GameLogo","Database Handler and userfunctions have been created.");
         if(intent.hasExtra("name")){
         	intent.getExtras();
         	FBID.setText(intent.getStringExtra("uid"));
@@ -73,6 +88,7 @@ public class GameLogo extends Activity {
         	btnLogout=(Button)findViewById(R.id.btnLogout);
         	btnLogout.setVisibility(View.GONE);
         }else{
+        	Log.d("GameLogo","User is logged in");
         	FBID.setText(db.getUserDetails().get("name").toString());
          	
         	JSONArray search = null;
@@ -83,7 +99,6 @@ public class GameLogo extends Activity {
     		// getting JSON string from URL
     		Log.d("GameLogo: ", "Sending Request " + url + db.getUserDetails().get("email").toString());
     		JSONObject json = jParser.getJSONFromUrl((url + db.getUserDetails().get("email").toString()).trim());
-    		
     		Log.d("GameLogo: ", "Starting JSON Try Loop");
     		try {
     			// Getting Array of Contacts
@@ -116,8 +131,9 @@ public class GameLogo extends Activity {
     		} catch (JSONException e) {
     			e.printStackTrace();
     		}
-            }
-	}
+    		}
+        }
+ }
 
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -159,5 +175,28 @@ public class GameLogo extends Activity {
 			}
 		}
 		}
+		
 	}
+    @SuppressWarnings("deprecation")
+	public void showAlertDialog(Context context, String title, String message, Boolean status) {
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+ 
+        // Setting Dialog Title
+        alertDialog.setTitle(title);
+ 
+        // Setting Dialog Message
+        alertDialog.setMessage(message);
+ 
+        // Setting alert dialog icon
+        alertDialog.setIcon((status) ? R.drawable.success : R.drawable.fail);
+ 
+        // Setting OK Button
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+ 
+        // Showing Alert Message
+        alertDialog.show();
+    }
 }
