@@ -19,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -63,7 +64,8 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
 	 private View purchaseView;
 	 private View sendHitView;
 	 public PlayerStatsObject[] playerStatsArray; 
-	 
+		// creating new HashMap
+	 public	HashMap<String, String> map; 
 	 
 	 ArrayList<HashMap<String, String>> Players;
 	
@@ -88,6 +90,8 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     	playerStatsArray = new PlayerStatsObject[1000];
 
+    	 map = new HashMap<String, String>();
+    	
 	DatabaseHandler db = new DatabaseHandler(getApplicationContext());
     setContentView(R.layout.activity_choose_rival);
     context = getApplicationContext();
@@ -109,7 +113,7 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
 			JSONObject s = search.getJSONObject(i);
 			
 			// creating new HashMap
-			HashMap<String, String> map = new HashMap<String, String>();
+			//HashMap<String, String> map = new HashMap<String, String>();
 			
 			Log.d("New Game Options", "initializing map");
 			for(int k =0;k<=2;k++){
@@ -127,6 +131,8 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
 				playerStatsArray[i]= new PlayerStatsObject(map.get("Rival"+k+"Name"),map.get("Rival"+k+"HitsID"));
 			}
 			
+			
+			
 			Players.add(map);
 		}
 	} catch (JSONException e) {
@@ -135,9 +141,14 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
 	/**
 	 * Updating parsed JSON data into ListView
 	 * */
-	RivalAdapter adapter = new RivalAdapter(getApplicationContext(), R.layout.activity_choose_rival, playerStatsArray) ;
+//	RivalAdapter adapter = new RivalAdapter(this, R.layout.activity_choose_rival, playerStatsArray);
 	
 	
+	
+	
+	@SuppressWarnings("unchecked")
+	ListAdapter adapter = new ArrayAdapter<HashMap<String, String>>(this, R.layout.list_item, Players);
+		
 	
 	 ListView playersListView = (ListView) findViewById(R.id.PlayersList);
 	// Assign adapter to ListView

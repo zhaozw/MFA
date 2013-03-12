@@ -20,6 +20,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
+import com.example.HitsObjects.AIPack;
 import com.example.HitsObjects.HitGiantBoss;
 import com.example.activities.NewGameOptions;
 import com.example.mfa.R;
@@ -76,7 +77,9 @@ public class MGP extends SurfaceView implements
     public int optionsChoice = 0;
     public static int life;
     private double initialLife;
-
+    public AIPack groupAI;
+    
+    
     //what wave the game is currently on
     public static int wave = 0;
     
@@ -140,7 +143,7 @@ public class MGP extends SurfaceView implements
 
 		dp = new double[1000];
 		
-		
+		groupAI = new AIPack(10,BitmapFactory.decodeResource(getResources(), R.drawable.vship));
 		for(int k=0;k<dp.length;k++)
 		{
 			 dp[k]=TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, k, NewGameOptions.dm); 
@@ -152,7 +155,7 @@ public class MGP extends SurfaceView implements
       	shootButton = new TouchButton(MGP.deviceWidth-MGP.dp[70],MGP.deviceHeight-MGP.dp[70],MGP.dp[60],true);
       	quitButton = new TouchButton(MGP.deviceWidth-MGP.dp[40],0,MGP.dp[40],false);
       	
-        ship = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.rs80),BitmapFactory.decodeResource(getResources(), R.drawable.laser),200,200);
+        ship = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.blueship),BitmapFactory.decodeResource(getResources(), R.drawable.laser),200,200);
         analog = new AnalogStick((int)dp[115],(int)dp[75]);
         powerUps= new PowerUpsAll(BitmapFactory.decodeResource(getResources(), R.drawable.bomb),BitmapFactory.decodeResource(getResources(), R.drawable.slowmotion),BitmapFactory.decodeResource(getResources(), R.drawable.sinewave),BitmapFactory.decodeResource(getResources(), R.drawable.shootfaster));
         message = new FlyingMessage();
@@ -418,6 +421,8 @@ public class MGP extends SurfaceView implements
 
 		ship.drawShots(canvas);
 		   
+		groupAI.draw(canvas);
+		
 	    canvas.drawBitmap(dock, 0, deviceHeight-35, null);
 		   
 //		for(int k=0;k<enemies.length;k++)
@@ -478,6 +483,7 @@ public class MGP extends SurfaceView implements
 		updateObjects();
 		updateAudio();
 		updateHits();
+		groupAI.move(ship);
     }
 
    public void updateAudio()
