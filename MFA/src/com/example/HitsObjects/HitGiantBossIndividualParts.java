@@ -79,22 +79,22 @@ public class HitGiantBossIndividualParts
      
 
      
-     
-//     if ((shipx-x)>-50&&x+(width/2)==MainGamePanel.deviceWidth)
+//     
+//     if ((shipx)>-50&&x+(width/2)==MGP.deviceWidth)
 //         attack = true;
-            
+//            
 //     if(attack)     
 //     {
 //         x-=120;
 //         y+=120;   
 //      attack=false;
 //     }
-     
-     
-     if(attack==false&&x<MGP.deviceWidth-(width/2))   
-          x+=1;
-     // y-=1;
-     // }
+//     
+//     
+//     if(attack==false&&x<MGP.deviceWidth-(width/2))   
+//          x+=1;
+//     // y-=1;
+//     // }
      
      
       cy=y+(height/2);
@@ -117,19 +117,22 @@ public class HitGiantBossIndividualParts
      else if ((shipy-y)<-120&&cy>MGP.deviceHeight/2)//&&y>100)
          y-=3;
          
-       
-//     if ((shipx-x)>-50&&x==800)
-//         attack = true;
-//     if(attack)
-//           {x-=120;
-//            y-=120;   
-//        attack=false;}
-//     if(attack==false&&x<800)   
-//          x+=1;
-       
-       if(attack==false&&x<MGP.deviceWidth-(width/2))   
-           x+=1;
-     
+//       
+//       if ((shipx)>-50&&x+(width/2)==MGP.deviceWidth)
+//           attack = true;
+//              
+//       if(attack)     
+//       {
+//           x-=120;
+//           y+=120;   
+//        attack=false;
+//       }
+//       
+//       
+//       if(attack==false&&x<MGP.deviceWidth-(width/2))   
+//            x+=1;
+//       // y-=1;
+       // }
      cy=y+(height/2);
      cx=x+(width/2);
      

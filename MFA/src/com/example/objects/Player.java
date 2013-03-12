@@ -168,7 +168,7 @@ public class Player
 		 if(unlocked)
 		 {
 			 //ship will move forward
-			 if(xDiff/6>0&&x<MGP.deviceWidth-50)
+			 if(xDiff/6>0&&x<MGP.deviceWidth-70)
 				 x+=(xDiff/6);
 			 
 			 //ship will move backwards	 
@@ -176,7 +176,7 @@ public class Player
 		    	 x+=(xDiff/6);
 		     
 		     //ship will move down	 
-			 if(yDiff/6>0&&y<MGP.deviceHeight-50)
+			 if(yDiff/6>0&&y<MGP.deviceHeight-90)
 				  y+=(yDiff/6); 
 			 
 			 //ship will move up	 

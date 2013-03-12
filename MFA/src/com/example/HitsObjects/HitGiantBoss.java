@@ -44,7 +44,7 @@ public class HitGiantBoss {
 		 
 		 moveShotsSin();
 		 
-		 updateShotCollision(ship);
+		// updateShotCollision(ship);
 		 
 		 if(shotDelayLeft>0) 
 	          shotDelayLeft--;  
@@ -59,7 +59,7 @@ public class HitGiantBoss {
 		 //draw all the shots on the screen
 		 for(int i=0;i<numUserShots;i++) //numUserShots
 		 {
-		  shots[i].draw(canvas);
+			 shots[i].draw(canvas);
 		 }
 
 	}
@@ -115,19 +115,22 @@ public class HitGiantBoss {
         return false;
 	 }
 	 
-	 public boolean updateShotCollision(Player ship)
-	 {
-			
-	      for(int i=0;i<numUserShots;i++)
-	      {
-		    if(ship.shotCollision(shots[i])){
-		    	 deleteShot(i);
-		    	 i=100;
-         	    return true;         	
-		    }
-	      }
-	     return false;    
-	 }
+//	 public boolean updateShotCollision(Player ship)
+//	 {
+//			
+//	      for(int i=0;i<numUserShots;i++)
+//	      {
+//		    if(ship.shotCollision(shots[i]))
+//		    {
+//		    	 deleteShot(i);
+//		    	 //MGP.life--;
+//         	    return true;         	
+//		    }
+//		    else
+//		    	return false;
+//	      }
+//	         
+//	 }
 	 
 
 	 
