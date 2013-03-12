@@ -47,5 +47,8 @@
     <string name="title_activity_hit0_menu">"Hit0Menu"   </string>
     <string name="title_activity_hit1_menu">"Hit1Menu"   </string>
     <string name="title_activity_hit2_menu">"Hit2Menu"   </string>
+    <string name="title_activity_market">Market</string>
+    <string name="title_activity_game">Game</string>
+    <string name="title_activity_game_over">GameOver</string>
 
 </resources>

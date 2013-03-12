@@ -13,8 +13,9 @@
 
     <application
         android:allowBackup="true"
+        android:debuggable="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" android:debuggable="true">
+        android:label="@string/app_name" >
         <activity
             android:name="com.example.activities.CompanyLogo"
             android:label="@string/app_name" >
@@ -72,8 +73,22 @@
             android:name="com.example.activities.Hit2Menu"
             android:label="@string/title_activity_hit2_menu" >
         </activity>
-        <activity android:name="com.example.activities.RegisterActivity"></activity>
-        <activity android:name="com.example.activities.LoginActivity"></activity>
+        <activity android:name="com.example.activities.RegisterActivity" >
+        </activity>
+        <activity android:name="com.example.activities.LoginActivity" >
+        </activity>
+        <activity
+            android:name="com.example.activities.Market"
+            android:label="@string/title_activity_market" >
+        </activity>
+        <activity
+            android:name="com.example.activities.Game"
+            android:label="@string/title_activity_game" >
+        </activity>
+        <activity
+            android:name="com.example.activities.GameOver"
+            android:label="@string/title_activity_game_over" >
+        </activity>
     </application>
 
 </manifest>

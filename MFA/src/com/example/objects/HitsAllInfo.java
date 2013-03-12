@@ -18,7 +18,7 @@ import com.example.HitsObjects.Hit12;
 import com.example.HitsObjects.Hit13;
 import com.example.HitsObjects.Hit14;
 import com.example.HitsObjects.Hit15;
-import com.example.HitsObjects.Hit5;
+import com.example.HitsObjects.SmallGroupAIs;
 import com.example.HitsObjects.Hit6;
 import com.example.HitsObjects.Hit7;
 import com.example.HitsObjects.Hit8;
@@ -37,7 +37,7 @@ public class HitsAllInfo {
     public  AsteroidHitMedium hit2;
     public  AsteroidHitLarge hit3;
     public  FollowAI hit4;
-    public  Hit5 hit5;
+    public  SmallGroupAIs hit5;
     public  Hit6 hit6;
     public  Hit7 hit7;
     public  Hit8 hit8;
@@ -66,9 +66,7 @@ public class HitsAllInfo {
         {
         	hitsInfo[k]= new HitsInfo();
         }
-        
-        
-        
+   
     }
 
     
@@ -182,7 +180,7 @@ public class HitsAllInfo {
      		  Log.d("Hits All Info ", "creating hit 5");
      	      flyingMessage.activate(1,(int) MGP.dp[3],hitsInfo[5].name+":  "+ hitsInfo[5].message);
      		
-     	      hit5 = new Hit5(BitmapFactory.decodeResource(context.getResources(), R.drawable.icelarge), MGP.dp[15],MGP.dp[30],MGP.deviceWidth,MGP.deviceHeight);
+     	      hit5 = new SmallGroupAIs(BitmapFactory.decodeResource(context.getResources(), R.drawable.vship));
      	 break;
     	 case(6):
 
@@ -287,7 +285,7 @@ public class HitsAllInfo {
 	    		hit4.move(ship.cx,ship.cy);
 	    		break;
 	    	case(5):
-	    		hit5.move();
+	    		hit5.move(ship);
 	    		break;
 	    	case(6):
 	    		hit6.move();

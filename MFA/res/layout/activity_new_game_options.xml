@@ -20,7 +20,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="75dp"
         android:layout_toLeftOf="@+id/imageView1"
-        android:onClick="BeginStandardGame"
+        android:onClick="onClick"
         android:src="@drawable/org1r" />
 
     <ImageButton
