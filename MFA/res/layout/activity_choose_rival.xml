@@ -1,0 +1,96 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    tools:context=".ChooseRival" >
+
+    <TextView
+        android:id="@+id/hit_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="5dp"
+        android:text="@string/choose_rival_hit_type"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:visibility="visible" />
+
+    <Spinner
+        android:id="@+id/PlayerType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/hit_type"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:minWidth="240dp"
+        tools:listitem="@android:layout/simple_spinner_item" />
+
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/PlayerType"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/PlayerType"
+        android:text="@string/choose_rival_is_active"
+        android:visibility="visible" />
+
+    <CheckBox
+        android:id="@+id/SendMessageCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/checkBox1"
+        android:layout_below="@+id/PlayerType"
+        android:layout_marginTop="14dp"
+        android:text="@string/choose_rival_include_message"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/checkBox1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="16dp"
+        android:text="@string/choose_rival_player_type"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:visibility="visible" />
+
+    <EditText
+        android:id="@+id/playerMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/SendMessageCheckBox"
+        android:layout_below="@+id/SendMessageCheckBox"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:visibility="gone" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/Purchase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/checkBox1"
+        android:layout_below="@+id/playerMessage"
+        android:text="@string/choose_rival_send_hit"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/PlayersList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/PlayerType"
+        android:layout_alignRight="@+id/PlayerType"
+        android:layout_below="@+id/checkBox1"
+        android:choiceMode="singleChoice"
+        android:divider="@android:drawable/divider_horizontal_dark"
+        android:visibility="visible"
+        tools:listitem="@layout/list_item" >
+    </ListView>
+
+</RelativeLayout>

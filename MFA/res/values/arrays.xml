@@ -1,0 +1,27 @@
+<resources>
+
+    <string-array name="player_choice_array">
+        <item>Rivals</item>
+        <item>Top Players</item>
+        <item>Friends</item>
+        <item>Random</item>
+    </string-array>
+    <string-array name="hit_types">
+        <item>Massive Asteroid</item>
+        <item>more stuff</item>
+        <item>and even more stuff</item>
+        <item>Random</item>
+    </string-array>
+    <string-array name="colors">
+        <item>Blue</item>
+        <item>Red</item>
+        <item>Green</item>
+        <item>Black</item>
+        <item>Yellow</item>
+        <item>Purple</item>
+        <item>Pink</item>
+        <item>Orange</item>
+        <item>White</item>
+    </string-array>
+
+</resources>
