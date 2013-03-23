@@ -22,7 +22,7 @@
 		
 	    public SmallGroupAIs(Bitmap img)     
 	    { 
-	    	groupAI = new AIPack(10,img);
+	    	groupAI = new AIPack(10,img,img);
 	    }
 	    
 	   

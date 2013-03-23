@@ -21,6 +21,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
+import com.example.HitsObjects.AIPack;
 import com.example.HitsObjects.HitGiantBoss;
 import com.example.HitsObjects.MineField;
 import com.example.activities.Game;
@@ -135,7 +136,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 	public int laserST=-1,playerHitST=-1,bonusWavePassLimit=10;
 	boolean bonusWaveStart=false,bonusWaveOngoing=false;
 	public MineField mines;
-	
+	public AIPack groupAI;
 
 	public MGP(Context context) 
 	{
@@ -161,6 +162,8 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
         deviceHeight = dh;
 
         mines = new MineField(50,BitmapFactory.decodeResource(getResources(), R.drawable.bomb));
+        
+        groupAI = new AIPack(50,BitmapFactory.decodeResource(getResources(), R.drawable.vship),(BitmapFactory.decodeResource(getResources(), R.drawable.laser)));
         
       	shootButton = new TouchButton(MGP.deviceWidth-MGP.dp[70],MGP.deviceHeight-MGP.dp[70],MGP.dp[60],true);
       	
@@ -421,14 +424,14 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 		 
 		ltBackground.draw(canvas); 
 		
-		Game.hitsAllInfo.DrawMessage(canvas);
+//		Game.hitsAllInfo.DrawMessage(canvas);
 		
 		//draw the asteroids
 		for(int i=0;i<asteroids.length;i++) 
 		{
 	        asteroids[i].draw(canvas);   
 	    }
-
+		groupAI.draw(canvas);
 		ship.drawShots(canvas);
 
 	    canvas.drawBitmap(dock, 0, deviceHeight-35, null);
@@ -451,7 +454,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
    		    shipThrusters.Draw(canvas);
    		}
             
- 		Game.hitsAllInfo.DrawHits(canvas);
+// 		Game.hitsAllInfo.DrawHits(canvas);
  		   
         explo1.draw(canvas);
   	    // canvas.drawText("1" , explo1.startX, explo1.startY, redPaint);
@@ -463,11 +466,11 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
   		message.draw(canvas);
   		
 
-  		Game.hitsAllInfo.drawHitInfo(canvas);
+//  		Game.hitsAllInfo.drawHitInfo(canvas);
   		 
   		 
   		bar.draw(canvas);
-  		//mines.draw(canvas); 
+  		mines.draw(canvas); 
   		
 	    // display fps
 	    displayFps(canvas, avgFps);
@@ -486,10 +489,45 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 		    updateGameState();
 			updateObjects();
 			updateAudio();
-			updateHits();
-			//updateMines();
+//			updateHits();
+			updateMines();
+			updateGroupAI();
 		}
 
+    }
+	
+    public void updateGroupAI(){
+        
+        
+        
+        groupAI.move(ship);
+        
+        
+           for(int k=0;k<groupAI.aiPack.length;k++)
+             {
+                   if(groupAI.aiPack[k].checkForNewShots()){
+                         soundEffects.laserST=0;     
+                     }
+                   
+                   for(int i=0;i<groupAI.aiPack[k].numShots;i++){
+                       if(ship.shotCollision(groupAI.aiPack[k].shots[i])){
+                                  collision(1,ship.x,ship.y);
+                           
+                                 Log.d("MGP", "Got to collision");
+                            }
+                    }
+                   
+                   for(int j = 0; j < ship.numUserShots; j++){
+                      if(groupAI.aiPack[k].dead==false&&groupAI.aiPack[k].shotCollision(ship.shots[j])){    
+                             ship.deleteShot(j); 
+                             j=ship.numUserShots;//break out of inner loop - it has 
+                             groupAI.aiPack[k].dead=true;
+                             collision(0,groupAI.aiPack[k].cx,groupAI.aiPack[k].cy);
+                             groupAI.updateFollowers();
+                      }
+                   }      
+             }
+           
     }
 	
 	public void updateMines()
@@ -539,7 +577,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 		}		
 	}
 	
-   public void updateAudio()
+    public void updateAudio()
 		{
 	         //Log.d(TAG, "starting effects ");
 	         soundEffects.playSounds();
@@ -568,6 +606,12 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 		     }   
 		}
 
+    public void stopAudio(){
+    	
+    	gameSoundtrack.stopAudio();
+    	
+    }
+    
 	public void updateObjects()
 	{
 		if(!bonusWaveOngoing)
@@ -860,7 +904,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
           //add one to wave
           wave++;       
           
-          Game.hitsAllInfo.checkStartHit(this.getContext());
+//          Game.hitsAllInfo.checkStartHit(this.getContext());
           
           if(wave < 5)
           {
@@ -881,7 +925,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
           astKilledThisWave=0;
     }
 	
-	 public void endWave()
+	public void endWave()
 	 { 
 		 Log.d(TAG, "ending wave");
 		 
@@ -919,17 +963,17 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 		      powerUps.slowMo.unlocked=false; 
 	    }
 	    
-	    public void setPause(boolean p)
+	public void setPause(boolean p)
 	    {
 	    	pause = p;
 	    }
 	    
-	    public boolean getPause()
+	public boolean getPause()
 	    {
 	    	return pause;
 	    }
 	    
-	 	public void ResetGame()
+	public void ResetGame()
 		{   
 	 		waited = 0;
 	 		countShots = 0;
@@ -946,7 +990,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 		    waveDelay = 400;  
 		    asteroidsPassed = 0;  
 		    score = 0; 	
-		    life = 3;
+		    life = 15;
 		    ship.x = 100;
 		    ship.y = deviceHeight/2;
 		    for(int k=0;k<asteroids.length;k++)
@@ -960,7 +1004,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 		    powerUps.slowMo.unlocked=false;
 		}
 	 	
-	 	public void gameTimer()
+	public void gameTimer()
 	 	{
 	 		//the timer of the game(runs on a separate thread)
 	 	    splashThread = new Thread() 
@@ -987,28 +1031,28 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 	 	    splashThread.start();	
 	 	}
 	 	
-	 	public void normalAudio()
+	public void normalAudio()
 	 	{
 	 		soundEffects.playBackRate=1;
 	 	}
 	 	
-		public void slowMoAudio()
+	public void slowMoAudio()
 	 	{
 			soundEffects.playBackRate=(float)0.7;
 	 	}
 		
-	    public void setAvgFps(String avgFps) 
+	public void setAvgFps(String avgFps) 
 	    {
 	 		this.avgFps = avgFps;
 	   	}
          
-	     public void closeGame()
+	public void closeGame()
 	     { 
-	    	 updateAudio();
+	    	 stopAudio();
 			 thread.setRunning(false);
 	     }
 	 	
-	     public void updateHits()
+	public void updateHits()
 	     {	  
 	    	 Game.hitsAllInfo.MoveHits(ship);
 	    	 Game.hitsAllInfo.checkHitFailure();
@@ -1047,7 +1091,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 	         }	 
 	     }
 	     
-	 	private void displayFps(Canvas canvas, String fps) 
+	private void displayFps(Canvas canvas, String fps) 
 	 	{
 	 		if (canvas != null && fps != null) 
 	 		{
@@ -1057,7 +1101,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback
 	 		}
 	 	}
 
-		public void createBitmap(Canvas canvas)
+    public void createBitmap(Canvas canvas)
 	 	{
 	 		//myBitmap = Bitmap.createBitmap((int)deviceWidth, (int)deviceHeight, Config.RGB_565);
 	 		

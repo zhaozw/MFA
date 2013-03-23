@@ -76,6 +76,16 @@ public class InteractiveSong {
 	     song.setLooping(true);
 	}
     
+	public void stopAudio(){
+		
+		if(song.isLooping()||song.isPlaying())
+			song.stop();
+		
+		if(kick.isLooping()||kick.isPlaying())
+			kick.stop();
+		
+	}
+	
     public void releaseObjects()
     {
     	 kick.release();

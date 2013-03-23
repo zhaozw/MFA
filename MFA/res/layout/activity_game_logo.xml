@@ -56,4 +56,13 @@
         android:textSize="50dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <Button
+        android:id="@+id/offlineButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/FBLogin"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClick"
+        android:text="offline bitchez" />
+
 </RelativeLayout>
