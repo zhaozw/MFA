@@ -1,8 +1,5 @@
 package com.example.activities;
 
-import com.example.mfa.R;
-import com.example.mfa.gamepanel.MGP;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,25 +10,25 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class MainMenu extends Activity 
-{
-	
+import com.example.mfa.R;
+
+public class MainMenu extends Activity {
+
 	@Override
-	protected void onCreate(Bundle savedInstanceState) 
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE); 
+		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // no title
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-		WindowManager.LayoutParams.FLAG_FULLSCREEN);
-	    setContentView(R.layout.activity_main_menu);
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		setContentView(R.layout.activity_main_menu);
 
 	}
 
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.imageButton1: {
-			
+
 			Intent i = new Intent(MainMenu.this, NewGameOptions.class);
 			startActivity(i);
 		}
@@ -65,7 +62,7 @@ public class MainMenu extends Activity
 			Intent i = new Intent(MainMenu.this, GameLogo.class);
 			startActivity(i);
 		}
-			break;		
+			break;
 		}
 	}
 
@@ -78,12 +75,9 @@ public class MainMenu extends Activity
 		return;
 	}
 
-	DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() 
-	{
-		public void onClick(DialogInterface dialog, int which) 
-		{
-			switch (which) 
-			{
+	DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+		public void onClick(DialogInterface dialog, int which) {
+			switch (which) {
 			case DialogInterface.BUTTON_POSITIVE:
 
 				Intent intent = new Intent(Intent.ACTION_MAIN);

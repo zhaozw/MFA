@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">MFA</string>
+    <string name="app_id">140646612752259</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_game_logo">GameLogo</string>
     <string name="desc">Image in the game</string>
