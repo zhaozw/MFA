@@ -8,6 +8,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.util.Log;
 
 public class UserFunctions {
 
@@ -67,6 +68,7 @@ public class UserFunctions {
 	 * Function get Login status
 	 * */
 	public boolean isUserLoggedIn(Context context) {
+		Log.d("IsUserLogedIn?","Testing");
 		DatabaseHandler db = new DatabaseHandler(context);
 		int count = db.getRowCount();
 		if (count > 0) {

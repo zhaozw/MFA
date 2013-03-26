@@ -26,7 +26,8 @@ public class Hit2Menu extends Activity {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.Purchase: {
-			Intent i = new Intent(Hit2Menu.this, ChooseRival.class);
+			Intent i = new Intent(Hit2Menu.this, testchoose.class);
+			i.putExtra("HitType", "2");
 			startActivity(i);
 		}
 			break;

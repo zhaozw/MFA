@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,7 +43,7 @@ public class LoginActivity extends Activity {
 		btnLogin = (Button) findViewById(R.id.btnLogin);
 		btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
 		loginErrorMsg = (TextView) findViewById(R.id.login_error);
-
+		Log.d("LoginActivity","Started onCreate");
 		// Login button Click Event
 		btnLogin.setOnClickListener(new View.OnClickListener() {
 
@@ -51,7 +52,9 @@ public class LoginActivity extends Activity {
 				String password = inputPassword.getText().toString();
 				UserFunctions userFunction = new UserFunctions();
 				JSONObject json = userFunction.loginUser(email, password);
-
+				
+				Log.d("LoginActivity","Onclick Activated");
+				
 				// check for login response
 				try {
 					if (json.getString(KEY_SUCCESS) != null) {
@@ -72,12 +75,13 @@ public class LoginActivity extends Activity {
 									json_user.getString(KEY_CREATED_AT));
 
 							// Launch Dashboard Screen
-							Intent Gamelogo = new Intent(
-									getApplicationContext(), GameLogo.class);
+							Intent MainMenu = new Intent(
+									getApplicationContext(), MainMenu.class);
 
 							// Close all views before launching Dashboard
-							Gamelogo.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-							startActivity(Gamelogo);
+							MainMenu.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							
+							startActivity(MainMenu);
 
 							// Close Login Screen
 							finish();
@@ -97,8 +101,7 @@ public class LoginActivity extends Activity {
 		btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View view) {
-				Intent i = new Intent(getApplicationContext(),
-						RegisterActivity.class);
+				Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
 				startActivity(i);
 				finish();
 			}

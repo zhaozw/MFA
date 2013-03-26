@@ -59,6 +59,7 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
 	// creating new HashMap
 	public HashMap<String, String> map;
 
+	DatabaseHandler db;
 	ArrayList<HashMap<String, String>> Players;
 
 	Button messageBox, sendHitCheckBox, purchaseButton;
@@ -75,18 +76,14 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE); // make
-																					// it
-																					// landscape
-																					// mode
+		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // no title
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		playerStatsArray = new PlayerStatsObject[1000];
 
 		map = new HashMap<String, String>();
 
-		DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+		db = new DatabaseHandler(getApplicationContext());
 		setContentView(R.layout.activity_choose_rival);
 		context = getApplicationContext();
 
@@ -183,6 +180,7 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
 
 		messageBox.setOnClickListener(messageCheckBoxListener);
 		sendHitCheckBox.setOnClickListener(sendHitCheckBoxListener);
+		purchaseButton.setOnClickListener(purchaseButtonListener);
 		Title = (TextView) findViewById(R.id.hit_type);
 
 	}
@@ -289,6 +287,13 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
 			} else if (((CompoundButton) messageBox).isChecked() == false) {
 				enterMessageView.setVisibility(View.GONE);
 			}
+		}
+	};
+	
+	OnClickListener purchaseButtonListener = new OnClickListener() {
+		public void onClick(View v) {
+			Toast toast = Toast.makeText(context, "Message from " + db.getUserDetails().get("uid").toString().trim(), duration);
+			toast.show();
 		}
 	};
 }

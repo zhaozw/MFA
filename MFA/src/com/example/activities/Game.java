@@ -2,6 +2,10 @@ package com.example.activities;
 
 import java.util.HashMap;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -17,10 +21,12 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.mfa.R;
 import com.example.mfa.gamepanel.MGP;
 import com.example.mfa.networking.DatabaseHandler;
+import com.example.mfa.networking.JSONParser;
 import com.example.mfa.networking.UserFunctions;
 import com.example.objects.HitsAllInfo;
 
@@ -74,76 +80,76 @@ public class Game extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(gamePanel = new MGP(this));
 
-		// if(!userFunctions.isUserLoggedIn(getApplicationContext()))
-		// {
-		// Toast toast = Toast.makeText(getApplicationContext(),
-		// "Please Log in", Toast.LENGTH_LONG);
-		// toast.show();
-		// }
-		// else
-		// {
-		//
-		// String hit = db.getUserDetails().get("uid").toString().trim();
-		// JSONArray Hits = null;
-		//
-		// // Creating JSON Parser instance
-		// JSONParser jParser = new JSONParser();
-		//
-		// // getting JSON string from URL
-		// JSONObject json = jParser.getJSONFromUrl(url + hit);
-		//
-		// Log.d("Game",hit);
-		//
-		// Log.d("Game: ", "Starting JSON Try Loop");
-		// try
-		// {
-		// // Getting Array of Contacts
-		// Hits = json.getJSONArray("Hits");
-		// Log.d("Game","Getting Json Array");
-		//
-		// // looping through All Contacts
-		// for (int i = 0; i < Hits.length(); i++)
-		// {
-		// JSONObject s = Hits.getJSONObject(i);
-		//
-		// Log.d("New Game Options", "Starting Parse");
-		//
-		// String hitid = s.getString("HitsID");
-		//
-		// // Storing each json item in variable
-		//
-		// map.put("HitsID", hitid);
-		//
-		// Log.d("New Game Options", "initializing map");
-		// for(int k =0;k<=15;k++)
-		// {
-		// map.put("Hit"+k+"From", s.getString("Hit"+k+"From"));
-		// map.put("Hit"+k+"Active", s.getString("Hit"+k+"Active"));
-		// map.put("Hit"+k+"Msg", s.getString("Hit"+k+"Msg"));
-		//
-		// Log.d("NewGameOptions ", "jsonArray  "+ k+
-		// s.getString("Hit"+k+"From"));
-		// Log.d("NewGameOptions ", "jsonArray  "+ k+
-		// s.getString("Hit"+k+"Msg"));
-		// Log.d("NewGameOptions ", "jsonArray "+ k+
-		// s.getString("Hit"+k+"Active"));
-		//
-		// Log.d("NewGameOptions ", "Map "+ k+ map.get("Hit"+k+"From"));
-		// Log.d("NewGameOptions ", "Map "+ k+ map.get("Hit"+k+"Active"));
-		// Log.d("NewGameOptions ", "Map "+ k+ map.get("Hit"+k+"Msg"));
-		// }
-		//
-		// Log.d("New Game Options", "Done");
-		// }
-		// }
-		// catch (JSONException e)
-		// {
-		// e.printStackTrace();
-		// }
-		// hitsAllInfo= new HitsAllInfo();
-		// Log.d("Game: ", "Initailizing Hits Info");
-		// hitsAllInfo.initialize(map);
-		// }
+		 if(!userFunctions.isUserLoggedIn(getApplicationContext()))
+		 {
+		 Toast toast = Toast.makeText(getApplicationContext(),
+		 "Please Log in", Toast.LENGTH_LONG);
+		 toast.show();
+		 }
+		 else
+		 {
+		
+		 String hit = db.getUserDetails().get("uid").toString().trim();
+		 JSONArray Hits = null;
+		
+		 // Creating JSON Parser instance
+		 JSONParser jParser = new JSONParser();
+		
+		 // getting JSON string from URL
+		 JSONObject json = jParser.getJSONFromUrl(url + hit);
+		
+		 Log.d("Game",hit);
+		
+		 Log.d("Game: ", "Starting JSON Try Loop");
+		 try
+		 {
+		 // Getting Array of Contacts
+		 Hits = json.getJSONArray("Hits");
+		 Log.d("Game","Getting Json Array");
+		
+		 // looping through All Contacts
+		 for (int i = 0; i < Hits.length(); i++)
+		 {
+		 JSONObject s = Hits.getJSONObject(i);
+		
+		 Log.d("New Game Options", "Starting Parse");
+		
+		 String hitid = s.getString("HitsID");
+		
+		 // Storing each json item in variable
+		
+		 map.put("HitsID", hitid);
+		
+		 Log.d("New Game Options", "initializing map");
+		 for(int k =0;k<=15;k++)
+		 {
+		 map.put("Hit"+k+"From", s.getString("Hit"+k+"From"));
+		 map.put("Hit"+k+"Active", s.getString("Hit"+k+"Active"));
+		 map.put("Hit"+k+"Msg", s.getString("Hit"+k+"Msg"));
+		
+		 Log.d("NewGameOptions ", "jsonArray  "+ k+
+		 s.getString("Hit"+k+"From"));
+		 Log.d("NewGameOptions ", "jsonArray  "+ k+
+		 s.getString("Hit"+k+"Msg"));
+		 Log.d("NewGameOptions ", "jsonArray "+ k+
+		 s.getString("Hit"+k+"Active"));
+		
+		 Log.d("NewGameOptions ", "Map "+ k+ map.get("Hit"+k+"From"));
+		 Log.d("NewGameOptions ", "Map "+ k+ map.get("Hit"+k+"Active"));
+		 Log.d("NewGameOptions ", "Map "+ k+ map.get("Hit"+k+"Msg"));
+		 }
+		
+		 Log.d("New Game Options", "Done");
+		 }
+		 }
+		 catch (JSONException e)
+		 {
+		 e.printStackTrace();
+		 }
+		 hitsAllInfo= new HitsAllInfo();
+		 Log.d("Game: ", "Initailizing Hits Info");
+		 hitsAllInfo.initialize(map);
+		 }
 	}
 
 	public void gameOver() {

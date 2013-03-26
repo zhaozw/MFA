@@ -90,6 +90,7 @@
             android:name="com.example.activities.GameOver"
             android:label="@string/title_activity_game_over" >
         </activity>
+        <activity android:name="com.example.activities.testchoose"></activity>
     </application>
 
 </manifest>

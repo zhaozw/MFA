@@ -28,8 +28,8 @@ public class Hit1Menu extends Activity {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.Purchase: {
-			Log.d("Hits1Menu", " Going to choose rivals");
-			Intent i = new Intent(Hit1Menu.this, ChooseRival.class);
+			Intent i = new Intent(Hit1Menu.this, testchoose.class);
+			i.putExtra("HitType", "1");
 			startActivity(i);
 		}
 			break;
