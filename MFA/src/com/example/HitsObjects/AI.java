@@ -33,8 +33,8 @@ public class AI {
 		height = img.getHeight();
 		radius = width / 2;
 		this.shotImg = shotImg;
-		x = 150;
-		y = 150;
+		x = (int) (MGP.deviceWidth+MGP.dp[50]);
+		y = (int) (MGP.deviceHeight/2);
 		shots = new Shot[20];
 		shotDelay = 400;
 		shotDelayLeft = 0;
@@ -50,7 +50,7 @@ public class AI {
 
 		if (img != null) {
 			canvas.drawBitmap(img, x, y, null);
-			canvas.drawLine(cx, cy, following.cx, following.cy, MGP.orangePaint);
+			//canvas.drawLine(cx, cy, following.cx, following.cy, MGP.orangePaint);
 		} else
 			canvas.drawText("bitmap aint workin", cx, cy, MGP.redPaint);
 

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.HitMenuActivities.Hit1Menu;
 import com.example.mfa.R;
 
 public class MainMenu extends Activity {

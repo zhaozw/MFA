@@ -22,6 +22,7 @@ public class Mine {
 	public int activationTime = 25;
 	public boolean activated;
 	public boolean exploded;
+	public boolean dead;
 	Bitmap img;
 	RectF outerRing;
 	Random generator = new Random();
@@ -39,31 +40,34 @@ public class Mine {
 	}
 
 	public void draw(Canvas canvas) {
-
-		if (activated == false) {
-			MGP.greenPaint.setStyle(Paint.Style.STROKE);
-			canvas.drawCircle(cx, cy, outerRadius, MGP.greenPaint);
-		} else if (activated == true) {
-			MGP.redPaint.setStyle(Paint.Style.STROKE);
-			canvas.drawCircle(cx, cy, outerRadius, MGP.redPaint);
-		}
-
-		if (img != null)
-			canvas.drawBitmap(img, x, y, null);
-		else {
-			canvas.drawText("shit Aint working", x, y, MGP.redPaint);
-
+		if(!dead){
+			if (activated == false) {
+				MGP.greenPaint.setStyle(Paint.Style.STROKE);
+				canvas.drawCircle(cx, cy, outerRadius, MGP.greenPaint);
+			} else if (activated == true) {
+				MGP.redPaint.setStyle(Paint.Style.STROKE);
+				canvas.drawCircle(cx, cy, outerRadius, MGP.redPaint);
+			}
+	
+			if (img != null)
+				canvas.drawBitmap(img, x, y, null);
+			else {
+				canvas.drawText("shit Aint working", x, y, MGP.redPaint);
+	
+			}
 		}
 	}
 
 	public void move() {
-		x -= 1;
-
-		if (activated)
-			activationTime--;
-
-		cx = x + (width / 2);
-		cy = y + (height / 2);
+		if(!dead){
+				x -= 1;
+	
+			if (activated)
+				activationTime--;
+	
+			cx = x + (width / 2);
+			cy = y + (height / 2);
+		}
 	}
 
 	public void exploded() {
@@ -74,6 +78,7 @@ public class Mine {
 				+ (int) MGP.dp[150];
 		cx = x + (width / 2);
 		cy = y + (height / 2);
+		dead=true;
 	}
 
 	public boolean shipInnerCollision(Player ship) {

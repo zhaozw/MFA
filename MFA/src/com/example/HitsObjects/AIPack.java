@@ -9,7 +9,8 @@ public class AIPack {
 
 	public AI[] aiPack;
 	public int topTotal, bottomTotal, topLast, bottomLast, front,
-			patternTimer = 500, position = 0;
+			patternTimer = 600, position = 0;
+	public boolean failed;
 
 	public AIPack() {
 	}

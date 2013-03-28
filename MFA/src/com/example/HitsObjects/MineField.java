@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 
 public class MineField {
 	public boolean failed;
-	public static Mine[] mines;
+	public Mine[] mines;
 
 	public MineField(int amount, Bitmap bitmap) {
 		mines = new Mine[amount];

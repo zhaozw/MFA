@@ -63,15 +63,15 @@
             android:label="@string/title_activity_light_thread" >
         </activity>
         <activity
-            android:name="com.example.activities.Hit0Menu"
+            android:name="com.example.HitMenuActivities.Hit0Menu"
             android:label="@string/title_activity_hit0_menu" >
         </activity>
         <activity
-            android:name="com.example.activities.Hit1Menu"
+            android:name="com.example.HitMenuActivities.Hit1Menu"
             android:label="@string/title_activity_hit1_menu" >
         </activity>
         <activity
-            android:name="com.example.activities.Hit2Menu"
+            android:name="com.example.HitMenuActivities.Hit2Menu"
             android:label="@string/title_activity_hit2_menu" >
         </activity>
         <activity android:name="com.example.activities.RegisterActivity" >
@@ -90,7 +90,20 @@
             android:name="com.example.activities.GameOver"
             android:label="@string/title_activity_game_over" >
         </activity>
-        <activity android:name="com.example.activities.testchoose"></activity>
+        <activity android:name="com.example.activities.testchoose" >
+        </activity>
+        <activity
+            android:name="com.example.HitMenuActivities.Hit4Menu"
+            android:label="@string/title_activity_hit4_menu" >
+        </activity>
+        <activity
+            android:name="com.example.HitMenuActivities.Hit5Menu"
+            android:label="@string/title_activity_hit5_menu" >
+        </activity>
+        <activity
+            android:name="com.example.HitMenuActivities.Hit6Menu"
+            android:label="@string/title_activity_hit6_menu" >
+        </activity>
     </application>
 
 </manifest>

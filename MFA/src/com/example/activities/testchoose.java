@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import com.example.mfa.R;
 import com.example.mfa.networking.*;
-import com.example.objects.HitsAllInfo;
 
 public class testchoose extends Activity {
 

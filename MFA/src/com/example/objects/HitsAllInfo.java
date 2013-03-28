@@ -8,22 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.Log;
 
-import com.example.HitsObjects.AsteroidHitLarge;
-import com.example.HitsObjects.AsteroidHitMedium;
-import com.example.HitsObjects.AsteroidHitSmall;
-import com.example.HitsObjects.FollowAI;
-import com.example.HitsObjects.Hit10;
-import com.example.HitsObjects.Hit11;
-import com.example.HitsObjects.Hit12;
-import com.example.HitsObjects.Hit13;
-import com.example.HitsObjects.Hit14;
-import com.example.HitsObjects.Hit15;
-import com.example.HitsObjects.Hit7;
-import com.example.HitsObjects.Hit8;
-import com.example.HitsObjects.Hit9;
-import com.example.HitsObjects.HitGiantBoss;
-import com.example.HitsObjects.MineField;
-import com.example.HitsObjects.SmallGroupAIs;
+import com.example.HitsObjects.*;
 import com.example.mfa.R;
 import com.example.mfa.gamepanel.MGP;
 
@@ -35,8 +20,8 @@ public class HitsAllInfo {
 	public AsteroidHitSmall hit1;
 	public AsteroidHitMedium hit2;
 	public AsteroidHitLarge hit3;
-	public FollowAI hit4;
-	public SmallGroupAIs hit5;
+	public AIPack hit4;
+	public AIPack hit5;
 	public MineField hit6;
 	public Hit7 hit7;
 	public Hit8 hit8;
@@ -182,18 +167,21 @@ public class HitsAllInfo {
 			Log.d("Hits All Info ", "creating hit 4");
 			flyingMessage.activate(1, (int) MGP.dp[3], hitsInfo[4].name + ":  "
 					+ hitsInfo[4].message);
-			hit4 = new FollowAI(BitmapFactory.decodeResource(
-					context.getResources(), R.drawable.tinyship1));
+			hit4 = new AIPack(15,BitmapFactory.decodeResource(
+					context.getResources(), R.drawable.vship),BitmapFactory.decodeResource(
+							context.getResources(), R.drawable.laser));
 
 			break;
 		case (5):
 
 			Log.d("Hits All Info ", "creating hit 5");
-			flyingMessage.activate(1, (int) MGP.dp[3], hitsInfo[5].name + ":  "
-					+ hitsInfo[5].message);
+	    	flyingMessage.activate(1, (int) MGP.dp[3], hitsInfo[5].name + ":  "
+				+ hitsInfo[5].message);
 
-			hit5 = new SmallGroupAIs(BitmapFactory.decodeResource(
-					context.getResources(), R.drawable.vship));
+			hit5 = new AIPack(31,BitmapFactory.decodeResource(
+					context.getResources(), R.drawable.vship),BitmapFactory.decodeResource(
+							context.getResources(), R.drawable.laser));
+
 			break;
 		case (6):
 
@@ -202,7 +190,7 @@ public class HitsAllInfo {
 					+ hitsInfo[6].message);
 
 			hit6 = new MineField(10, BitmapFactory.decodeResource(
-					context.getResources(), R.drawable.icelarge));
+					context.getResources(), R.drawable.bomb));
 			break;
 		case (7):
 
@@ -318,7 +306,7 @@ public class HitsAllInfo {
 			hit3.move();
 			break;
 		case (4):
-			hit4.move(ship.cx, ship.cy);
+			hit4.move(ship);
 			break;
 		case (5):
 			hit5.move(ship);
