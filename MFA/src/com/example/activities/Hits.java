@@ -5,7 +5,6 @@ import java.util.Locale;
 import com.example.mfa.R;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -22,11 +21,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-public class Hits extends FragmentActivity implements ActionBar.TabListener {
+public class Hits extends FragmentActivity {
 
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
-	private ActionBar actionBar;
     
 	@SuppressLint("NewApi")
 	@Override
