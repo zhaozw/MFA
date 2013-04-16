@@ -21,7 +21,6 @@ public class AI {
 	public int width, height;
 	public int x, y, cy, cx;
 	public Bitmap img;
-	public boolean failed = false;
 	public AI following;
 	public int followXdistance = 0, followYdistance = 0, xdeadZone = 0,
 			ydeadZone = 0;
@@ -34,7 +33,7 @@ public class AI {
 		radius = width / 2;
 		this.shotImg = shotImg;
 		x = (int) (MGP.deviceWidth+MGP.dp[50]);
-		y = (int) (MGP.deviceHeight/2);
+		y = (MGP.deviceHeight/2);
 		shots = new Shot[20];
 		shotDelay = 400;
 		shotDelayLeft = 0;
@@ -51,8 +50,9 @@ public class AI {
 		if (img != null) {
 			canvas.drawBitmap(img, x, y, null);
 			//canvas.drawLine(cx, cy, following.cx, following.cy, MGP.orangePaint);
-		} else
-			canvas.drawText("bitmap aint workin", cx, cy, MGP.redPaint);
+		}
+//		else
+//			canvas.drawText("bitmap aint workin", cx, cy, MGP.redPaint);
 
 		// draw all the shots on the screen
 		for (int i = 0; i < numShots; i++) // numUserShots

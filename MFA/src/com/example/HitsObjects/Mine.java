@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 
 import com.example.mfa.gamepanel.MGP;
+import com.example.objects.Paints;
 import com.example.objects.Player;
 import com.example.objects.Shot;
 
@@ -42,17 +43,17 @@ public class Mine {
 	public void draw(Canvas canvas) {
 		if(!dead){
 			if (activated == false) {
-				MGP.greenPaint.setStyle(Paint.Style.STROKE);
-				canvas.drawCircle(cx, cy, outerRadius, MGP.greenPaint);
+				Paints.darkGreen.setStyle(Paint.Style.STROKE);
+				canvas.drawCircle(cx, cy, outerRadius, Paints.darkGreen);
 			} else if (activated == true) {
-				MGP.redPaint.setStyle(Paint.Style.STROKE);
-				canvas.drawCircle(cx, cy, outerRadius, MGP.redPaint);
+				Paints.red.setStyle(Paint.Style.STROKE);
+				canvas.drawCircle(cx, cy, outerRadius, Paints.red);
 			}
 	
 			if (img != null)
 				canvas.drawBitmap(img, x, y, null);
 			else {
-				canvas.drawText("shit Aint working", x, y, MGP.redPaint);
+				canvas.drawText("shit Aint working", x, y, Paints.red);
 	
 			}
 		}

@@ -45,15 +45,17 @@
     <string name="hits_2_description">This hit sends a medium size asteroid carrening into the opponents level  and high speeds qwith the hopes of them meeting it head on.</string>
     <string name="hits_2_name">Asteroid Medium</string>
     <string name="hits_2_cost">Cost: 2000</string>
-    <string name="hits_4_description">This hit sends a medium size asteroid carrening into the opponents level  and high speeds qwith the hopes of them meeting it head on.</string>
+    <string name="hits_3_name">Follow AI</string>
+    <string name="hits_4_description">This hit sends a murder of aliens.</string>
     <string name="hits_4_name">Small AI Pack</string>
-    <string name="hits_4_cost">Cost: 2000</string>
-    <string name="hits_5_description">This hit sends a medium size asteroid carrening into the opponents level  and high speeds qwith the hopes of them meeting it head on.</string>
+    <string name="hits_4_cost">Cost: 5000</string>
+    <string name="hits_5_description">This hit sends a pride of aliens.</string>
     <string name="hits_5_name">Large AI Pack</string>
-    <string name="hits_5_cost">Cost: 2000</string>
-    <string name="hits_6_description">This hit sends a medium size asteroid carrening into the opponents level  and high speeds qwith the hopes of them meeting it head on.</string>
+    <string name="hits_5_cost">Cost: 10000</string>
+    <string name="hits_6_description">This hit sends mines, watch the fuck out.</string>
     <string name="hits_6_name">Mines</string>
     <string name="hits_6_cost">Cost: 2000</string>
+    
     <string name="title_activity_hit0_menu">"Hit0Menu"   </string>
     <string name="title_activity_hit1_menu">"Hit1Menu"   </string>
     <string name="title_activity_hit2_menu">"Hit2Menu"   </string>
@@ -63,5 +65,14 @@
     <string name="title_activity_hit4_menu">Hit4Menu</string>
     <string name="title_activity_hit5_menu">Hit5Menu</string>
     <string name="title_activity_hit6_menu">Hit6Menu</string>
-
+    <string name="sentBy"> sent by </string>
+    <string name="hits_8_name">unknown</string>
+    <string name="hits_7_name">mines</string>
+    <string name="hits_9_name">unknown</string>
+    <string name="hits_10_name">unknown</string>
+    <string name="hits_11_name">unknown</string>
+    <string name="hits_12_name">unknown</string>
+    <string name="hits_13_name">unknown</string>
+    <string name="hits_14_name">unknown</string>
+    <string name="hits_15_name">unknown</string>
 </resources>

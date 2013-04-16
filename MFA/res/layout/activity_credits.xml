@@ -6,7 +6,7 @@
     tools:context=".Credits" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/selection_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -21,7 +21,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/selection_label"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:text="Christian Gorham"

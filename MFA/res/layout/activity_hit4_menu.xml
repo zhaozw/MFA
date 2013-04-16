@@ -34,7 +34,7 @@
         android:layout_marginLeft="80dp"
         android:layout_marginTop="25dp"
         android:maxWidth="170dp"
-        android:text="@string/hits_0_description"
+        android:text="@string/hits_4_description"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageView
@@ -44,7 +44,7 @@
         android:layout_alignTop="@+id/Hit2Description"
         android:layout_marginLeft="70dp"
         android:layout_toRightOf="@+id/Hit2Description"
-        android:src="@drawable/ab165" />
+        android:src="@drawable/smallvship2" />
 
     <Button
         android:id="@+id/Purchase"
@@ -63,26 +63,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="@string/hits_0_name"
+        android:text="@string/hits_4_name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/Cost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/Hit2Description"
-        android:layout_alignLeft="@+id/Hit2Image"
-        android:text="@string/hits_0_cost"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/CashWord"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/Cost"
-        android:layout_alignLeft="@+id/Hit2Image"
-        android:text="@string/all_hits_menus_cash_word"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/CashAmount"
@@ -93,5 +75,32 @@
         android:layout_toRightOf="@+id/CashWord"
         android:text="@string/all_hits_menus_cash_amount"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/Cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Hit2Image"
+        android:layout_below="@+id/CashAmount"
+        android:text="@string/hits_4_cost"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/CashWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Hit2Image"
+        android:layout_below="@+id/Hit2Image"
+        android:text="@string/all_hits_menus_cash_word"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+        <TextView
+        android:id="@+id/selection_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

@@ -37,8 +37,8 @@ public class HitsAllInfo {
 	public int currentlyActivatedHit = -1;
 	Random randomGenerator;
 	int[] currentlySetWaves;
-	int[] setHits = new int[3];
-	int totalActiveHits;
+	public int[] setHits = new int[3];
+	public int totalActiveHits;
 
 	public HitsAllInfo() {
 		hitsInfo = new HitsInfo[16];
@@ -168,7 +168,7 @@ public class HitsAllInfo {
 			flyingMessage.activate(1, (int) MGP.dp[3], hitsInfo[4].name + ":  "
 					+ hitsInfo[4].message);
 			hit4 = new AIPack(15,BitmapFactory.decodeResource(
-					context.getResources(), R.drawable.vship),BitmapFactory.decodeResource(
+					context.getResources(), R.drawable.smallvship2),BitmapFactory.decodeResource(
 							context.getResources(), R.drawable.laser));
 
 			break;
@@ -179,7 +179,7 @@ public class HitsAllInfo {
 				+ hitsInfo[5].message);
 
 			hit5 = new AIPack(31,BitmapFactory.decodeResource(
-					context.getResources(), R.drawable.vship),BitmapFactory.decodeResource(
+					context.getResources(), R.drawable.smallvship2),BitmapFactory.decodeResource(
 							context.getResources(), R.drawable.laser));
 
 			break;
@@ -189,8 +189,8 @@ public class HitsAllInfo {
 			flyingMessage.activate(1, (int) MGP.dp[3], hitsInfo[6].name + ":  "
 					+ hitsInfo[6].message);
 
-			hit6 = new MineField(10, BitmapFactory.decodeResource(
-					context.getResources(), R.drawable.bomb));
+			hit6 = new MineField(50, BitmapFactory.decodeResource(
+					context.getResources(), R.drawable.mine1));
 			break;
 		case (7):
 
@@ -354,12 +354,13 @@ public class HitsAllInfo {
 	}
 
 	public void DrawHits(Canvas canvas) {
-
 		for (int k = 0; k < 3; k++) {
 			canvas.drawText("hit " + setHits[k] + " "
 					+ hitsInfo[setHits[k]].name + " activation Wave "
-					+ hitsInfo[setHits[k]].activationWave, 0,
-					(k + 1) * 10 + 10, MGP.orangePaint);
+					+ hitsInfo[setHits[k]].activationWave
+					+"failed? "+hitsInfo[setHits[k]].failed
+					+"succeeded? "+hitsInfo[setHits[k]].succeeded,
+					0,(k + 1) * 10 + 10, Paints.orange);
 		}
 
 		switch (currentlyActivatedHit) {
@@ -436,68 +437,100 @@ public class HitsAllInfo {
 		switch (currentlyActivatedHit) {
 
 		case (0):
-			if (hit0.failed)
+			if (hit0.failed){
+				hitsInfo[0].failed=true;
 				currentlyActivatedHit = -1;
+			}
 			break;
 		case (1):
-			if (hit1.failed)
+			if (hit1.failed){
+				hitsInfo[1].failed=true;
 				currentlyActivatedHit = -1;
+			}
 			break;
 		case (2):
-			if (hit2.failed)
+			if (hit2.failed){
+				hitsInfo[2].failed=true;
 				currentlyActivatedHit = -1;
+			}
 			break;
 		case (3):
-			if (hit3.failed)
+			if (hit3.failed){
+				hitsInfo[3].failed=true;
 				currentlyActivatedHit = -1;
+			}
 			break;
 		case (4):
-			if (hit4.failed)
+			if (hit4.failed){
+				hitsInfo[4].failed=true;
 				currentlyActivatedHit = -1;
+			}
 			break;
 		case (5):
-			if (hit5.failed)
+			if (hit5.failed){
+				hitsInfo[5].failed=true;
 				currentlyActivatedHit = -1;
+			}
 			break;
 		case (6):
-			if (hit6.failed)
+			if (hit6.failed){
+				hitsInfo[6].failed=true;
 				currentlyActivatedHit = -1;
+			}
 			break;
 		case (7):
-			if (hit7.failed)
+			if (hit7.failed){
+				hitsInfo[7].failed=true;
 				currentlyActivatedHit = -1;
+			}
 			break;
 		case (8):
-			if (hit8.failed)
+			if (hit8.failed){
+				hitsInfo[8].failed=true;
 				currentlyActivatedHit = -1;
+			}
 			break;
 		case (9):
-			if (hit9.failed)
+			if (hit9.failed){
+				hitsInfo[9].failed=true;
 				currentlyActivatedHit = -1;
+			}
 			break;
 		case (10):
-			if (hit10.failed)
+			if (hit10.failed){
+				hitsInfo[10].failed=true;
 				currentlyActivatedHit = -1;
+			}
 			break;
 		case (11):
-			if (hit11.failed)
+			if (hit11.failed){
+				hitsInfo[11].failed=true;
 				currentlyActivatedHit = -1;
+			}
 			break;
 		case (12):
-			if (hit12.failed)
+			if (hit12.failed){
+				hitsInfo[12].failed=true;
 				currentlyActivatedHit = -1;
+			}
 			break;
 		case (13):
-			if (hit13.failed)
+			if (hit13.failed){
+				hitsInfo[13].failed=true;
 				currentlyActivatedHit = -1;
+			}
 			break;
 		case (14):
-			if (hit14.failed)
+			if (hit14.failed){
+				hitsInfo[14].failed=true;
 				currentlyActivatedHit = -1;
+			}
 			break;
 		case (15):
-			if (hit15.failed)
+			if (hit15.failed){
+				hitsInfo[15].failed=true;
 				currentlyActivatedHit = -1;
+			}
 			break;
 
 		default:

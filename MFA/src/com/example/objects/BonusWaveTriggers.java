@@ -76,7 +76,7 @@ public class BonusWaveTriggers {
 	}
 
 	public void draw2(Canvas canvas) {
-		canvas.drawOval(shape, MGP.yellowPaint);
+		canvas.drawOval(shape, Paints.yellow);
 	}
 
 	public void moveBack() {

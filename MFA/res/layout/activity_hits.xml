@@ -6,7 +6,7 @@
     tools:context=".Hits" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/selection_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -86,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/selection_label"
         android:layout_marginLeft="2dp"
         tools:listitem="@android:layout/simple_gallery_item" >
     </ListView>

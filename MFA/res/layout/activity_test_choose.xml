@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
-    <Button
-        android:id="@+id/SendYacov"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClick"
-        android:text="Yacov" />
 
     <Button
         android:id="@+id/SendJames"
@@ -19,17 +13,40 @@
         android:text="James" />
 
     <Button
-        android:id="@+id/SendKAcie"
+        android:id="@+id/SendYacov"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/SendJames"
         android:onClick="onClick"
-        android:text="KAcie" />
+        android:text="Yacov" />
 
     <Button
         android:id="@+id/SendChristian"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/SendYacov"
         android:onClick="onClick"
         android:text="Christian" />
 
-</LinearLayout>
+    <Button
+        android:id="@+id/SendKAcie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/SendYacov"
+        android:layout_below="@+id/SendChristian"
+        android:onClick="onClick"
+        android:text="KAcie" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/SendKAcie"
+        android:layout_alignBottom="@+id/SendKAcie"
+        android:layout_toRightOf="@+id/SendChristian"
+        android:ems="10"
+        android:inputType="textMultiLine" />
+
+</RelativeLayout>

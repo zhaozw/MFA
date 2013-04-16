@@ -38,7 +38,8 @@ public class Game extends Activity {
 	public static float dpWidth;
 	public static DisplayMetrics dm;
 	public static HitsAllInfo hitsAllInfo;
-	public static int lightColor;
+	public static int lightColor,ec1,ec2,ec3,ec4,ec5,ec6,thrusterColor,txtc;
+	
 	private PowerManager.WakeLock wl;
 	public static final String PREFS_NAME = "MyPrefsFile";
 	public String hits;
@@ -54,6 +55,15 @@ public class Game extends Activity {
 
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		lightColor = settings.getInt("lightColor", 0);
+		ec1 = settings.getInt("ec1", 0);
+		ec2 = settings.getInt("ec2", 0);
+		ec3 = settings.getInt("ec3", 0);
+		ec4 = settings.getInt("ec4", 0);
+		ec5 = settings.getInt("ec5", 0);
+		ec6 = settings.getInt("ec6", 0);
+		thrusterColor= settings.getInt("thrusterColor", 0);
+		txtc = settings.getInt("txtc", 0);
+		
 		Log.d("Game: ", "Light Color =" + lightColor);
 
 		PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);

@@ -28,16 +28,31 @@ public class InteractiveSong {
 		Log.d("Music", "Intensity " + intensity);
 		switch (intensity) {
 		case (1):
-			song = MediaPlayer.create(context, R.raw.mc1);
+			song = MediaPlayer.create(context, R.raw.g1);
 			break;
 		case (2):
-			song = MediaPlayer.create(context, R.raw.mc2);
+			song = MediaPlayer.create(context, R.raw.g2);
 			break;
 		case (3):
-			song = MediaPlayer.create(context, R.raw.mc3);
+			song = MediaPlayer.create(context, R.raw.g3);
 			break;
 		case (4):
-			song = MediaPlayer.create(context, R.raw.mc4);
+			song = MediaPlayer.create(context, R.raw.g4);
+			break;
+		case (5):
+			song = MediaPlayer.create(context, R.raw.g5);
+			break;
+		case (6):
+			song = MediaPlayer.create(context, R.raw.g6);
+			break;
+		case (7):
+			song = MediaPlayer.create(context, R.raw.g7);
+			break;
+		case (8):
+			song = MediaPlayer.create(context, R.raw.g8);
+			break;
+		case (9):
+			song = MediaPlayer.create(context, R.raw.g9);
 			break;
 		}
 
@@ -71,17 +86,27 @@ public class InteractiveSong {
 
 	public void stopAudio() {
 
-		if (song.isLooping() || song.isPlaying())
+		if (song.isLooping() || song.isPlaying()){
 			song.stop();
-
-		if (kick.isLooping() || kick.isPlaying())
+			song.reset();}
+		if (kick.isLooping() || kick.isPlaying()){
 			kick.stop();
-
+			kick.reset();}
 	}
 
 	public void releaseObjects() {
-		kick.release();
-		song.release();
+		
+		try{	
+		  kick.release();
+		}catch(Exception e){
+			
+		}
+		try{	
+		  song.release();
+			}catch(Exception e){
+				
+	    }
+		
 	}
 
 }

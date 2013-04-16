@@ -121,7 +121,7 @@ public class Asteroid {
 	}
 
 	public void moveBack() {
-		this.y = generator.nextInt(MGP.deviceHeight - 300);
+		this.y = generator.nextInt(MGP.deviceHeight - 200);
 		this.x = generator.nextInt((scrnW) * 2) + scrnW + (int) MGP.dp[150];
 	}
 

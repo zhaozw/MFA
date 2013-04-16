@@ -56,7 +56,7 @@ public class FlyingMessage {
 	}
 
 	public void draw(Canvas canvas) {
-		MGP.greenPaint.setTextSize((float) MGP.dp[80]);
-		canvas.drawText(message, X, Y, MGP.greenPaint);
+		Paints.messagePaint.setTextSize((float) MGP.dp[80]);
+		canvas.drawText(message, X, Y, Paints.messagePaint);
 	}
 }

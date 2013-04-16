@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.example.HitMenuActivities.Hit1Menu;
 import com.example.mfa.R;
 
 public class MainMenu extends Activity {
@@ -44,7 +43,7 @@ public class MainMenu extends Activity {
 		}
 			break;
 		case R.id.imageButton4: {
-			Intent i = new Intent(MainMenu.this, Hit1Menu.class);
+			Intent i = new Intent(MainMenu.this, Hits.class);
 			startActivity(i);
 		}
 			break;

@@ -73,8 +73,8 @@ public class TouchButton {
 			canvas.drawBitmap(bitmap, x, y, null);
 		else {
 			if (shade)
-				canvas.drawOval(shadow, MGP.blackPaint);
-			canvas.drawOval(touchLocation, MGP.redPaint);
+				canvas.drawOval(shadow, Paints.black);
+			canvas.drawOval(touchLocation, Paints.red);
 		}
 	}
 }

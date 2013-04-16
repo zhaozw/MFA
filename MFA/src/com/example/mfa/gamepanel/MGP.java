@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package com.example.mfa.gamepanel;
 
 import java.util.Random;
@@ -21,9 +19,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
-import com.example.HitsObjects.AIPack;
+import com.example.HitsObjects.FollowAI;
 import com.example.HitsObjects.HitGiantBoss;
-import com.example.HitsObjects.MineField;
 import com.example.activities.Game;
 import com.example.mfa.R;
 import com.example.objects.AnalogStick;
@@ -31,8 +28,8 @@ import com.example.objects.Asteroid;
 import com.example.objects.Explosion;
 import com.example.objects.FlyingMessage;
 import com.example.objects.InteractiveSong;
-import com.example.objects.LifeBar;
 import com.example.objects.LightBackground;
+import com.example.objects.Paints;
 import com.example.objects.Player;
 import com.example.objects.PowerUpsAll;
 import com.example.objects.SoundEffectsManager;
@@ -43,7 +40,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 	private static final String TAG = MGP.class.getSimpleName();
 
 	private MainThread thread;
-	private LifeBar bar;
+	//private LifeBar bar;
 	private TouchButton shootButton;
 	private FlyingMessage message;
 	private Explosion explo1, explo2, explo3;
@@ -55,7 +52,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 	private AnalogStick analog;
 	private PowerUpsAll powerUps;
 	HitGiantBoss bossHit;
-
+   
 	public static double[] dp; // DP units
 
 	DisplayMetrics metrics = this.getResources().getDisplayMetrics();
@@ -65,7 +62,9 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 	public static int deviceHeight;
 	public RectF screenShape;
 	public int currentHit = -1;
-
+    public int gameOverCounter = 500;
+	public boolean gameOver;
+    
 	boolean pause;
 	private boolean debugInfo = false;
 	boolean createBitmap = false;
@@ -75,15 +74,16 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 	Bitmap dock, myBitmap = null;
 
 	public int optionsChoice = 0;
-	public static int life;
-	private double initialLife;
+	//public static int life;
+	//private double initialLife;
 	private Thread splashThread;
 
 	// what wave the game is currently on
 	public static int wave = 0;
 
 	public float playBackRate = 1;
-
+    public FollowAI ai;
+	
 	// for random numbers
 	Random Generator = new Random();
 	int r;
@@ -96,7 +96,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 	// wave
 	public static int waveDelay = 400;
 
-	public static int lightColor = 1, explodeColor = 1;
+	public static int lightColor = 1,ec1,ec2,ec3,ec4;
 
 	// the amount of asteroids that must pass before the wave finishes
 	// using this as opposed to asteroids killed allows for variable amounts of
@@ -110,18 +110,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 	int backBonusCount = 0;
 	int astDiff;
 
-	// Colors
-	public static Paint textPaint, WPaint, redPaint, bluePaint, greenPaint,
-			yellowPaint, greyPaint, blackPaint, orangePaint, purplePaint,
-			pinkPaint, s1, s2, blueT, redT, orangeT, yellowT;
-
-	// Player ship = new Player(BitmapFactory.decodeResource(getResources(),
-	// R.drawable.bs65),
-	// BitmapFactory.decodeResource(getResources(), R.drawable.gps65),
-	// BitmapFactory.decodeResource(getResources(),R.drawable.grs65),
-	// BitmapFactory.decodeResource(getResources(),R.drawable.ship),
-	// BitmapFactory.decodeResource(getResources(), R.drawable.ps),
-	// BitmapFactory.decodeResource(getResources(), R.drawable.laser),100,100);
+    public static Paint textPaint;
 
 	// the array of asteroids
 	Asteroid[] asteroids = new Asteroid[18];
@@ -129,8 +118,10 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 	// Alien[] enemies = new Alien[10];
 
 	// the number that is solely responsible for
-	int asteroidsUnlocked = 2;
+	int asteroidsUnlocked = 3;
 
+	public static Paints paints;
+	
 	// the fps to be displayed
 	private String avgFps;
 
@@ -147,11 +138,14 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 		getHolder().addCallback(this);
 
 		lightColor = Game.lightColor;
-
+		
 		pause = false;
 
 		gameTimer();
 
+		
+		
+		
 		dp = new double[1000];
 
 		for (int k = 0; k < dp.length; k++) {
@@ -162,11 +156,15 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 		deviceWidth = dw;
 		deviceHeight = dh;
 
+		 ai = new FollowAI(BitmapFactory.decodeResource(getResources(),
+					R.drawable.littleship),BitmapFactory.decodeResource(getResources(),
+							R.drawable.laser));
+		 
 		shootButton = new TouchButton(MGP.deviceWidth - MGP.dp[70],
 				MGP.deviceHeight - MGP.dp[70], MGP.dp[60], true);
 
 		ship = new Player(BitmapFactory.decodeResource(getResources(),
-				R.drawable.ship), BitmapFactory.decodeResource(getResources(),
+				R.drawable.f162), BitmapFactory.decodeResource(getResources(),
 				R.drawable.laser), 500, 200);
 		analog = new AnalogStick((int) dp[115], (int) dp[75]);
 		powerUps = new PowerUpsAll(BitmapFactory.decodeResource(getResources(),
@@ -184,7 +182,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 		explo3 = new Explosion();
 		shipThrusters = new Thrusters();
 		ltBackground = new LightBackground();
-		bar = new LifeBar();
+	//	bar = new LifeBar();
 		// initialize asteroids
 		for (int i = 0; i < asteroids.length; i++) {
 			if (i < 3)
@@ -217,76 +215,32 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 		dock = BitmapFactory.decodeResource(getResources(), R.drawable.bar);
 
 		// create Paints
-		textPaint = new Paint();
+		textPaint = new Paint(); 
 		textPaint.setARGB(150, 255, 0, 0);
-		textPaint.setTextSize(11);
+		textPaint.setTextSize(11); 
 		textPaint.setAntiAlias(true); // red paint
-		WPaint = new Paint();
-		WPaint.setARGB(255, 255, 255, 255);
-		WPaint.setTextSize(11);
-		redPaint = new Paint();
-		redPaint.setARGB(255, 255, 0, 0);
-		redPaint.setTextSize(11);
-		redPaint.setAntiAlias(true);
-		bluePaint = new Paint();
-		bluePaint.setARGB(255, 0, 0, 255);
-		bluePaint.setTextSize(11);
-		bluePaint.setAntiAlias(true);
-		greenPaint = new Paint();
-		greenPaint.setARGB(255, 34, 139, 34);
-		greenPaint.setTextSize(11);
-		greenPaint.setAntiAlias(true);
-		greyPaint = new Paint();
-		greyPaint.setARGB(255, 139, 137, 137);
-		greyPaint.setTextSize(11);
-		greyPaint.setAntiAlias(true);
-		blackPaint = new Paint();
-		blackPaint.setARGB(255, 0, 0, 0);
-		blackPaint.setTextSize(11);
-		blackPaint.setAntiAlias(true);
-		yellowPaint = new Paint();
-		yellowPaint.setARGB(255, 255, 255, 0);
-		yellowPaint.setTextSize(11);
-		yellowPaint.setAntiAlias(true);
-		orangePaint = new Paint();
-		orangePaint.setARGB(255, 255, 140, 0);
-		orangePaint.setTextSize(11);
-		orangePaint.setAntiAlias(true);
-		yellowT = new Paint();
-		yellowT.setARGB(100, 255, 255, 0);
-		yellowT.setTextSize(11);
-		yellowT.setAntiAlias(true);
-		blueT = new Paint();
-		blueT.setARGB(100, 0, 0, 255);
-		blueT.setTextSize(11);
-		blueT.setAntiAlias(true);
-		orangeT = new Paint();
-		orangeT.setARGB(100, 255, 140, 0);
-		orangeT.setTextSize(11);
-		orangeT.setAntiAlias(true);
-		redT = new Paint();
-		redT.setARGB(100, 255, 0, 0);
-		redT.setTextSize(11);
-		redT.setAntiAlias(true);
-		purplePaint = new Paint();
-		purplePaint.setARGB(255, 51, 0, 102);
-		purplePaint.setTextSize(11);
-		purplePaint.setAntiAlias(true);
-		pinkPaint = new Paint();
-		pinkPaint.setARGB(255, 224, 0, 224);
-		pinkPaint.setTextSize(11);
-		pinkPaint.setAntiAlias(true);
-		s1 = new Paint();
-		s1.setARGB(90, 224, 224, 224);
-		s1.setTextSize(11);
-		s1.setAntiAlias(true);
-		s2 = new Paint();
-		s2.setARGB(255, 143, 143, 143);
-		s2.setTextSize(11);
-		s2.setAntiAlias(true);
+		
+		paints = new Paints();
+		
+		//paints.initalizeCustomColors(Game.lightColor, Game.ec1, Game.ec2, Game.ec3, Game.ec4);
+		
+		paints.initalizeCustomColors(Game.lightColor, Game.ec1, Game.ec2, Game.ec3, Game.ec4, Game.ec5, Game.ec6,Game.thrusterColor,Game.txtc);
 
-		life = 0;
-		initialLife = life;
+		// 0 white
+		// 1 black
+		// 2 red
+		// 3 orange
+		// 4 yellow
+		// 5 lightGreen
+		// 6 darkGreen
+		// 7 lightBlue
+		// 8 darkBlue
+		// 9 purple 
+		// 10 pink
+		
+		
+		//life = 0;
+		//initialLife = life;
 
 		ResetGame();
 
@@ -319,12 +273,12 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 		switch (action) {
 		case (MotionEvent.ACTION_DOWN):
 
-			if (analog.fullPad.contains(event.getX(), event.getY()) && life > 0) {
+			if (analog.fullPad.contains(event.getX(), event.getY()) && Player.life > 0) {
 				analog.SetActiveLocation(event.getX(), event.getY());
 				pointerAnalog1 = true;
 			} else if (shootButton.touchLocation.contains(event.getX(),
 					event.getY())) {
-				if (life > 0 && bonusWaveOngoing == false) {
+				if (Player.life > 0 && bonusWaveOngoing == false) {
 					countShots++;
 					if (ship.shooting == true)
 						ship.shooting = false;
@@ -361,12 +315,15 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 
 			pointerIndex = (event.getAction() & MotionEvent.ACTION_POINTER_ID_MASK) >> MotionEvent.ACTION_POINTER_ID_SHIFT;
 
+			if (powerUps.nuke.shape.contains(event.getX(pointerIndex), event.getY(pointerIndex))) 
+				collision(4, (int) event.getX(), (int) event.getY());
+			
 			if (!pointerShoot1) {
 				if (shootButton.touchLocation.contains(
 						event.getX(pointerIndex), event.getY(pointerIndex))) {
 					pointerShoot2 = true;
 					countShots++;
-					if (life > 0 && bonusWaveOngoing == false) {
+					if (Player.life > 0 && bonusWaveOngoing == false) {
 						if (ship.shooting == true) {
 							ship.shooting = false;
 						} else {
@@ -378,7 +335,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 			if (!pointerAnalog1) {
 				if (analog.fullPad.contains(event.getX(pointerIndex),
 						event.getY(pointerIndex))
-						&& life > 0) {
+						&& Player.life > 0) {
 					analog.SetActiveLocation(event.getX(pointerIndex),
 							event.getY(pointerIndex));
 					pointerAnalog2 = true;
@@ -389,7 +346,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 		case MotionEvent.ACTION_MOVE: {
 			if (pointerAnalog1) {
 				if (analog.fullPad.contains(event.getX(), event.getY())
-						&& life > 0) {
+						&& Player.life > 0) {
 					analog.SetActiveLocation(event.getX(), event.getY());
 				}
 			}
@@ -397,7 +354,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 			if (pointerAnalog2) {
 				if (analog.fullPad.contains(event.getX(pointerIndex),
 						event.getY(pointerIndex))
-						&& life > 0) {
+						&& Player.life > 0) {
 					analog.SetActiveLocation(event.getX(pointerIndex),
 							event.getY(pointerIndex));
 				}
@@ -484,12 +441,13 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 				shootButton.draw(canvas);
 				analog.draw(canvas);
 			}
-			ship.draw(canvas);
 			shipThrusters.Draw(canvas);
+			ship.draw(canvas);
 		}
 
-	    Game.hitsAllInfo.DrawHits(canvas);
-
+	   // Game.hitsAllInfo.DrawHits(canvas);
+       // ai.draw(canvas);
+        
 		explo1.draw(canvas);
 		// canvas.drawText("1" , explo1.startX, explo1.startY, redPaint);
 		explo2.draw(canvas);
@@ -501,7 +459,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 
 	    Game.hitsAllInfo.drawHitInfo(canvas);
 
-		bar.draw(canvas);
+	//	bar.draw(canvas);
 
 		// display fps
 		displayFps(canvas, avgFps);
@@ -518,15 +476,42 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 			updateGameState();
 			updateObjects();
 			updateAudio();
-			updateHits();
+			//updateHits();
+			//updateAI();
 		}
 
 	}
 
-
+     public void updateAI(){
+	     
+    	 ai.move(ship.x,ship.y);
+	     
+	    for (int i = 0; i < ai.numShots; i++) {
+			if (ship.shotCollision(ai.shots[i])) {
+				collision(1, ship.cx, ship.cy);
+				;
+			}
+		}
+	    
+	    for (int j = 0; j < ship.numUserShots; j++) {
+			if (ai.failed == false
+					&&ai.shotCollision(ship.shots[j])) {
+				ship.deleteShot(j);
+				j = ship.numUserShots;// break out of inner loop - it has
+				ai.failed = true;
+				collision(0,ai.cx, ai.cy);
+			}
+		}
+	    
+     if(ai.checkCollisionFront(ship))
+    	 if(ai.checkForNewShots())
+    		 soundEffects.laserST = 0;
+     }
+     
+     
 	public void updateAudio() {
 		// Log.d(TAG, "starting effects ");
-		soundEffects.playSounds();
+		soundEffects.playSounds(Player.life);
 
 		if (startMusic) {
 			Log.d(TAG, "starting track " + wave);
@@ -622,15 +607,11 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 		case (1):
 			soundEffects.playerHitST = 0;
 
-			if (life > 0) {
-				life--;
-				bar.setBar((life / initialLife) * 200);
-				if ((life / initialLife) <= 0.75 && (life / initialLife) > 0.25)
-					LifeBar.paint = yellowPaint;
-				else if (life / initialLife <= 0.25)
-					LifeBar.paint = redPaint;
-			}
-
+			if (Player.life > 0) 
+				Player.life--;
+				
+			ship.setLifeBarSize();
+			
 			break;
 		case (2):
 			totalAsteroidsKilled++;
@@ -687,6 +668,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 	}
 
 	private void updateAsteroids() {
+		
 		for (int i = 0; i < asteroids.length; i++) {
 			// move each asteroid
 			if (bonusWaveOngoing)
@@ -695,20 +677,20 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 				asteroids[i].move();
 
 			// check for collisions with the ship
-			if (asteroids[i].shipCollision(ship) && life > 0) {
+			if (asteroids[i].shipCollision(ship) && Player.life > 0) {
 				if (bonusWaveOngoing) {
 					backBonusCount++;
 					asteroids[i].moveBackBonus();
-					collision(1, ship.x, ship.y);
+					collision(1, ship.cx, ship.cy);
 				} else {
 					asteroids[i].moveBack();
-					collision(1, ship.x, ship.y);
+					collision(1, ship.cx, ship.cy);
 				}
 			}
 			// check for collision with the user shots.
 			for (int j = 0; j < ship.numUserShots; j++) {
 				if (asteroids[i].shotCollision(ship.shots[j])) {
-					collision(2, asteroids[i].x, asteroids[i].y);
+					collision(2, asteroids[i].cx, asteroids[i].cy);
 					ship.deleteShot(j);
 					// delete the original asteroid
 					asteroids[i].moveBack();
@@ -743,13 +725,32 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 		}
 
 		// game over if the ship is dead
-		if (life == 0) {
+		if (Player.life == 0) {
+			gameOver=true;
 			state = 4;
-			ship.shooting = false;
-			((Game) Game.activity).gameOver();
-			((Activity) getContext()).finish();
-			closeGame();
+			MainThread.MAX_FPS = 20;
+			MainThread.FRAME_PERIOD = 1000 / MainThread.MAX_FPS;
+			slowMoAudio();
+			
+			if(Game.hitsAllInfo.currentlyActivatedHit!=-1){
+				Game.hitsAllInfo.hitsInfo[Game.hitsAllInfo.currentlyActivatedHit].succeeded=true;				
+			}
+			
 		}
+		
+		if(gameOver)
+		gameOverCounter--;
+		
+		
+		
+		if(gameOver&&gameOverCounter<0){
+		   ((Game) Game.activity).gameOver();
+		   ((Activity) getContext()).finish();
+		   closeGame();
+		}
+		   
+		
+		
 
 		// if the player died and the game is over then stop the music
 		if (state == 4 && stopMusic == false && musicPlaying) {
@@ -816,10 +817,15 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 			asteroids[k].unlocked = true;
 		}
 
-		if (wave > 0) {
-			totalSpeed += 2;
-		}
-
+		  if(wave>0&&wave<4)
+		     {
+			   totalSpeed += 2; 
+		     }
+		     else if(wave>4)
+		     {
+			   totalSpeed += 1; 
+		     }
+		     
 		// change game state to wave ongoing
 		state = 1;
 
@@ -828,10 +834,10 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 
 	    Game.hitsAllInfo.checkStartHit(this.getContext());
 
-		if (wave < 5) {
+		if (wave < 10) {
 			gameSoundtrack.setIntensity(wave, this.getContext());
-		} else if (wave > 4) {
-			gameSoundtrack.setIntensity(4, this.getContext());
+		} else if (wave > 9) {
+			gameSoundtrack.setIntensity(9, this.getContext());
 		}
 
 		waveDelay -= 1;
@@ -856,16 +862,22 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 		}
 
 		// increase number of asteroids to pass next wave
-		asteroidPassLimit += 0;
-
+	if(wave<5)
+		asteroidPassLimit += 10;
+	else
+		asteroidPassLimit += 7;
+		
 		// reset the amount of asteroids that have passed
 		asteroidsPassed = 0;
 
-		// increase the number of asteroids that will be unlocked
-		asteroidsUnlocked += 2;
-		if (asteroidsUnlocked >= asteroids.length)
-			asteroidsUnlocked = asteroids.length - 1;
-
+	     if(wave<4)
+	         asteroidsUnlocked+=2;
+	      else
+	    	 asteroidsUnlocked+=1;
+	     
+	      if(asteroidsUnlocked>=asteroids.length)
+	    	  asteroidsUnlocked=asteroids.length-1;
+	      
 		stopMusic = true;
 
 		// change state to in between
@@ -895,16 +907,16 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 		stopKick = true;
 		startMusic = false;
 		totalAsteroidsKilled = 0;
-		asteroidsUnlocked = 5;
+		asteroidsUnlocked = 3;
 		astKilledThisWave = 0;
 		totalSpeed = -1;
-		asteroidPassLimit = 1;
+		asteroidPassLimit = 10;
 		wave = 0;
 		state = 0;
 		waveDelay = 400;
 		asteroidsPassed = 0;
 		score = 0;
-		life = 500;
+		Player.life = 3;
 		ship.x = 100;
 		ship.y = deviceHeight / 2;
 		for (int k = 0; k < asteroids.length; k++) {
@@ -924,7 +936,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 			public void run() {
 				try {
 					waited = 0;
-					while (life > 0) {
+					while (Player.life > 0) {
 						sleep(100);
 						if (!pause)
 							waited += .1;
@@ -968,14 +980,14 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 
 			for (int i = 0; i < Game.hitsAllInfo.hit0.numUserShots; i++) {
 				if (ship.shotCollision(Game.hitsAllInfo.hit0.shots[i])) {
-					collision(1, ship.x, ship.y);
+					collision(1, ship.cx, ship.cy);
 					Log.d("MGP", "Got to collision");
 				}
 			}
 
 			break;
 		case (1):
-			if (Game.hitsAllInfo.hit1.shipCollision(ship) && life > 0)
+			if (Game.hitsAllInfo.hit1.shipCollision(ship) && Player.life > 0)
 				collision(1, ship.cx, ship.cy);
 
 			for (int j = 0; j < ship.numUserShots; j++) {
@@ -987,7 +999,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 			break;
 		case(4):
 			
-
+			Game.hitsAllInfo.hit4.checkForFailure();
 			Game.hitsAllInfo.hit4.move(ship);
 
 			for (int k = 0; k < Game.hitsAllInfo.hit4.aiPack.length; k++) {
@@ -997,7 +1009,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 
 				for (int i = 0; i < Game.hitsAllInfo.hit4.aiPack[k].numShots; i++) {
 					if (ship.shotCollision(Game.hitsAllInfo.hit4.aiPack[k].shots[i])) {
-						collision(1, ship.x, ship.y);
+						collision(1, ship.cx, ship.cy);
 
 						Log.d("MGP", "Got to collision");
 					}
@@ -1020,6 +1032,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 		break;
 		case(5):
 
+			Game.hitsAllInfo.hit5.checkForFailure();
 			Game.hitsAllInfo.hit5.move(ship);
 
 			for (int k = 0; k < Game.hitsAllInfo.hit5.aiPack.length; k++) {
@@ -1029,7 +1042,7 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 
 				for (int i = 0; i < Game.hitsAllInfo.hit5.aiPack[k].numShots; i++) {
 					if (ship.shotCollision(Game.hitsAllInfo.hit5.aiPack[k].shots[i])) {
-						collision(1, ship.x, ship.y);
+						collision(1, ship.cx, ship.cy);
 
 						Log.d("MGP", "Got to collision");
 					}

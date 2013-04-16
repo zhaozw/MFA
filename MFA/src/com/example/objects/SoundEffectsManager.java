@@ -7,7 +7,6 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 
 import com.example.mfa.R;
-import com.example.mfa.gamepanel.MGP;
 
 public class SoundEffectsManager {
 
@@ -68,13 +67,13 @@ public class SoundEffectsManager {
 		nukeSID = SP.load(context, R.raw.nuke, 1);
 	}
 
-	public void playSounds() {
+	public void playSounds(int shiplife) {
 
 		// player hit sounds
 		if (playerHitST == 0) {
-			if (MGP.life == 3)
+			if ( shiplife == 3)
 				SP.play(shipHit1SID, 1, 1, 0, 0, playBackRate);
-			else if (MGP.life == 2)
+			else if ( shiplife == 2)
 				SP.play(shipHit2SID, 1, 1, 0, 0, playBackRate);
 			else
 				SP.play(shipHit3SID, 1, 1, 0, 0, playBackRate);

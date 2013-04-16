@@ -83,7 +83,7 @@ public class Shot {
 
 	public void moveSin() {
 		lifeLeft -= 0.5;
-		sine += 5;
+		sine += 10;
 		x += 2;
 		y += sine * Math.sin(x);
 	}

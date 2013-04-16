@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 import com.example.mfa.gamepanel.MGP;
+import com.example.objects.Paints;
 import com.example.objects.Player;
 import com.example.objects.Shot;
 
@@ -90,7 +91,7 @@ public class AsteroidHitMedium {
 
 	public void draw(Canvas canvas) {
 		canvas.drawBitmap(bitmap, x, y, null);
-		canvas.drawLine(cx, cy, (float) (cx - radius), cy, MGP.redPaint);
+		canvas.drawLine(cx, cy, (float) (cx - radius), cy, Paints.red);
 	}
 
 	public void setBitmap(Bitmap bitmap) {

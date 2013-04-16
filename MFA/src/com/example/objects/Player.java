@@ -22,23 +22,12 @@ public class Player {
 	public int shotDelay, shotDelayLeft;
 	public int numUserShots;
 	public boolean unlocked = true;
-
-	public Player(Bitmap i1, Bitmap i2, Bitmap i3, Bitmap i4, Bitmap i5,
-			Bitmap shotImg, int x, int y) {
-		this.img1 = i1;
-		this.img2 = i2;
-		this.img3 = i3;
-		this.img4 = i4;
-		this.img5 = i5;
-		this.shotImg = shotImg;
-		this.y = y;
-		this.x = x;
-		shots = new Shot[40];
-		shotDelay = 12;
-		shotDelayLeft = 0;
-	}
+	private LifeBar bar;
+	public static int life;
+	private double initialLife;
 
 	public Player(Bitmap i1, Bitmap shotImg, int x, int y) {
+		bar = new LifeBar();
 		this.img1 = i1;
 		this.shotImg = shotImg;
 		this.y = y;
@@ -46,6 +35,9 @@ public class Player {
 		shotDelay = 11;
 		shotDelayLeft = 0;
 		shots = new Shot[40];
+		life = 3;
+		initialLife = life;
+
 	}
 
 	public void drawShots(Canvas canvas) {
@@ -125,30 +117,8 @@ public class Player {
 
 	public void draw(Canvas canvas) {
 
-		// switch(imgChoice)
-		// {
-		// case(1):
+		bar.draw(canvas);
 		canvas.drawBitmap(img1, x, y, null);
-		// break;
-		//
-		// case(2):
-		// canvas.drawBitmap(img2, x - (img2.getWidth() / 2), y -
-		// (img2.getHeight() / 2), null);
-		// break;
-		// case(3):
-		// canvas.drawBitmap(img3, x - (img3.getWidth() / 2), y -
-		// (img3.getHeight() / 2), null);
-		// break;
-		// case(4):
-		// canvas.drawBitmap(img4, x - (img4.getWidth() / 2), y -
-		// (img4.getHeight() / 2), null);
-		// break;
-		// case(5):
-		// canvas.drawBitmap(img5, x - (img5.getWidth() / 2), y -
-		// (img5.getHeight() / 2), null);
-		// break;
-		// }
-		// canvas.drawLine(x,y,x+30,y,MGP.yellowPaint);
 	}
 
 	public void move(int xDiff, int yDiff) {
@@ -209,10 +179,15 @@ public class Player {
 				+ Math.pow(shot.y - cy, 2));
 	}
 
-	public int getX() {
-		return x;
-	}
-
+public void setLifeBarSize(){
+	
+	bar.setBar((life / initialLife) * 200);
+	if ((life / initialLife) <= 0.75 && (life / initialLife) > 0.25)
+		LifeBar.paint = Paints.yellow;
+	else if (life / initialLife <= 0.25)
+		LifeBar.paint = Paints.red;
+}
+	
 	public boolean canShoot() {
 		if (shotDelayLeft > 0)
 			return false;

@@ -21,7 +21,7 @@ public class Hit6Menu extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // no title
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.activity_hit2_menu);
+		setContentView(R.layout.activity_hit6_menu);
 	}
 
 	public void onClick(View v) {

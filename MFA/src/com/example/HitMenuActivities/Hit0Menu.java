@@ -39,7 +39,7 @@ public class Hit0Menu extends Activity {
 		}
 			break;
 		case R.id.PrevButton: {
-			Intent i = new Intent(Hit0Menu.this, Hit2Menu.class);
+			Intent i = new Intent(Hit0Menu.this, Hit6Menu.class);
 			finish();
 			startActivity(i);
 		}

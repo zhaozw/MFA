@@ -21,10 +21,10 @@ public class LifeBar {
 	}
 
 	public void draw(Canvas canvas) {
-		MGP.WPaint.setStrokeWidth(3);
-		MGP.WPaint.setStyle(Paint.Style.STROKE);
-		canvas.drawRect(x, y, x + 200, y + 20, MGP.WPaint);
-		MGP.WPaint.setStyle(Paint.Style.FILL);
+		Paints.white.setStrokeWidth(3);
+		Paints.white.setStyle(Paint.Style.STROKE);
+		canvas.drawRect(x, y, x + 200, y + 20, Paints.white);
+		Paints.white.setStyle(Paint.Style.FILL);
 		canvas.drawRect(x + 3, y + 3, x + (int) lifeX, y + 17, paint);
 	}
 

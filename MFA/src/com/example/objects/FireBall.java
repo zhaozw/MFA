@@ -113,207 +113,38 @@ public class FireBall {
 
 	public void drawThrusters(Canvas canvas) {
 		if (color == 1)
-			canvas.drawOval(shape, MGP.blueT);
+			canvas.drawOval(shape, Paints.darkBlue);
 		else if (color == 2)
-			canvas.drawOval(shape, MGP.redT);
+			canvas.drawOval(shape, Paints.red);
 		else if (color == 3)
-			canvas.drawOval(shape, MGP.orangeT);
+			canvas.drawOval(shape, Paints.orange);
 		else if (color == 4)
-			canvas.drawOval(shape, MGP.yellowT);
+			canvas.drawOval(shape, Paints.yellow);
 		else if (color == 5)
-			canvas.drawOval(shape, MGP.s1);
+			canvas.drawOval(shape, Paints.thrusters);
 	}
+	
+	
+	
 
-	public void drawExplosions1(Canvas canvas) {
+	
+	public void drawExplosionsCustom(Canvas canvas) {
 		if (type != 3) {
 			if (color == 1)
-				canvas.drawOval(shape, MGP.redPaint);
+				canvas.drawOval(shape, Paints.ep1);
 			else if (color == 2)
-				canvas.drawOval(shape, MGP.orangePaint);
+				canvas.drawOval(shape, Paints.ep2);
 			else if (color == 3)
-				canvas.drawOval(shape, MGP.blackPaint);
-			else if (color == 4)
-				canvas.drawOval(shape, MGP.yellowPaint);
-			else if (color == 5)
-				canvas.drawOval(shape, MGP.WPaint);
-		} else {
-			canvas.drawOval(shape, MGP.WPaint);
+				canvas.drawOval(shape, Paints.ep3);
+		    else if (color == 4)
+			    canvas.drawOval(shape, Paints.ep4);
+		    else if (color == 5)
+			    canvas.drawOval(shape, Paints.ep5);
 		}
+		else
+			canvas.drawOval(shape, Paints.ep6);
 	}
-
-	public void drawExplosions2(Canvas canvas) {
-		if (type != 3) {
-			if (color == 1)
-				canvas.drawOval(shape, MGP.blackPaint);
-			else if (color == 2)
-				canvas.drawOval(shape, MGP.WPaint);
-			else if (color == 3)
-				canvas.drawOval(shape, MGP.blackPaint);
-			else if (color == 4)
-				canvas.drawOval(shape, MGP.WPaint);
-			else if (color == 5)
-				canvas.drawOval(shape, MGP.blackPaint);
-		} else {
-			canvas.drawOval(shape, MGP.WPaint);
-		}
-	}
-
-	public void drawExplosions3(Canvas canvas) {
-		if (type != 3) {
-			if (color == 1)
-				canvas.drawOval(shape, MGP.redPaint);
-			else if (color == 2)
-				canvas.drawOval(shape, MGP.redPaint);
-			else if (color == 3)
-				canvas.drawOval(shape, MGP.redPaint);
-			else if (color == 4)
-				canvas.drawOval(shape, MGP.redPaint);
-			else if (color == 5)
-				canvas.drawOval(shape, MGP.redPaint);
-		} else {
-			canvas.drawOval(shape, MGP.redPaint);
-		}
-	}
-
-	public void drawExplosions4(Canvas canvas) {
-		if (type != 3) {
-			if (color == 1)
-				canvas.drawOval(shape, MGP.s1);
-			else if (color == 2)
-				canvas.drawOval(shape, MGP.s2);
-			else if (color == 3)
-				canvas.drawOval(shape, MGP.s1);
-			else if (color == 4)
-				canvas.drawOval(shape, MGP.s2);
-			else if (color == 5)
-				canvas.drawOval(shape, MGP.s1);
-		} else {
-			canvas.drawOval(shape, MGP.s2);
-		}
-	}
-
-	public void drawExplosions5(Canvas canvas) {
-		if (type != 3) {
-			if (color == 1)
-				canvas.drawOval(shape, MGP.bluePaint);
-			else if (color == 2)
-				canvas.drawOval(shape, MGP.bluePaint);
-			else if (color == 3)
-				canvas.drawOval(shape, MGP.blackPaint);
-			else if (color == 4)
-				canvas.drawOval(shape, MGP.blackPaint);
-			else if (color == 5)
-				canvas.drawOval(shape, MGP.WPaint);
-		} else {
-			canvas.drawOval(shape, MGP.bluePaint);
-		}
-	}
-
-	public void drawExplosions6(Canvas canvas) {
-		if (type != 3) {
-			if (color == 1)
-				canvas.drawOval(shape, MGP.pinkPaint);
-			else if (color == 2)
-				canvas.drawOval(shape, MGP.redPaint);
-			else if (color == 3)
-				canvas.drawOval(shape, MGP.bluePaint);
-			else if (color == 4)
-				canvas.drawOval(shape, MGP.pinkPaint);
-			else if (color == 5)
-				canvas.drawOval(shape, MGP.redPaint);
-		} else {
-			canvas.drawOval(shape, MGP.pinkPaint);
-		}
-	}
-
-	public void drawExplosions7(Canvas canvas) {
-		if (type != 3) {
-			if (color == 1)
-				canvas.drawOval(shape, MGP.purplePaint);
-			else if (color == 2)
-				canvas.drawOval(shape, MGP.bluePaint);
-			else if (color == 3)
-				canvas.drawOval(shape, MGP.blackPaint);
-			else if (color == 4)
-				canvas.drawOval(shape, MGP.purplePaint);
-			else if (color == 5)
-				canvas.drawOval(shape, MGP.purplePaint);
-		} else {
-			canvas.drawOval(shape, MGP.purplePaint);
-		}
-
-	}
-
-	public void drawExplosions8(Canvas canvas) {
-		if (type != 3) {
-			if (color == 1)
-				canvas.drawOval(shape, MGP.pinkPaint);
-			else if (color == 2)
-				canvas.drawOval(shape, MGP.pinkPaint);
-			else if (color == 3)
-				canvas.drawOval(shape, MGP.pinkPaint);
-			else if (color == 4)
-				canvas.drawOval(shape, MGP.pinkPaint);
-			else if (color == 5)
-				canvas.drawOval(shape, MGP.pinkPaint);
-		} else {
-			canvas.drawOval(shape, MGP.pinkPaint);
-		}
-
-	}
-
-	public void drawExplosions9(Canvas canvas) {
-		if (type != 3) {
-			if (color == 1)
-				canvas.drawOval(shape, MGP.greenPaint);
-			else if (color == 2)
-				canvas.drawOval(shape, MGP.redPaint);
-			else if (color == 3)
-				canvas.drawOval(shape, MGP.bluePaint);
-			else if (color == 4)
-				canvas.drawOval(shape, MGP.purplePaint);
-			else if (color == 5)
-				canvas.drawOval(shape, MGP.orangePaint);
-		} else {
-			canvas.drawOval(shape, MGP.purplePaint);
-		}
-
-	}
-
-	public void drawExplosions10(Canvas canvas) {
-		if (type != 3) {
-			if (color == 1)
-				canvas.drawOval(shape, MGP.WPaint);
-			else if (color == 2)
-				canvas.drawOval(shape, MGP.WPaint);
-			else if (color == 3)
-				canvas.drawOval(shape, MGP.redPaint);
-			else if (color == 4)
-				canvas.drawOval(shape, MGP.greenPaint);
-			else if (color == 5)
-				canvas.drawOval(shape, MGP.greenPaint);
-		} else {
-			canvas.drawOval(shape, MGP.redPaint);
-		}
-
-	}
-
-	public void drawExplosions0(Canvas canvas) {
-		if (type != 3) {
-			if (color == 1)
-				canvas.drawOval(shape, MGP.greenPaint);
-			else if (color == 2)
-				canvas.drawOval(shape, MGP.greenPaint);
-			else if (color == 3)
-				canvas.drawOval(shape, MGP.greenPaint);
-			else if (color == 4)
-				canvas.drawOval(shape, MGP.greenPaint);
-			else if (color == 5)
-				canvas.drawOval(shape, MGP.greenPaint);
-		} else {
-			canvas.drawOval(shape, MGP.greenPaint);
-		}
-	}
+	
 
 	public void ExplodeTrue(double x, double y) {
 		explode = true;
@@ -415,17 +246,17 @@ public class FireBall {
 	public void ExplodeHuge() {
 		if (explode) {
 			// WIDTH -=5; //generator.nextInt(2) ;
-			WIDTH += MGP.dp[10]; // generator.nextInt(5) ;
+			WIDTH += MGP.dp[7]; // generator.nextInt(5) ;
 			// HEIGHT -=5; //generator.nextInt(2) ;
-			HEIGHT += MGP.dp[10]; // generator.nextInt(2) ;
+			HEIGHT += MGP.dp[7 ]; // generator.nextInt(2) ;
 			color = generator.nextInt(5) + 1;
-			X -= generator.nextInt((int) MGP.dp[20]);
-			Y -= generator.nextInt((int) MGP.dp[20]);
-			X += generator.nextInt((int) MGP.dp[20]);
-			Y += generator.nextInt((int) MGP.dp[20]);
+			X -= generator.nextInt((int) MGP.dp[15]);
+			Y -= generator.nextInt((int) MGP.dp[15]);
+			X += generator.nextInt((int) MGP.dp[15]);
+			Y += generator.nextInt((int) MGP.dp[15]);
 			X -= MGP.dp[4];
 			Y -= MGP.dp[4];
-			if (HEIGHT > MGP.dp[100]) {
+			if (HEIGHT > MGP.dp[90]) {
 				explode = false;
 				HEIGHT = 0;
 				WIDTH = 0;
@@ -436,17 +267,17 @@ public class FireBall {
 
 	public void ExplodeSmall() {
 		if (explode) {
-			X -= MGP.dp[2];
-			Y -= MGP.dp[2];
+			X -= MGP.dp[3];
+			Y -= MGP.dp[3];
 			// WIDTH -=5; //generator.nextInt(2) ;
-			WIDTH += MGP.dp[3]; // generator.nextInt(5) ;
+			WIDTH += MGP.dp[4]; // generator.nextInt(5) ;
 			// HEIGHT -=5; //generator.nextInt(2) ;
-			HEIGHT += MGP.dp[3]; // generator.nextInt(2) ;
+			HEIGHT += MGP.dp[4]; // generator.nextInt(2) ;
 			color = generator.nextInt(5) + 1;
-			X -= generator.nextInt((int) MGP.dp[15]);
-			Y -= generator.nextInt((int) MGP.dp[15]);
-			X += generator.nextInt((int) MGP.dp[15]);
-			Y += generator.nextInt((int) MGP.dp[15]);
+			X -= generator.nextInt((int) MGP.dp[20]);
+			Y -= generator.nextInt((int) MGP.dp[20]);
+			X += generator.nextInt((int) MGP.dp[20]);
+			Y += generator.nextInt((int) MGP.dp[20]);
 			// X -= 1;
 			// Y -= 1;
 			if (HEIGHT > MGP.dp[50]) {

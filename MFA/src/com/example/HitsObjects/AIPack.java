@@ -133,7 +133,14 @@ public class AIPack {
 			nextFollower(ai);
 
 	}
-
+	
+   public void checkForFailure(){
+	            failed=true;
+		for (int k = 0; k < aiPack.length; k++) {
+			if (aiPack[k].dead==false)
+				failed=false;
+         }
+   }
 	// public void move(Player ship){
 	//
 	// for(int k=0;k<aiPack.length;k++){

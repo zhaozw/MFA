@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mfa.R;
@@ -33,7 +34,7 @@ public class testchoose extends Activity {
 	JSONParser jParser = new JSONParser();
 
 	int duration = Toast.LENGTH_LONG;
-	
+	TextView textbox;
 	String hitchoice, uid;
 	boolean available;
 
@@ -44,6 +45,10 @@ public class testchoose extends Activity {
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // no title
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
+		textbox = (TextView)findViewById(R.id.editText1);
+				
+				
 		
 		Intent intent = getIntent();
 		hitchoice = intent.getStringExtra("HitType").trim();
@@ -60,16 +65,25 @@ public class testchoose extends Activity {
 
 
 		public void onClick(View v) {
+			
+			String s = new String(); 
+			
+			try{
+			s = textbox.getText().toString();
+			}
+			catch(Exception e){	
+			}
+			
 			switch (v.getId()) {
 			case R.id.SendChristian: {
 				// getting JSON string from URL
-				Log.d("sending hit to christian", setHit +"?From="+ db.getUserDetails().get("uid").toString().trim() +"&To=5150e7b96b14f7.58739785&Type="+hitchoice+"&Msg=fuck you");
+				Log.d("sending hit to christian", setHit +"?From="+ db.getUserDetails().get("uid").toString().trim() +"&To=5150e7b96b14f7.58739785&Type="+hitchoice+"&Msg="+s.trim());
 				uid = "5150e7b96b14f7.58739785";
 				if(hitavailiable(uid)){
 				try {
 					// defaultHttpClient
 					DefaultHttpClient httpClient = new DefaultHttpClient();
-					HttpPost httpPost = new HttpPost((setHit +"?From="+ db.getUserDetails().get("uid").toString().trim() +"&To=5150e7b96b14f7.58739785&Type="+hitchoice+"&Msg=blahblah"));
+					HttpPost httpPost = new HttpPost((setHit +"?From="+ db.getUserDetails().get("uid").toString().trim() +"&To=5150e7b96b14f7.58739785&Type="+hitchoice+"&Msg="+s));
 
 					HttpResponse httpResponse = httpClient.execute(httpPost);
 					HttpEntity httpEntity = httpResponse.getEntity();
@@ -87,13 +101,13 @@ public class testchoose extends Activity {
 			
 			case R.id.SendYacov: {
 				// getting JSON string from URL
-				Log.d("sending hit to christian", setHit +"?From="+ db.getUserDetails().get("uid").toString().trim() +"&To=513557a6a1c802.11086283&Type="+hitchoice+"&Msg=fuck you");
+				Log.d("sending hit to christian", setHit +"?From="+ db.getUserDetails().get("uid").toString().trim() +"&To=513557a6a1c802.11086283&Type="+hitchoice+"&Msg="+s.trim());
 				uid = "513557a6a1c802.11086283";
 				if(hitavailiable(uid)){
 				try {
 					// defaultHttpClient
 					DefaultHttpClient httpClient = new DefaultHttpClient();
-					HttpPost httpPost = new HttpPost((setHit +"?From="+ db.getUserDetails().get("uid").toString().trim() +"&To=513557a6a1c802.11086283&Type="+hitchoice+"&Msg=blahblah"));
+					HttpPost httpPost = new HttpPost((setHit +"?From="+ db.getUserDetails().get("uid").toString().trim() +"&To=513557a6a1c802.11086283&Type="+hitchoice+"&Msg="+s));
 
 					HttpResponse httpResponse = httpClient.execute(httpPost);
 					HttpEntity httpEntity = httpResponse.getEntity();
@@ -118,7 +132,7 @@ public class testchoose extends Activity {
 				try {
 				// defaultHttpClient
 					DefaultHttpClient httpClient = new DefaultHttpClient();
-					HttpPost httpPost = new HttpPost((setHit +"?From="+ db.getUserDetails().get("uid").toString().trim() +"&To=513be7b18d0511.81928076&Type="+hitchoice+"&Msg=blahblah"));
+					HttpPost httpPost = new HttpPost((setHit +"?From="+ db.getUserDetails().get("uid").toString().trim() +"&To=513be7b18d0511.81928076&Type="+hitchoice+"&Msg="+s));
 
 					HttpResponse httpResponse = httpClient.execute(httpPost);
 					HttpEntity httpEntity = httpResponse.getEntity();
@@ -144,7 +158,7 @@ public class testchoose extends Activity {
 				try {
 					// defaultHttpClient
 					DefaultHttpClient httpClient = new DefaultHttpClient();
-					HttpPost httpPost = new HttpPost((setHit +"?From="+ db.getUserDetails().get("uid").toString().trim() +"&To=51354f4b171520.96868586&Type="+hitchoice+"&Msg=blahblah"));
+					HttpPost httpPost = new HttpPost((setHit +"?From="+ db.getUserDetails().get("uid").toString().trim() +"&To=51354f4b171520.96868586&Type="+hitchoice+"&Msg="+s.trim()));
 
 					HttpResponse httpResponse = httpClient.execute(httpPost);
 					HttpEntity httpEntity = httpResponse.getEntity();

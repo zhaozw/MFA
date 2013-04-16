@@ -34,31 +34,31 @@ public class AnalogStick {
 	}
 
 	public void draw(Canvas canvas) {
-		canvas.drawOval(fullPad, MGP.s1);
-		canvas.drawLine(cx, cy, acx, acy, MGP.blackPaint);
-		canvas.drawOval(activeLocation, MGP.s2);
+		canvas.drawOval(fullPad, Paints.silver1);
+		canvas.drawLine(cx, cy, acx, acy, Paints.black);
+		canvas.drawOval(activeLocation, Paints.silver2);
 	}
 
 	public RectF getFullPad() {
 		return fullPad;
 	}
 
-	public void GetInputAndDisplay(Canvas canvas) {
-		canvas.drawText("ACTIVE lOCATION X " + activeLocation.left, 15, 200,
-				MGP.WPaint);
-		canvas.drawText("ACTIVE lOCATION y " + activeLocation.top, 15, 210,
-				MGP.WPaint);
-		canvas.drawText("ACTIVE lOCATION BOTTOM  " + activeLocation.bottom, 15,
-				220, MGP.WPaint);
-		canvas.drawText("ACTIVE lOCATION RIGHT SIDE " + activeLocation.right,
-				15, 230, MGP.WPaint);
-		canvas.drawText("ACTIVE lOCATION CENTER X " + acx, 15, 240, MGP.WPaint);
-		canvas.drawText("ACTIVE lOCATION CENTER y " + acy, 15, 250, MGP.WPaint);
-		canvas.drawText("xDiff " + xDiff, 15, 260, MGP.WPaint);
-		canvas.drawText("yDiff " + yDiff, 15, 270, MGP.WPaint);
-		canvas.drawText("STANDARD CENTER X " + cx, 15, 280, MGP.WPaint);
-		canvas.drawText("STANDARD CENTER y " + cy, 15, 290, MGP.WPaint);
-	}
+//	public void GetInputAndDisplay(Canvas canvas) {
+//		canvas.drawText("ACTIVE lOCATION X " + activeLocation.left, 15, 200,
+//				MGP.WPaint);
+//		canvas.drawText("ACTIVE lOCATION y " + activeLocation.top, 15, 210,
+//				MGP.WPaint);
+//		canvas.drawText("ACTIVE lOCATION BOTTOM  " + activeLocation.bottom, 15,
+//				220, MGP.WPaint);
+//		canvas.drawText("ACTIVE lOCATION RIGHT SIDE " + activeLocation.right,
+//				15, 230, MGP.WPaint);
+//		canvas.drawText("ACTIVE lOCATION CENTER X " + acx, 15, 240, MGP.WPaint);
+//		canvas.drawText("ACTIVE lOCATION CENTER y " + acy, 15, 250, MGP.WPaint);
+//		canvas.drawText("xDiff " + xDiff, 15, 260, MGP.WPaint);
+//		canvas.drawText("yDiff " + yDiff, 15, 270, MGP.WPaint);
+//		canvas.drawText("STANDARD CENTER X " + cx, 15, 280, MGP.WPaint);
+//		canvas.drawText("STANDARD CENTER y " + cy, 15, 290, MGP.WPaint);
+//	}
 
 	public void SetActiveLocation(float x, float y) {
 		activeLocation.set(x - (analogSize / 2), y - (analogSize / 2), x
