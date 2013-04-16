@@ -4,7 +4,7 @@ ___
 
 ###Login###
 
-We're Working On Facebook and Twitter Intagration. Then We'll Use that for User Authentication. 
+We're Working On Facebook and Google+ Intagration. Then We'll Use that for User Authentication. 
 
 ___
 
