@@ -263,10 +263,14 @@ public final class R {
         public static final int la1=0x7f04000d;
         public static final int la2=0x7f04000e;
         public static final int la3=0x7f04000f;
-        public static final int nuke=0x7f040010;
-        public static final int sh1=0x7f040011;
-        public static final int sh2=0x7f040012;
-        public static final int sh3=0x7f040013;
+        public static final int mc1=0x7f040010;
+        public static final int mc2=0x7f040011;
+        public static final int mc3=0x7f040012;
+        public static final int mc4=0x7f040013;
+        public static final int nuke=0x7f040014;
+        public static final int sh1=0x7f040015;
+        public static final int sh2=0x7f040016;
+        public static final int sh3=0x7f040017;
     }
     public static final class string {
         public static final int Christian=0x7f06001c;

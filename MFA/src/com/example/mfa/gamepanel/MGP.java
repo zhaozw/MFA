@@ -144,8 +144,6 @@ public class MGP extends SurfaceView implements SurfaceHolder.Callback {
 		gameTimer();
 
 		
-		
-		
 		dp = new double[1000];
 
 		for (int k = 0; k < dp.length; k++) {

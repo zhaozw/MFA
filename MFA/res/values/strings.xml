@@ -7,7 +7,7 @@
     <string name="title_activity_game_logo">GameLogo</string>
     <string name="desc">Image in the game</string>
     <string name="title_activity_main_menu">MainMenu</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">Goodbye World</string>
     <string name="title_activity_options">Options</string>
     <string name="title_activity_high_scores">HighScores</string>
     <string name="title_activity_hits">Hits</string>
