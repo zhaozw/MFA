@@ -23,7 +23,10 @@
         android:layout_margin="25dp"
         android:cacheColorHint="#00000000"
         android:scrollingCache="false"
-        tools:listitem="@layout/hit_details_view" >
+        tools:listitem="@layout/hit_details_view" 
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:showDividers="none">
  
     </ListView>
 
