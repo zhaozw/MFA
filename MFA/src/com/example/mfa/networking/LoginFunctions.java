@@ -139,6 +139,8 @@ public class LoginFunctions {
 		return 2;
 	}
 
+	
+	
 	public static HashMap<String, String> getRivals(Context context,
 			String email) {
 
@@ -272,15 +274,20 @@ public class LoginFunctions {
 		}
 	}
 
-	public static boolean deactivateHit(Context context, String hitID, int hit) {
+	public static boolean activateHit(Context context, String hitID, int hit, String message) {
 		try {
 			// defaultHttpClient
+			UserFunctions uF = new UserFunctions();
+			
 			DefaultHttpClient httpClient = new DefaultHttpClient();
-			HttpPost httpPost = new HttpPost("Set_Hit.php?From=null&To="
-					+ hitID + "&Type=" + hit + "&Msg=null");
+			HttpPost httpPost = new HttpPost
+					("http://cofactorstudios.com/Set_Hit.php?From="+""+"&To="
+					+ LoginFunctions.getPlayerHitsID(context,uF.getEmail(context))
+					+ "&Type=" + hit + "&Msg="+message);
+			httpClient.execute(httpPost);
 
-			HttpResponse httpResponse = httpClient.execute(httpPost);
-			HttpEntity httpEntity = httpResponse.getEntity();
+			//	HttpResponse httpResponse = httpClient.execute(httpPost);
+			//HttpEntity httpEntity = httpResponse.getEntity();
 			return true;
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -293,5 +300,5 @@ public class LoginFunctions {
 			return false;
 		}
 	}
-
+	
 }
