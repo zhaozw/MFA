@@ -83,7 +83,7 @@ public class HitsNew extends Activity {
 
 			TextView availability = (TextView) dialoglayout
 					.findViewById(R.id.availability);
-			availability.setText("3");
+			availability.setText("Available");
 
 			TextView cost = (TextView) dialoglayout
 					.findViewById(R.id.cost);
