@@ -6,20 +6,11 @@ import java.util.Random;
 
 import com.example.listViewComponents.HitListViewAdapter;
 import com.example.listViewComponents.HitListViewItem;
-<<<<<<< HEAD
 import com.example.mfa.R;
-=======
-import com.example.listViewComponents.ItemDetails;
-import com.example.listViewComponents.ItemListBaseAdapter;
 import com.example.listViewComponents.RivalsItem;
-import com.example.listViewComponents.RivalsItemListBaseAdapter;
-import com.example.mfa.R;
-import com.example.mfa.R.layout;
-import com.example.mfa.R.menu;
 import com.example.mfa.networking.LoginFunctions;
 import com.example.mfa.networking.UserFunctions;
 
->>>>>>> origin/NewHitsPage
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
