@@ -43,7 +43,7 @@ public class LoginActivity extends Activity {
 		btnLogin = (Button) findViewById(R.id.btnLogin);
 		btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
 		loginErrorMsg = (TextView) findViewById(R.id.login_error);
-		Log.d("LoginActivity","Started onCreate");
+		Log.d("LoginActivity", "Started onCreate");
 		// Login button Click Event
 		btnLogin.setOnClickListener(new View.OnClickListener() {
 
@@ -52,9 +52,9 @@ public class LoginActivity extends Activity {
 				String password = inputPassword.getText().toString();
 				UserFunctions userFunction = new UserFunctions();
 				JSONObject json = userFunction.loginUser(email, password);
-				
-				Log.d("LoginActivity","Onclick Activated");
-				
+
+				Log.d("LoginActivity", "Onclick Activated");
+
 				// check for login response
 				try {
 					if (json.getString(KEY_SUCCESS) != null) {
@@ -80,7 +80,7 @@ public class LoginActivity extends Activity {
 
 							// Close all views before launching Dashboard
 							MainMenu.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-							
+
 							startActivity(MainMenu);
 
 							// Close Login Screen
@@ -101,7 +101,8 @@ public class LoginActivity extends Activity {
 		btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View view) {
-				Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+				Intent i = new Intent(getApplicationContext(),
+						RegisterActivity.class);
 				startActivity(i);
 				finish();
 			}

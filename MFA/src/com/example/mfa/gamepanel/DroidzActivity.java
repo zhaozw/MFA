@@ -28,7 +28,7 @@ public class DroidzActivity extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-		gamePanel = new MGP(this);
+		// gamePanel = new MGP(this);
 
 		// set our MainGamePanel as the View
 		setContentView(gamePanel);

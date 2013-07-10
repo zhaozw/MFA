@@ -25,7 +25,6 @@
         android:layout_alignLeft="@+id/textView3"
         android:layout_alignRight="@+id/textView3"
         android:layout_below="@+id/textView3" >
-
     </ListView>
 
     <ListView
@@ -35,7 +34,6 @@
         android:layout_alignLeft="@+id/selection_label"
         android:layout_alignRight="@+id/selection_label"
         android:layout_below="@+id/selection_label" >
-
     </ListView>
 
     <ListView
@@ -45,7 +43,6 @@
         android:layout_alignLeft="@+id/textView4"
         android:layout_alignRight="@+id/textView4"
         android:layout_alignTop="@+id/listView1" >
-
     </ListView>
 
     <ListView
@@ -55,7 +52,6 @@
         android:layout_alignLeft="@+id/textView5"
         android:layout_alignRight="@+id/textView5"
         android:layout_alignTop="@+id/listView3" >
-
     </ListView>
 
     <ListView
@@ -65,7 +61,6 @@
         android:layout_alignLeft="@+id/textView6"
         android:layout_alignRight="@+id/textView6"
         android:layout_alignTop="@+id/listView4" >
-
     </ListView>
 
     <TextView
@@ -115,7 +110,6 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView7"
         android:layout_alignTop="@+id/listView5" >
-
     </ListView>
 
     <TextView

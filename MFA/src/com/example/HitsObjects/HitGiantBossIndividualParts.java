@@ -6,35 +6,27 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 import com.example.mfa.gamepanel.MGP;
+import com.example.objects.GameCharacter;
 import com.example.objects.Shot;
 
-public class HitGiantBossIndividualParts {
+public class HitGiantBossIndividualParts extends GameCharacter {
 	private int radius;
 	Random generator = new Random();
-	public int width, height, x, y;
-	public Bitmap shotImg, img;
+	public Bitmap shotImg;
 	public boolean enter = true, attack, drawOutlines = true;
-	public int cy, cx, biteDistance, shipBiteLocation, upperConstraint,
+	public int biteDistance, shipBiteLocation, upperConstraint,
 			bottomConstraint;
 
-	public HitGiantBossIndividualParts() {
-
-	}
-
-	public HitGiantBossIndividualParts(int x, int y) {
+	public HitGiantBossIndividualParts(Bitmap bitmap) {
+		super();
+		setImage(bitmap);
 		width = 400;
 		height = 30;
 		x = 1300;
 		y = 150;
 	}
 
-	public HitGiantBossIndividualParts(int shotDelay) {
-		width = 400;
-		height = 30;
-		x = 1300;
-		y = 150;
-	}
-
+	@Override
 	public void draw(Canvas canvas) {
 		canvas.drawBitmap(img, x, y, null);
 
@@ -155,14 +147,6 @@ public class HitGiantBossIndividualParts {
 				+ Math.pow(shot.y - y, 2))
 			return true;
 		return false;
-	}
-
-	public int getx() {
-		return x;
-	}
-
-	public int gety() {
-		return y;
 	}
 
 }

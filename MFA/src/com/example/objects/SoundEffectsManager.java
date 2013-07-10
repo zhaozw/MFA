@@ -50,7 +50,7 @@ public class SoundEffectsManager {
 
 	public SoundEffectsManager(Context context) {
 
-		SP = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+		SP = new SoundPool(25, AudioManager.STREAM_MUSIC, 0);
 
 		exp1SID = SP.load(context, R.raw.exp1, 1);
 		exp2SID = SP.load(context, R.raw.exp2, 1);
@@ -71,9 +71,9 @@ public class SoundEffectsManager {
 
 		// player hit sounds
 		if (playerHitST == 0) {
-			if ( shiplife == 3)
+			if (shiplife == 3)
 				SP.play(shipHit1SID, 1, 1, 0, 0, playBackRate);
-			else if ( shiplife == 2)
+			else if (shiplife == 2)
 				SP.play(shipHit2SID, 1, 1, 0, 0, playBackRate);
 			else
 				SP.play(shipHit3SID, 1, 1, 0, 0, playBackRate);

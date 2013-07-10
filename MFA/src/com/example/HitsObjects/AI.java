@@ -6,9 +6,13 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 import com.example.mfa.gamepanel.MGP;
+import com.example.objects.GameCharacter;
+import com.example.objects.Gun;
 import com.example.objects.Shot;
 
-public class AI {
+public class AI extends GameCharacter {
+
+	Gun gun;
 
 	public Shot[] shots;
 	public boolean shooting = true;
@@ -32,8 +36,8 @@ public class AI {
 		height = img.getHeight();
 		radius = width / 2;
 		this.shotImg = shotImg;
-		x = (int) (MGP.deviceWidth+MGP.dp[50]);
-		y = (MGP.deviceHeight/2);
+		x = (int) (MGP.deviceWidth + MGP.dp[50]);
+		y = (MGP.deviceHeight / 2);
 		shots = new Shot[20];
 		shotDelay = 400;
 		shotDelayLeft = 0;
@@ -45,14 +49,16 @@ public class AI {
 		following = ai;
 	}
 
+	@Override
 	public void draw(Canvas canvas) {
 
 		if (img != null) {
 			canvas.drawBitmap(img, x, y, null);
-			//canvas.drawLine(cx, cy, following.cx, following.cy, MGP.orangePaint);
+			// canvas.drawLine(cx, cy, following.cx, following.cy,
+			// MGP.orangePaint);
 		}
-//		else
-//			canvas.drawText("bitmap aint workin", cx, cy, MGP.redPaint);
+		// else
+		// canvas.drawText("bitmap aint workin", cx, cy, MGP.redPaint);
 
 		// draw all the shots on the screen
 		for (int i = 0; i < numShots; i++) // numUserShots

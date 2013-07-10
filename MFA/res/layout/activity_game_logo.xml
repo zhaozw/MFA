@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="james0123"
+        android:text="-----"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white"
         android:visibility="gone" />
@@ -52,17 +52,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="M.F.A."
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#FFFFFF"
-        android:textSize="50dp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android:id="@+id/offlineButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/FBLogin"
-        android:layout_centerHorizontal="true"
-        android:onClick="onClick"
-        android:text="offline bitchez" />
+        android:textSize="50dp" />
 
 </RelativeLayout>

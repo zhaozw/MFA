@@ -1,8 +1,10 @@
 package com.example.HitsObjects;
 
-import android.graphics.Bitmap;
+import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
+import com.example.mfa.R;
 import com.example.objects.Player;
 
 public class AIPack {
@@ -10,17 +12,19 @@ public class AIPack {
 	public AI[] aiPack;
 	public int topTotal, bottomTotal, topLast, bottomLast, front,
 			patternTimer = 600, position = 0;
-	public boolean failed;
 
 	public AIPack() {
 	}
 
-	public AIPack(int amount, Bitmap bitmap, Bitmap sBitmap) {
+	public AIPack(Context context, int amount) {
 
 		aiPack = new AI[amount];
 
 		for (int k = 0; k < aiPack.length; k++) {
-			aiPack[k] = new AI(bitmap, sBitmap);
+			aiPack[k] = new AI(BitmapFactory.decodeResource(
+					context.getResources(), R.drawable.smallvship2),
+					BitmapFactory.decodeResource(context.getResources(),
+							R.drawable.laser));
 		}
 
 		front = 0;
@@ -133,28 +137,12 @@ public class AIPack {
 			nextFollower(ai);
 
 	}
-	
-   public void checkForFailure(){
-	            failed=true;
-		for (int k = 0; k < aiPack.length; k++) {
-			if (aiPack[k].dead==false)
-				failed=false;
-         }
-   }
-	// public void move(Player ship){
-	//
-	// for(int k=0;k<aiPack.length;k++){
-	// if(k==front)
-	// aiPack[k].move(ship.x, ship.y);
-	// else if(k%2==0)
-	// aiPack[k].followBelow(aiPack[aiPack[k].following].x,
-	// aiPack[aiPack[k].following].y);
-	// else if(k%2==1)
-	// aiPack[k].followAbove(aiPack[aiPack[k].following].x,
-	// aiPack[aiPack[k].following].y);
-	//
-	//
-	// aiPack[k].moveShots();
+
+	// public void checkForFailure() {
+	// failed = true;
+	// for (int k = 0; k < aiPack.length; k++) {
+	// if (aiPack[k].dead == false)
+	// failed = false;
 	// }
 	// }
 

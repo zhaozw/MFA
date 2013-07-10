@@ -106,26 +106,26 @@ public class PowerUp {
 				- (img.getWidth() / 2), null);
 	}
 
-//	public void draw2(Canvas canvas) {
-//		switch (type) {
-//		case (1):
-//			canvas.drawOval(shape, MGP.bluePaint);
-//			// canvas.drawText("Spread Shot", x, y,MGP.textPaint );
-//			break;
-//		case (2):
-//			canvas.drawOval(shape, MGP.redPaint);
-//			// canvas.drawText("Shoot Faster", x, y,MGP.textPaint );
-//			break;
-//		case (3):
-//			canvas.drawOval(shape, MGP.yellowPaint);
-//			// canvas.drawText("SlowMo", x, y,MGP.textPaint );
-//			break;
-//		case (4):
-//			canvas.drawOval(shape, MGP.greenPaint);
-//			canvas.drawText("Nuke", x, y, MGP.textPaint);
-//			break;
-//		}
-//	}
+	// public void draw2(Canvas canvas) {
+	// switch (type) {
+	// case (1):
+	// canvas.drawOval(shape, MGP.bluePaint);
+	// // canvas.drawText("Spread Shot", x, y,MGP.textPaint );
+	// break;
+	// case (2):
+	// canvas.drawOval(shape, MGP.redPaint);
+	// // canvas.drawText("Shoot Faster", x, y,MGP.textPaint );
+	// break;
+	// case (3):
+	// canvas.drawOval(shape, MGP.yellowPaint);
+	// // canvas.drawText("SlowMo", x, y,MGP.textPaint );
+	// break;
+	// case (4):
+	// canvas.drawOval(shape, MGP.greenPaint);
+	// canvas.drawText("Nuke", x, y, MGP.textPaint);
+	// break;
+	// }
+	// }
 
 	public void moveBack() {
 		x += generator.nextInt(MGP.deviceWidth * 5) + MGP.deviceWidth;

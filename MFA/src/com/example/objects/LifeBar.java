@@ -11,11 +11,23 @@ public class LifeBar {
 	public static Paint paint = new Paint();
 	public RectF shape;
 	int x, y;
+	int initialWidth, currentWidth;
 	double lifeX;
+	public int initialLife, life;
 
 	public LifeBar() {
 		x = (MGP.deviceWidth / 2) + 50;
 		y = MGP.deviceHeight - 30;
+		lifeX = 200;
+		paint.setColor(Color.GREEN);
+	}
+
+	public LifeBar(int x, int y, int life) {
+		this.life = life;
+		this.x = x;
+		this.y = y;
+		initialLife = life;
+		initialWidth = 200;
 		lifeX = 200;
 		paint.setColor(Color.GREEN);
 	}
@@ -30,5 +42,19 @@ public class LifeBar {
 
 	public void setBar(double x) {
 		lifeX = x;
+	}
+
+	public void lowerHealth() {
+		life--;
+		setLifeBarSize();
+	}
+
+	public void setLifeBarSize() {
+
+		setBar((life / initialLife) * initialWidth);
+		if ((life / initialLife) <= 0.75 && (life / initialLife) > 0.25)
+			LifeBar.paint = Paints.yellow;
+		else if (life / initialLife <= 0.25)
+			LifeBar.paint = Paints.red;
 	}
 }

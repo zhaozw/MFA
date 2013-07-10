@@ -7,7 +7,7 @@
     <string name="title_activity_game_logo">GameLogo</string>
     <string name="desc">Image in the game</string>
     <string name="title_activity_main_menu">MainMenu</string>
-    <string name="hello_world">Goodbye World</string>
+    <string name="hello_world">Hello world!</string>
     <string name="title_activity_options">Options</string>
     <string name="title_activity_high_scores">HighScores</string>
     <string name="title_activity_hits">Hits</string>
@@ -55,7 +55,6 @@
     <string name="hits_6_description">This hit sends mines, watch the fuck out.</string>
     <string name="hits_6_name">Mines</string>
     <string name="hits_6_cost">Cost: 2000</string>
-    
     <string name="title_activity_hit0_menu">"Hit0Menu"   </string>
     <string name="title_activity_hit1_menu">"Hit1Menu"   </string>
     <string name="title_activity_hit2_menu">"Hit2Menu"   </string>
@@ -66,7 +65,7 @@
     <string name="title_activity_hit5_menu">Hit5Menu</string>
     <string name="title_activity_hit6_menu">Hit6Menu</string>
     <string name="sentBy"> sent by </string>
-    <string name="hits_8_name">unknown</string>
+    <string name="hits_8_name">Alien Cannon</string>
     <string name="hits_7_name">mines</string>
     <string name="hits_9_name">unknown</string>
     <string name="hits_10_name">unknown</string>
@@ -75,4 +74,305 @@
     <string name="hits_13_name">unknown</string>
     <string name="hits_14_name">unknown</string>
     <string name="hits_15_name">unknown</string>
+    <string name="title_activity_custom_game_options">CustomGameOptions</string>
+    <string name="title_activity_new_menu">NewMenu</string>
+    <string name="Market_Item_0_Name">1000 SpaceBucks</string>
+    <string name="Market_Item_0_Price">1$</string>
+    <string name="Market_Item_0_Description">Currency for in game use</string>
+    <string name="Market_Item_1_Name">Light Green</string>
+    <string name="Market_Item_1_Price">100</string>
+    <string name="Market_Item_1_Description">The Color for use in explosions, thrusters text and lights</string>
+    <string name="Market_Item_2_Name">Dark Green</string>
+    <string name="Market_Item_2_Price">100</string>
+    <string name="Market_Item_2_Description">The Color for use in explosions, thrusters text and lights</string>
+    <string name="Market_Item_3_Name">Light Blue</string>
+    <string name="Market_Item_3_Price">100</string>
+    <string name="Market_Item_3_Description">The Color for use in explosions, thrusters text and lights</string>
+    <string name="Market_Item_4_Name">Dark Blue</string>
+    <string name="Market_Item_4_Price">100</string>
+    <string name="Market_Item_4_Description">The Color for use in explosions, thrusters text and lights</string>
+    <string name="Market_Item_5_Name">Purple</string>
+    <string name="Market_Item_5_Price">100</string>
+    <string name="Market_Item_5_Description">The Color for use in explosions, thrusters text and lights</string>
+    <string name="Market_Item_6_Name">Pink</string>
+    <string name="Market_Item_6_Price">100</string>
+    <string name="Market_Item_6_Description">The Color for use in explosions, thrusters text and lights</string>
+    <string name="Market_Item_7_Name">Classic Ship</string>
+    <string name="Market_Item_7_Price">10</string>
+    <string name="Market_Item_7_Description">The Classic ship image for use in game</string>
+    <string name="Market_Item_8_Name">Classic Badass Ship</string>
+    <string name="Market_Item_8_Price">10</string>
+    <string name="Market_Item_8_Description">The Classic Badass ship image for use in game</string>
+    <string name="Market_Item_9_Name">Weird Ship</string>
+    <string name="Market_Item_9_Price">10</string>
+    <string name="Market_Item_9_Description">The Weird ship image for use in game</string>
+    <string name="Market_Item_10_Name">Alien Ship</string>
+    <string name="Market_Item_10_Price">10</string>
+    <string name="Market_Item_10_Description">The Alien ship image for use in game</string>
+    <string name="Market_Item_11_Name">Asteroid Ship</string>
+    <string name="Market_Item_11_Price">10</string>
+    <string name="Market_Item_11_Description">The Asteroid ship image for use in game</string>
+    <string name="Market_Item_12_Name">Ship 6</string>
+    <string name="Market_Item_12_Price">10</string>
+    <string name="Market_Item_12_Description">The ship 6 image for use in game</string>
+    <string name="Market_Item_13_Name">Ship 7</string>
+    <string name="Market_Item_13_Price">10</string>
+    <string name="Market_Item_13_Description">The Classic ship image for use in game</string>
+    <string name="Market_Item_14_Name">Ship 8</string>
+    <string name="Market_Item_14_Price">10</string>
+    <string name="Market_Item_14_Description">The Classic ship image for use in game</string>
+    <string name="Market_Item_15_Name">Ship 9</string>
+    <string name="Market_Item_15_Price">10</string>
+    <string name="Market_Item_15_Description">The Classic ship image for use in game</string>
+    <string name="Market_Item_16_Name">Ship 10</string>
+    <string name="Market_Item_16_Price">10</string>
+    <string name="Market_Item_16_Description">The Classic ship image for use in game</string>
+    <string name="Market_Item_17_Name"> Shoot Faster </string>
+    <string name="Market_Item_17_Price">1</string>
+    <string name="Market_Item_17_Description"> Allows the player to always have the powerup that allows for faster shooting. Custom games only</string>
+    <string name="Market_Item_18_Name"> Slow Motion </string>
+    <string name="Market_Item_18_Price">1</string>
+    <string name="Market_Item_18_Description"> Allows the player to always have the powerup that allows for slow motion. Custom games only </string>
+    <string name="Market_Item_19_Name"> Sine Wave Bullets </string>
+    <string name="Market_Item_19_Price">1</string>
+    <string name="Market_Item_19_Description"> Allows the player to always have the powerup that allows for sine wave bullets. Custom games only </string>
+    <string name="Market_Item_20_Name"> Intense Game </string>
+    <string name="Market_Item_20_Price">1</string>
+    <string name="Market_Item_20_Description"> Allows the player to play the game in intense mode. Custom games only </string>
+    <string name="Market_Item_21_Name"> God Mode </string>
+    <string name="Market_Item_21_Price">1</string>
+    <string name="Market_Item_21_Description">  Allows the player to be invincible. Custom games only  </string>
+    <string name="Market_Item_22_Name"> Demon Alien </string>
+    <string name="Market_Item_22_Price">1</string>
+    <string name="Market_Item_22_Description">  Allows the player to send the hit after themselves. Custom games only  </string>
+    <string name="Market_Item_23_Name"> Small Asteroid </string>
+    <string name="Market_Item_23_Price">1</string>
+    <string name="Market_Item_23_Description">  Allows the player to send the hit after themselves. Custom games only  </string>
+    <string name="Market_Item_24_Name"> Large Asteroid </string>
+    <string name="Market_Item_24_Price">1</string>
+    <string name="Market_Item_24_Description"> Allows the player to send the hit after themselves. Custom games only  </string>
+    <string name="Market_Item_25_Name"> Follow AI </string>
+    <string name="Market_Item_25_Price">1</string>
+    <string name="Market_Item_25_Description"> Allows the player to send the hit after themselves. Custom games only  </string>
+    <string name="Market_Item_26_Name"> Small AI Pack </string>
+    <string name="Market_Item_26_Price">1</string>
+    <string name="Market_Item_26_Description"> Allows the player to send the hit after themselves. Custom games only  </string>
+    <string name="Market_Item_27_Name"> Large AI Pack </string>
+    <string name="Market_Item_27_Price">1</string>
+    <string name="Market_Item_27_Description"> Allows the player to send the hit after themselves. Custom games only  </string>
+    <string name="Market_Item_28_Name"> Mines </string>
+    <string name="Market_Item_28_Price">1</string>
+    <string name="Market_Item_28_Description"> Allows the player to send the hit after themselves. Custom games only  </string>
+    <string name="Market_Item_29_Name"> Unknown </string>
+    <string name="Market_Item_29_Price">1</string>
+    <string name="Market_Item_29_Description"> Allows the player to send the hit after themselves. Custom games only  </string>
+    <string name="Market_Item_30_Name"> Alien Cannon </string>
+    <string name="Market_Item_30_Price">1</string>
+    <string name="Market_Item_30_Description"> Allows the player to send the hit after themselves. Custom games only  </string>
+    <string name="Market_Item_31_Name"> unknown hit </string>
+    <string name="Market_Item_31_Price">1</string>
+    <string name="Market_Item_31_Description"> Allows the player to send the hit after themselves. Custom games only  </string>
+    <string name="Market_Item_32_Name">unknown hit  </string>
+    <string name="Market_Item_32_Price">1</string>
+    <string name="Market_Item_32_Description"> Allows the player to send the hit after themselves. Custom games only  </string>
+    <string name="Market_Item_33_Name"> unknown hit  </string>
+    <string name="Market_Item_33_Price">1</string>
+    <string name="Market_Item_33_Description"> Allows the player to send the hit after themselves. Custom games only  </string>
+    <string name="Market_Item_34_Name"> unknown hit  </string>
+    <string name="Market_Item_34_Price">1</string>
+    <string name="Market_Item_34_Description"> Allows the player to send the hit after themselves. Custom games only  </string>
+    <string name="Market_Item_35_Name"> unknown hit </string>
+    <string name="Market_Item_35_Price">1</string>
+    <string name="Market_Item_35_Description"> Allows the player to send the hit after themselves. Custom games only  </string>
+ 
+    <string name="Trophy_0_Requirement">1</string>
+    <string name="Trophy_1_Requirement">10</string>
+    <string name="Trophy_2_Requirement">50</string>
+    <string name="Trophy_3_Requirement">100</string>
+    <string name="Trophy_4_Requirement">500</string>
+    <string name="Trophy_5_Requirement">1000</string>
+    <string name="Trophy_6_Requirement">5000</string>
+    <string name="Trophy_7_Requirement">10000</string>
+    <string name="Trophy_8_Requirement">25000</string>
+    <string name="Trophy_9_Requirement">50000</string>
+    <string name="Trophy_10_Requirement">100000</string>
+    <string name="Trophy_11_Requirement">1000000</string>
+    <string name="Trophy_0_Name">Asteroid Killer</string> 
+    <string name="Trophy_1_Name">Asteroid Murderer</string>
+    <string name="Trophy_2_Name">Asteroid Destroyer</string>
+    <string name="Trophy_3_Name">Asteroid Desecrater</string>
+    <string name="Trophy_4_Name">Asteroid Assassin</string>
+    <string name="Trophy_5_Name">Asteroid Exterminator</string>
+    <string name="Trophy_6_Name">Asteroid Slayer</string>
+    <string name="Trophy_7_Name">Asteroid Butcher</string>
+    <string name="Trophy_8_Name">Asteroid Executioner</string>
+    <string name="Trophy_9_Name">Asteroid liquidator</string>
+    <string name="Trophy_10_Name">Asteroid Annihilator</string>
+    <string name="Trophy_11_Name">Asteroid Terminator</string>
+    <string name="Trophy_0_Description">Kill 1 Asteroid</string>
+    <string name="Trophy_1_Description">Murder 10 Asteroids</string>
+    <string name="Trophy_2_Description">Destroy 50 Asteroids</string>
+    <string name="Trophy_3_Description">Desecrate 100 Asteroids</string>
+    <string name="Trophy_4_Description">Assassinate 500 Asteroids</string>
+    <string name="Trophy_5_Description">Exterminate 1000 Asteroids</string>
+    <string name="Trophy_6_Description">Slay 5000 Asteroid</string>
+    <string name="Trophy_7_Description">Butcher 10000 Asteroid</string>
+    <string name="Trophy_8_Description">Execute 25000 Asteroid</string>
+    <string name="Trophy_9_Description">Liquidate 50000 Asteroid</string>
+    <string name="Trophy_10_Description">Annihilate 100000 Asteroid</string>
+    <string name="Trophy_11_Description">Terminate 1000000 Asteroid</string>
+
+    
+    
+    
+    <string name="Trophy_12_Name">Penny Pincher</string>
+    <string name="Trophy_12_Requirement">5000</string>
+    <string name="Trophy_12_Description">Retain 5000 in Cash</string>
+    
+    <string name="Trophy_13_Name">Cheapskate</string>
+    <string name="Trophy_13_Requirement">10000</string>
+    <string name="Trophy_13_Description">Retain 10000 in Cash</string>
+    
+    <string name="Trophy_14_Name">Money Grubber</string>
+    <string name="Trophy_14_Requirement">50000</string>
+    <string name="Trophy_14_Description">Retain 50000 in Cash</string>
+    
+    <string name="Trophy_15_Name">Master Scrooge</string>
+    <string name="Trophy_15_Requirement">100000</string>
+    <string name="Trophy_15_Description">Retain 100000 in Cash</string>
+    
+    
+    <string name="Trophy_16_Name">Acquirer</string>
+    <string name="Trophy_16_Requirement"> 2500 </string>
+    <string name="Trophy_16_Description">Acquire 2500 points in a single Standard match.</string>
+    
+    <string name="Trophy_17_Name">Appropriator</string>
+    <string name="Trophy_17_Requirement"> 5000 </string>
+    <string name="Trophy_17_Description">Appropriate 5000 points in a single Standard match.</string>
+
+    <string name="Trophy_18_Name">Claimant</string>
+    <string name="Trophy_18_Requirement"> 7500 </string>
+    <string name="Trophy_18_Description">Claim 75000 points in a single Standard match.</string>
+    
+    <string name="Trophy_19_Name">Failure</string>
+    <string name="Trophy_19_Requirement"> 0 </string>
+    <string name="Trophy_19_Description">Die Before Firing a Single Shot.</string>
+    
+    <string name="Trophy_20_Name">Beginner</string>
+    <string name="Trophy_20_Requirement"> 1 </string>
+    <string name="Trophy_20_Description">Complete wave 1.</string>
+    
+    <string name="Trophy_21_Name">Amateur</string>
+    <string name="Trophy_21_Requirement"> 2 </string>
+    <string name="Trophy_21_Description">Complete wave 2.</string>
+    
+    <string name="Trophy_22_Name">Greenhorn</string>
+    <string name="Trophy_22_Requirement"> 3 </string>
+    <string name="Trophy_22_Description">Complete wave 3.</string>
+    
+    <string name="Trophy_23_Name">Competent</string>
+    <string name="Trophy_23_Requirement"> 4 </string>
+    <string name="Trophy_23_Description">Complete wave 4.</string>
+    
+    <string name="Trophy_24_Name">Passable</string>
+    <string name="Trophy_24_Requirement"> 5 </string>
+    <string name="Trophy_24_Description">Complete wave 5.</string>
+    
+    <string name="Trophy_25_Name">Decent</string>
+    <string name="Trophy_25_Requirement"> 6 </string>
+    <string name="Trophy_25_Description">Complete wave 6.</string>
+    
+    <string name="Trophy_26_Name">Satisfactory</string>
+    <string name="Trophy_26_Requirement"> 7 </string>
+    <string name="Trophy_26_Description">Complete wave 7.</string>
+   
+    <string name="Trophy_27_Name">Adept</string>
+    <string name="Trophy_27_Requirement"> 8 </string>
+    <string name="Trophy_27_Description">Complete wave 8.</string>
+    
+    <string name="Trophy_28_Name">Master</string>
+    <string name="Trophy_28_Requirement"> 9 </string>
+    <string name="Trophy_28_Description">Complete wave 9.</string>
+    
+    <string name="Trophy_29_Name">lord</string>
+    <string name="Trophy_29_Requirement"> 10 </string>
+    <string name="Trophy_29_Description">Complete wave 10.</string>
+    
+    <string name="TrophySuccessMessage">Congratulations For Your Achievement</string>
+    <string name="TrophyNoSuccessMessage">No Trophy For You</string>
+    <string name="AchievementsUnlocked">Achievements Unlocked</string>
+    <string name="AsteroidsKilled">Asteroids Killed</string>
+    <string name="HighestWave">Highest Wave</string>
+    <string name="TotalScore">Total Score</string>
+    <string name="ShotsFired">Shots Fired</string>
+    <string name="Accuracy">Accuracy</string>
+    <string name="Achievements">Achievements</string>
+    <string name="HitsStats">Hit Stats</string>
+    <string name="Login">Login</string>
+    <string name="Logout">Logout</string>
+    <string name="Email">Email   </string>
+    <string name="Password">Password</string>
+    <string name="EnterTextNextTime">Enter text in all fields.</string>
+    <string name="DefaultShipName">Standard Ship</string>
+    <string name="Purchase">Purchase</string>
+    <string name="LoginOrRegister">Login or Register</string>
+    <string name="RegistrationError">Registration Error</string>
+    <string name="For">for</string>
+    <string name="Points">points</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+    <string name="Cancel">Cancel</string>
+    <string name="ConfirmPassword">Re-Password</string>
+    <string name="PasswordsDontMatch">Passwords Dont Match</string>
+    <string name="Register">Register</string>
+    <string name="RegistrationSuccesfull">You are now Registered and Logged in. Go kick some ass.</string>
+    <string name="UserName">UserName</string>
+    <string name="HaveAccount">Have Account</string>
+    <string name="DontHaveAccount">No Account</string>
+    <string name="IncorrectUsernamePassword">Email and Password not found</string>
+    <string name="ConnectionError">Connection Error</string>
+    <string name="LoginSuccessfull">You are now logged in as</string>
+    <string name="LoginFailed">Login Failed</string>
+    <string name="ConfirmPurchase">Purchase Confirmed</string>
+    <string name="DenyPurchase">Not enough cash</string>
+    <string name="PurchaseCashMesage">Would You like To use 1$ to purchase 1000 in game Currency</string>
+    <string name="ItemNotPurchased">This item has not been purchased for use, would you like to purchase it now?</string>
+    <string name="ItemNotToBePurchased">This item will not be usable until purchase is made.</string>
+    <string name="ItemAlreadyPurchased">This item has been purchased</string>
+    <string name="Purchased">Purchased</string>
+    
+    <string name="Friends">Friends</string>
+    <string name="Score">Score</string>
+    <string name="ThisGameStats">this.stats</string>
+    <string name="TotalGameStats">Total Stats</string>
+    <string name="Stats">Stats</string>
+    <string name="Rivals">Rivals</string>
+    <string name="HitsOut">Hits Currently Out</string>
+    <string name="HitsSent">Hits Sent</string>
+    <string name="HitsSentSuccessful">Successful Hits Sent</string>
+    <string name="FailedHitsSent">Failed Hits Sent</string>
+    <string name="SentHitsSuccessRate">Sent Hits Success Rate</string>
+    <string name="SuccessfulHitsGallery">Successful Hits Gallery</string>
+    <string name="HitsRecieved">Hits Received</string>
+    <string name="HitsFailedAgainst">Hits Failed Against</string>
+    <string name="HitsAvoided">Hits Avoided</string>
+    <string name="HitsFailureRate">Hits Against Failure Rate</string>
+    <string name="SentHitOn">Sent Hit:</string>
+    <string name="Message">Message:</string>
+    <string name="HitSent">Hit Sent:</string>
+    <string name="HitSuccessful">Hit was successful</string>
+    <string name="HitNotSuccessful">Hit was not successful</string>
+    <string name="GameOver">GameOver</string>
+    <string name="Wave">Wave</string>
+    
+    <string name="Time">Time</string>
+    <string name="title_activity_color_options">ColorOptionsActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_ship_type">ShipTypeActivity</string>
+    <string name="title_activity_color_options_activity2">ColorOptionsActivity2</string>
+    <string name="title_activity_achievements">AchievementsActivity</string>
+    
+    
+    
+
 </resources>

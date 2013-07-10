@@ -5,10 +5,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.example.mfa.R;
 
@@ -19,8 +21,21 @@ public class MainMenu extends Activity {
 		super.onCreate(savedInstanceState);
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // no title
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_main_menu);
+
+		// ImageView spaceshipImage = (ImageView)
+		// findViewById(R.id.imageButton3);
+		// Animation asteroidAnimation = AnimationUtils.loadAnimation(this,
+		// R.anim.asteroid_animation);
+		// spaceshipImage.startAnimation(asteroidAnimation);
+		//
+		ImageView rocketImage = (ImageView) findViewById(R.id.asteroidImageView);
+		rocketImage.setBackgroundResource(R.anim.asteroid_animation);
+		AnimationDrawable rocketAnimation = (AnimationDrawable) rocketImage
+				.getBackground();
+		rocketAnimation.start();
 
 	}
 

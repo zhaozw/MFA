@@ -15,8 +15,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.mfa.NewMenu;
 import com.example.mfa.R;
 import com.example.mfa.networking.*;
+
 public class GameLogo extends Activity {
 
 	boolean isInternetPresent;
@@ -33,7 +35,8 @@ public class GameLogo extends Activity {
 		Intent intent = getIntent();
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // no title
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		cd = new ConnectionDetector(getApplicationContext());
 
 		isInternetPresent = cd.isConnectingToInternet();
@@ -49,32 +52,29 @@ public class GameLogo extends Activity {
 
 		FBLogin = (ImageButton) findViewById(R.id.FBLogin);
 
-		Offline = (Button) findViewById(R.id.offlineButton);
-		
-		 // check for Internet status
-		 if (!isInternetPresent) {
-		 showAlertDialog(GameLogo.this, "No Internet Connection",
-		 "You don't have internet connection.", false);
-		 }
-		 else{
-		
-		
-		 userFunctions = new UserFunctions();
-		 db = new DatabaseHandler(getApplicationContext());
-		 Log.d("GameLogo","Database Handler and userfunctions have been created.");
-		 if(intent.hasExtra("name")){
-		 intent.getExtras();
-		 FBID.setText(intent.getStringExtra("uid"));
-		 }
-		
-		 if(!userFunctions.isUserLoggedIn(getApplicationContext())){
-		 btnLogout=(Button)findViewById(R.id.btnLogout);
-		 btnLogout.setVisibility(View.GONE);
-		 }else{
-		 Log.d("GameLogo","User is logged in");
-		 FBID.setText(db.getUserDetails().get("name").toString());
-		 }
-		 }
+		// check for Internet status
+		if (!isInternetPresent) {
+			showAlertDialog(GameLogo.this, "No Internet Connection",
+					"You don't have internet connection.", false);
+		} else {
+
+			userFunctions = new UserFunctions();
+			db = new DatabaseHandler(getApplicationContext());
+			Log.d("GameLogo",
+					"Database Handler and userfunctions have been created.");
+			if (intent.hasExtra("name")) {
+				intent.getExtras();
+				FBID.setText(intent.getStringExtra("uid"));
+			}
+
+			if (!userFunctions.isUserLoggedIn(getApplicationContext())) {
+				btnLogout = (Button) findViewById(R.id.btnLogout);
+				btnLogout.setVisibility(View.GONE);
+			} else {
+				Log.d("GameLogo", "User is logged in");
+				FBID.setText(db.getUserDetails().get("name").toString());
+			}
+		}
 	}
 
 	public void onClick(View v) {
@@ -90,7 +90,8 @@ public class GameLogo extends Activity {
 			if (userFunctions.isUserLoggedIn(getApplicationContext())) {
 				userFunctions.logoutUser(getApplicationContext());
 			}
-			Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+			Intent login = new Intent(getApplicationContext(),
+					LoginActivity.class);
 			login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(login);
 			finish();
@@ -100,24 +101,18 @@ public class GameLogo extends Activity {
 			Log.d("Button Pressed", "Log In");
 			if (userFunctions.isUserLoggedIn(getApplicationContext())) {
 				Log.d("BTNLogin Button Pressed", "User is logged in");
-				Intent intent = new Intent(this, MainMenu.class);
+				Intent intent = new Intent(this, NewMenu.class);
 				startActivity(intent);
 			} else {
 				Log.d("BTNLogin Button Pressed", "User is not logged in");
-				Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+				Intent login = new Intent(getApplicationContext(),
+						LoginActivity.class);
 				startActivity(login);
 				finish();
 			}
-		break;
-		}
-		case R.id.offlineButton: {
-			Log.d("Button Pressed", "offline");
-			Intent login = new Intent(getApplicationContext(), testchoose.class);
-			login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(login);
-			finish();
 			break;
 		}
+
 		}
 
 	}

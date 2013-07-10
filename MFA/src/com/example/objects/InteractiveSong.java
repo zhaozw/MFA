@@ -86,27 +86,29 @@ public class InteractiveSong {
 
 	public void stopAudio() {
 
-		if (song.isLooping() || song.isPlaying()){
+		if (song.isLooping() || song.isPlaying()) {
 			song.stop();
-			song.reset();}
-		if (kick.isLooping() || kick.isPlaying()){
+			song.reset();
+		}
+		if (kick.isLooping() || kick.isPlaying()) {
 			kick.stop();
-			kick.reset();}
+			kick.reset();
+		}
 	}
 
 	public void releaseObjects() {
-		
-		try{	
-		  kick.release();
-		}catch(Exception e){
-			
+
+		try {
+			kick.release();
+		} catch (Exception e) {
+
 		}
-		try{	
-		  song.release();
-			}catch(Exception e){
-				
-	    }
-		
+		try {
+			song.release();
+		} catch (Exception e) {
+
+		}
+
 	}
 
 }

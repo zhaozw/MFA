@@ -1,0 +1,139 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/space1"
+    tools:context=".ColorOptionsActivity" >
+
+    <Spinner
+        android:id="@+id/LightColors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/selection_label"
+        android:layout_below="@+id/selection_label"
+        tools:listitem="@android:layout/preference_category" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Visuals"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/selection_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="15dp"
+        android:text="Lights"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/textC"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignRight="@+id/LightColors"
+        android:layout_below="@+id/textView4"
+        tools:listitem="@android:layout/preference_category" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/LightColors"
+        android:layout_marginLeft="60dp"
+        android:layout_toRightOf="@+id/LightColors"
+        android:text="Explosions"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/ec1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView4"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_marginRight="30dp"
+        tools:listitem="@android:layout/preference_category" />
+
+    <Spinner
+        android:id="@+id/ec4"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ec2"
+        android:layout_alignBottom="@+id/ec2"
+        android:layout_alignLeft="@+id/ec3"
+        android:layout_alignRight="@+id/ec3"
+        tools:listitem="@android:layout/preference_category" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/LightColors"
+        android:layout_below="@+id/LightColors"
+        android:layout_marginTop="15dp"
+        android:text="Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/ec5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ec2"
+        android:layout_alignRight="@+id/ec2"
+        android:layout_below="@+id/ec2"
+        android:layout_marginTop="36dp"
+        tools:listitem="@android:layout/preference_category" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textC"
+        android:layout_below="@+id/textC"
+        android:layout_marginTop="15dp"
+        android:text="Thrusters"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/thrustersColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView5"
+        android:layout_below="@+id/textView5"
+        tools:listitem="@android:layout/preference_category" />
+
+    <Spinner
+        android:id="@+id/ec6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ec4"
+        android:layout_alignTop="@+id/ec5"
+        tools:listitem="@android:layout/preference_category" />
+
+    <Spinner
+        android:id="@+id/ec2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ec1"
+        android:layout_alignRight="@+id/ec1"
+        android:layout_below="@+id/ec1"
+        android:layout_marginTop="36dp"
+        tools:listitem="@android:layout/preference_category" />
+
+    <Spinner
+        android:id="@+id/ec3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ec2"
+        android:layout_toRightOf="@+id/ec1"
+        tools:listitem="@android:layout/preference_category" />
+
+</RelativeLayout>

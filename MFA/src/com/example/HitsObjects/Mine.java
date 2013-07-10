@@ -41,7 +41,7 @@ public class Mine {
 	}
 
 	public void draw(Canvas canvas) {
-		if(!dead){
+		if (!dead) {
 			if (activated == false) {
 				Paints.darkGreen.setStyle(Paint.Style.STROKE);
 				canvas.drawCircle(cx, cy, outerRadius, Paints.darkGreen);
@@ -49,23 +49,23 @@ public class Mine {
 				Paints.red.setStyle(Paint.Style.STROKE);
 				canvas.drawCircle(cx, cy, outerRadius, Paints.red);
 			}
-	
+
 			if (img != null)
 				canvas.drawBitmap(img, x, y, null);
 			else {
 				canvas.drawText("shit Aint working", x, y, Paints.red);
-	
+
 			}
 		}
 	}
 
 	public void move() {
-		if(!dead){
-				x -= 1;
-	
+		if (!dead) {
+			x -= 1;
+
 			if (activated)
 				activationTime--;
-	
+
 			cx = x + (width / 2);
 			cy = y + (height / 2);
 		}
@@ -79,7 +79,7 @@ public class Mine {
 				+ (int) MGP.dp[150];
 		cx = x + (width / 2);
 		cy = y + (height / 2);
-		dead=true;
+		dead = true;
 	}
 
 	public boolean shipInnerCollision(Player ship) {

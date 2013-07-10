@@ -1,0 +1,97 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/space"
+    tools:context=".NewMenu" >
+
+    <ImageView
+        android:id="@+id/rock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="35dp"
+        android:src="@drawable/rock2" />
+
+    <Button
+        android:id="@+id/Login_Logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/rock"
+        android:layout_marginBottom="130dp"
+        android:layout_marginRight="73dp"
+        android:background="@drawable/button_cell_tower"
+        android:onClick="onClick" />
+
+    <Button
+        android:id="@+id/start_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Login_Logout"
+        android:layout_alignBottom="@+id/Login_Logout"
+        android:layout_marginRight="47dp"
+        android:layout_toLeftOf="@+id/Login_Logout"
+        android:background="@drawable/button_start_game"
+        android:onClick="onClick" />
+
+    <ImageView
+        android:id="@+id/towerLights"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Login_Logout"
+        android:layout_alignTop="@+id/Login_Logout"
+        android:src="@drawable/greenlights" />
+
+    <Button
+        android:id="@+id/market"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/start_game"
+        android:layout_alignBottom="@+id/start_game"
+        android:layout_alignLeft="@+id/rock"
+        android:layout_marginLeft="64dp"
+        android:onClick="onClick"
+        android:text="market" />
+
+    <Button
+        android:id="@+id/Options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/market"
+        android:layout_alignBottom="@+id/market"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="49dp"
+         android:onClick="onClick"
+        android:text="Options" />
+
+    <Button
+        android:id="@+id/Achievements"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Options"
+        android:layout_below="@+id/market"
+        android:text="Achievements" 
+        android:onClick="onClick" />
+
+    <Button
+        android:id="@+id/delete_stats_and_unlocks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="reset stats and unlocks" 
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/newMenuHits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/start_game"
+        android:layout_alignBottom="@+id/start_game"
+        android:layout_toLeftOf="@+id/start_game"
+        android:text="Hits"
+        android:onClick="onClick"  />
+
+</RelativeLayout>

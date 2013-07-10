@@ -5,16 +5,36 @@
     android:background="@drawable/space1"
     tools:context=".Market" >
 
+    <ListView
+        android:id="@+id/MarketListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/selection_label"
+        android:cacheColorHint="#00000000"
+        android:scrollingCache="false"
+        tools:listitem="@layout/item_details_view" >
+
+    </ListView>
+
     <TextView
         android:id="@+id/selection_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
         android:text="MARKET"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#FFFFFF"
-        android:textSize="40dp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/Cash_Market"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

@@ -6,12 +6,6 @@
         <item>Friends</item>
         <item>Random</item>
     </string-array>
-    <string-array name="hit_types">
-        <item>Massive Asteroid</item>
-        <item>more stuff</item>
-        <item>and even more stuff</item>
-        <item>Random</item>
-    </string-array>
     <string-array name="colors">
         <item>White</item>
         <item>Black</item>
@@ -24,6 +18,24 @@
         <item>darkBlue</item>
         <item>purple </item>
         <item>pink</item>
+    </string-array>
+    <string-array name="Hits">
+        <item>None</item>
+        <item>Demon Alien</item>
+        <item>Small Asteroid</item>
+        <item>Medium Asteroid</item>
+        <item>Follow AI</item>
+        <item>Small AI Pack</item>
+        <item>Large AI Pack</item>
+        <item>Mines</item>
+        <item>Not Finished</item>
+        <item>Alien Cannon</item>
+        <item>None</item>
+        <item>None</item>
+        <item>None</item>
+        <item>None</item>
+        <item>None</item>
+        <item>None</item>
     </string-array>
 
 </resources>

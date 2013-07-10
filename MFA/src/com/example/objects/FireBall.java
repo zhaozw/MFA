@@ -123,11 +123,7 @@ public class FireBall {
 		else if (color == 5)
 			canvas.drawOval(shape, Paints.thrusters);
 	}
-	
-	
-	
 
-	
 	public void drawExplosionsCustom(Canvas canvas) {
 		if (type != 3) {
 			if (color == 1)
@@ -136,15 +132,13 @@ public class FireBall {
 				canvas.drawOval(shape, Paints.ep2);
 			else if (color == 3)
 				canvas.drawOval(shape, Paints.ep3);
-		    else if (color == 4)
-			    canvas.drawOval(shape, Paints.ep4);
-		    else if (color == 5)
-			    canvas.drawOval(shape, Paints.ep5);
-		}
-		else
+			else if (color == 4)
+				canvas.drawOval(shape, Paints.ep4);
+			else if (color == 5)
+				canvas.drawOval(shape, Paints.ep5);
+		} else
 			canvas.drawOval(shape, Paints.ep6);
 	}
-	
 
 	public void ExplodeTrue(double x, double y) {
 		explode = true;
@@ -248,7 +242,7 @@ public class FireBall {
 			// WIDTH -=5; //generator.nextInt(2) ;
 			WIDTH += MGP.dp[7]; // generator.nextInt(5) ;
 			// HEIGHT -=5; //generator.nextInt(2) ;
-			HEIGHT += MGP.dp[7 ]; // generator.nextInt(2) ;
+			HEIGHT += MGP.dp[7]; // generator.nextInt(2) ;
 			color = generator.nextInt(5) + 1;
 			X -= generator.nextInt((int) MGP.dp[15]);
 			Y -= generator.nextInt((int) MGP.dp[15]);

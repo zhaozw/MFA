@@ -78,7 +78,8 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
 
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // no title
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		playerStatsArray = new PlayerStatsObject[1000];
 
 		map = new HashMap<String, String>();
@@ -289,10 +290,12 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
 			}
 		}
 	};
-	
+
 	OnClickListener purchaseButtonListener = new OnClickListener() {
 		public void onClick(View v) {
-			Toast toast = Toast.makeText(context, "Message from " + db.getUserDetails().get("uid").toString().trim(), duration);
+			Toast toast = Toast.makeText(context, "Message from "
+					+ db.getUserDetails().get("uid").toString().trim(),
+					duration);
 			toast.show();
 		}
 	};

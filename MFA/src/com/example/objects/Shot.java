@@ -7,12 +7,10 @@ import android.graphics.Canvas;
 
 import com.example.mfa.gamepanel.MGP;
 
-public class Shot {
+public class Shot extends GameCharacter {
 
 	private final double shotSpeed;
 	private double angle;
-	public double x;
-	public double y;
 	private double xVelocity;
 	private double yVelocity;
 	private int lifeLeft;
@@ -24,9 +22,8 @@ public class Shot {
 
 	public Shot(double x, double y, double angle, int lifeLeft, int shotSpeed,
 			Bitmap bitmap, int dir) {
+		super(bitmap, x, y);
 		this.dir = dir;
-		this.x = x;
-		this.y = y;
 		ps = (int) y;
 		this.angle = angle;
 		xVelocity = shotSpeed * Math.cos(angle);
@@ -39,20 +36,18 @@ public class Shot {
 		angleChanged = false;
 	}
 
-	public Shot(double x, double y, double angle, int lifeLeft, int shotSpeed,
+	public Shot(double x, double y, double angle, int lifeLeft, double speed,
 			Bitmap bitmap) {
-		this.dir = dir;
-		this.x = x;
-		this.y = y;
+		super(bitmap, x, y);
 		ps = (int) y;
 		this.angle = angle;
-		xVelocity = shotSpeed * Math.cos(angle);
-		yVelocity = shotSpeed * Math.sin(angle);
+		xVelocity = speed * Math.cos(angle);
+		yVelocity = speed * Math.sin(angle);
 		this.bitmap = bitmap;
 		// the number of frames the shot will last for before disappearing if it
 		// doesn't hit anything
 		this.lifeLeft = lifeLeft;
-		this.shotSpeed = shotSpeed;
+		this.shotSpeed = speed;
 	}
 
 	public void move() {
@@ -67,6 +62,9 @@ public class Shot {
 
 		if (x > MGP.deviceWidth || x < 0)
 			lifeLeft = 0;
+
+		cy = y + (height / 2);
+		cx = x + (width / 2);
 	}
 
 	public void changeAngle() {
@@ -88,9 +86,15 @@ public class Shot {
 		y += sine * Math.sin(x);
 	}
 
+	@Override
 	public void draw(Canvas canvas) {
-		canvas.drawBitmap(bitmap, (float) x - (bitmap.getWidth() / 2),
-				(float) y - (bitmap.getHeight() / 2), null);
+		if (bitmap != null) {
+			canvas.drawBitmap(bitmap, (float) x - (bitmap.getWidth() / 2),
+					(float) y - (bitmap.getHeight() / 2), null);
+		} else {
+			canvas.drawCircle(cx, cy, 5, Paints.red);
+
+		}
 	}
 
 	public int getLifeLeft() {

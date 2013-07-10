@@ -33,7 +33,7 @@
         android:layout_marginLeft="74dp"
         android:layout_toRightOf="@+id/imageView1"
         android:background="@android:drawable/dialog_frame"
-        android:onClick="BeginCustomGame"
+        android:onClick="onClick"
         android:src="@drawable/ast" />
 
     <TextView

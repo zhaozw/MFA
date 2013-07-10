@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ShipTypeActivity" >
+
+      <TextView
+          android:id="@+id/ShipOptionsTitle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentTop="true"
+          android:layout_centerHorizontal="true"
+          android:paddingLeft="0dp"
+          android:text="Ship Options"
+          android:textAppearance="?android:attr/textAppearanceLarge" />
+
+      <ListView
+          android:id="@+id/ShipTypeListView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/ShipOptionsTitle"
+          android:layout_toRightOf="@+id/ShipOptionsTitle"
+          android:cacheColorHint="#00000000"
+          android:choiceMode="singleChoice"
+          android:paddingLeft="50dp"
+          android:scrollingCache="false"
+          tools:listitem="@layout/single_image_list_view" >
+
+      </ListView>
+
+      <ImageView
+          android:id="@+id/ShipImage"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:layout_below="@+id/CurrentShipName"
+          android:layout_marginLeft="28dp"
+          android:src="@drawable/f162" />
+
+      <TextView
+          android:id="@+id/CurrentShipName"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignLeft="@+id/ShipImage"
+          android:layout_alignTop="@+id/ShipTypeListView"
+          android:layout_marginTop="66dp"
+          android:text="Medium Text"
+          android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+</RelativeLayout>

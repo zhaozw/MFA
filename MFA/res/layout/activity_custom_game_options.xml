@@ -1,0 +1,145 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/space"
+    tools:context=".CustomGameOptions" >
+
+    <Spinner
+        android:id="@+id/Hit1CustomGameSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/textView3"
+        tools:listitem="@android:layout/preference_category" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="65dp"
+        android:text="Hit 2"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="65dp"
+        android:text="Hit 3"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_marginLeft="140dp"
+        android:layout_toRightOf="@+id/textView2"
+        android:paddingLeft="60dp"
+        android:text="Cheats"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="20dp"
+        android:text="Hit 1"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/Hit3CustomGameSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Hit2CustomGameSpinner"
+        android:layout_alignTop="@+id/textView5"
+        tools:listitem="@android:layout/preference_category" />
+
+    <Spinner
+        android:id="@+id/Hit2CustomGameSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Hit1CustomGameSpinner"
+        android:layout_alignTop="@+id/textView4"
+        tools:listitem="@android:layout/preference_category" />
+
+    <CheckBox
+        android:id="@+id/CustomGameGodCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Hit1CustomGameSpinner"
+        android:layout_alignBottom="@+id/Hit1CustomGameSpinner"
+        android:layout_alignLeft="@+id/textView6"
+        android:onClick="onClick"
+        android:text="God" />
+
+    <CheckBox
+        android:id="@+id/CustomGameShootFasterCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/CustomGameGodCheckBox"
+        android:layout_below="@+id/Hit1CustomGameSpinner"
+        android:onClick="onClick"
+        android:text="Always Shoot Faster" />
+
+    <CheckBox
+        android:id="@+id/CustomGameSlowMotionCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/CustomGameShootFasterCheckBox"
+        android:layout_below="@+id/CustomGameShootFasterCheckBox"
+        android:layout_marginTop="15dp"
+        android:onClick="onClick"
+        android:text="Always Slow Motion" />
+
+    <CheckBox
+        android:id="@+id/CustomGameSineBulletsCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/CustomGameSlowMotionCheckBox"
+        android:layout_below="@+id/CustomGameSlowMotionCheckBox"
+        android:layout_marginTop="15dp"
+        android:onClick="onClick"
+        android:text="Always Sine Bullets" />
+
+    <CheckBox
+        android:id="@+id/CustomGameIntenseGameCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/CustomGameShootFasterCheckBox"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/CustomGameGodCheckBox"
+        android:onClick="onClick"
+        android:text="Intense Game" />
+
+    <Button
+        android:id="@+id/CustomGameStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:onClick="onClick"
+        android:text="Start Game" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/CustomGameStart"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="24dp"
+        android:paddingLeft="30dp"
+        android:text="Hits In Game"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

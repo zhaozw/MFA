@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.mfa.NewMenu;
 import com.example.mfa.R;
 
 public class CompanyLogo extends Activity {
@@ -39,7 +40,7 @@ public class CompanyLogo extends Activity {
 				} catch (InterruptedException e) {
 					// do nothing
 				} finally {
-					Intent i = new Intent(CompanyLogo.this, GameLogo.class);
+					Intent i = new Intent(CompanyLogo.this, NewMenu.class);
 					startActivity(i);
 					finish();
 				}

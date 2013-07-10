@@ -93,7 +93,7 @@
         android:layout_toRightOf="@+id/CashWord"
         android:text="@string/all_hits_menus_cash_amount"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-  
+
     <TextView
         android:id="@+id/selection_label"
         android:layout_width="wrap_content"
@@ -102,6 +102,5 @@
         android:layout_alignParentLeft="true"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-    
 
 </RelativeLayout>

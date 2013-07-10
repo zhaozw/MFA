@@ -115,13 +115,14 @@ public class MainThread extends Thread {
 						}
 					}
 
-					while (sleepTime < 0 && framesSkipped < MAX_FRAME_SKIPS) {
-						// we need to catch up
-						this.gamePanel.update(); // update without rendering
-						sleepTime += FRAME_PERIOD; // add frame period to check
-													// if in next frame
-						framesSkipped++;
-					}
+					// while (sleepTime < 0 && framesSkipped < MAX_FRAME_SKIPS)
+					// {
+					// // we need to catch up
+					// this.gamePanel.update(); // update without rendering
+					// sleepTime += FRAME_PERIOD; // add frame period to check
+					// // if in next frame
+					// framesSkipped++;
+					// }
 
 					// if (framesSkipped > 0) {
 					// Log.d(TAG, "Skipped:" + framesSkipped);
