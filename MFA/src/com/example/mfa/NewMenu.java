@@ -9,7 +9,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.example.activities.AchievementsActivity;
-import com.example.activities.Hits;
 import com.example.activities.HitsNew;
 import com.example.activities.Market;
 import com.example.activities.NewGameOptions;
