@@ -1,7 +1,5 @@
 package com.example.listViewComponents;
 
-import android.widget.Button;
-
 public class HitListViewItem {
 
 	private String hitName;

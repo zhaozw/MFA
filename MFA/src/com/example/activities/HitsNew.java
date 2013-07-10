@@ -4,12 +4,7 @@ import java.util.ArrayList;
 
 import com.example.listViewComponents.HitListViewAdapter;
 import com.example.listViewComponents.HitListViewItem;
-import com.example.listViewComponents.ItemDetails;
-import com.example.listViewComponents.ItemListBaseAdapter;
 import com.example.mfa.R;
-import com.example.mfa.R.layout;
-import com.example.mfa.R.menu;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
