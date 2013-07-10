@@ -38,23 +38,68 @@
     <string name="all_hits_menus_cash_amount">0</string>
     <string name="hits_0_description">This hit sends a Massive Alien, shooting god knowswhat, into your opponents level . Surely they will not prevail at the jaws of this beast.</string>
     <string name="hits_0_name">Demon Alien</string>
-    <string name="hits_0_cost">Cost: 10000</string>
+    <string name="hits_0_cost">10000</string>
     <string name="hits_1_description">This hit sends a small sezid asteroid carrening into the opponents level and rasonable speeds with the hopes of them meeting it head on.</string>
     <string name="hits_1_name">Asteroid Small</string>
-    <string name="hits_1_cost">Cost: 1000</string>
+    <string name="hits_1_cost">1000</string>
     <string name="hits_2_description">This hit sends a medium size asteroid carrening into the opponents level  and high speeds qwith the hopes of them meeting it head on.</string>
     <string name="hits_2_name">Asteroid Medium</string>
-    <string name="hits_2_cost">Cost: 2000</string>
+    <string name="hits_2_cost">2000</string>
     <string name="hits_3_name">Follow AI</string>
+    <string name="hits_3_cost">5000</string>
+    <string name="hits_3_description">Follow AI</string>
     <string name="hits_4_description">This hit sends a murder of aliens.</string>
     <string name="hits_4_name">Small AI Pack</string>
-    <string name="hits_4_cost">Cost: 5000</string>
+    <string name="hits_4_cost">5000</string>
     <string name="hits_5_description">This hit sends a pride of aliens.</string>
     <string name="hits_5_name">Large AI Pack</string>
-    <string name="hits_5_cost">Cost: 10000</string>
+    <string name="hits_5_cost">10000</string>
     <string name="hits_6_description">This hit sends mines, watch the fuck out.</string>
     <string name="hits_6_name">Mines</string>
-    <string name="hits_6_cost">Cost: 2000</string>
+    <string name="hits_6_cost">2000</string>
+
+    <string name="hits_7_name">Alien Cannon</string>
+    <string name="hits_7_description">Alien Cannon</string>
+    <string name="hits_7_cost">Alien Cannon</string>
+
+    <string name="hits_8_name">Alien Cannon</string>
+    <string name="hits_8_description">Alien Cannon</string>
+    <string name="hits_8_cost">Alien Cannon</string>
+    
+    <string name="hits_9_name">Alien Cannon</string>
+    <string name="hits_9_description">Alien Cannon</string>
+    <string name="hits_9_cost">Alien Cannon</string>
+    
+    <string name="hits_10_name">Alien Cannon</string>
+    <string name="hits_10_description">Alien Cannon</string>
+    <string name="hits_10_cost">Alien Cannon</string>
+    
+    <string name="hits_11_name">Alien Cannon</string>
+    <string name="hits_11_description">Alien Cannon</string>
+    <string name="hits_11_cost">Alien Cannon</string>
+    
+    <string name="hits_12_name">Alien Cannon</string>
+    <string name="hits_12_description">Alien Cannon</string>
+    <string name="hits_12_cost">Alien Cannon</string>
+    
+    <string name="hits_13_name">Alien Cannon</string>
+    <string name="hits_13_description">Alien Cannon</string>
+    <string name="hits_13_cost">Alien Cannon</string>
+    
+    <string name="hits_14_name">Alien Cannon</string>
+    <string name="hits_14_description">Alien Cannon</string>
+    <string name="hits_14_cost">Alien Cannon</string>
+    
+    <string name="hits_15_name">Alien Cannon</string>
+    <string name="hits_15_description">Alien Cannon</string>
+    <string name="hits_15_cost">Alien Cannon</string>
+    
+
+
+    
+    
+    <string name="title_activity_custom_game_options">CustomGameOptions</string>
+    <string name="title_activity_new_menu">NewMenu</string>
     <string name="title_activity_hit0_menu">"Hit0Menu"   </string>
     <string name="title_activity_hit1_menu">"Hit1Menu"   </string>
     <string name="title_activity_hit2_menu">"Hit2Menu"   </string>
@@ -64,18 +109,7 @@
     <string name="title_activity_hit4_menu">Hit4Menu</string>
     <string name="title_activity_hit5_menu">Hit5Menu</string>
     <string name="title_activity_hit6_menu">Hit6Menu</string>
-    <string name="sentBy"> sent by </string>
-    <string name="hits_8_name">Alien Cannon</string>
-    <string name="hits_7_name">mines</string>
-    <string name="hits_9_name">unknown</string>
-    <string name="hits_10_name">unknown</string>
-    <string name="hits_11_name">unknown</string>
-    <string name="hits_12_name">unknown</string>
-    <string name="hits_13_name">unknown</string>
-    <string name="hits_14_name">unknown</string>
-    <string name="hits_15_name">unknown</string>
-    <string name="title_activity_custom_game_options">CustomGameOptions</string>
-    <string name="title_activity_new_menu">NewMenu</string>
+    
     <string name="Market_Item_0_Name">1000 SpaceBucks</string>
     <string name="Market_Item_0_Price">1$</string>
     <string name="Market_Item_0_Description">Currency for in game use</string>
@@ -341,6 +375,12 @@
     <string name="GameOver">GameOver</string>
     <string name="Wave">Wave</string>
     <string name="Time">Time</string>
+    <string name="sentBy"> sent by </string>
+    <string name="MustIncludeMessage">Must include message.</string>
+    <string name="HitSentConfirmed">Hit Sent Confirmed:</string>
+    <string name="Random">Random</string>
+    <string name="Enemies">Enemies</string>
+    <string name="SendAfter">Send After</string>
     <string name="title_activity_color_options">ColorOptionsActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_ship_type">ShipTypeActivity</string>

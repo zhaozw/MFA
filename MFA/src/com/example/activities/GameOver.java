@@ -42,7 +42,7 @@ public class GameOver extends Activity {
 		setContentView(R.layout.activity_game_over);
 
 		if (MGP.hitsInGame.size() > 0)
-			deactivateHits();
+			deactivateUserHits();
 
 		// ADDING THE GAME SCORE TO CASH FOR USE
 		unlocks = getSharedPreferences("UnlocksFile", 0);
@@ -118,16 +118,19 @@ public class GameOver extends Activity {
 
 	}
 
-	public void deactivateHits() {
-
+	public void deactivateUserHits() {
+              UserFunctions userFunctions = new UserFunctions();
 		for (int k = 0; k < MGP.hitsInGame.size(); k++) {
-			if (LoginFunctions.deactivateHit(context,
-					MGP.hitsInGame.get(k).HitID, MGP.hitsInGame.get(k).hitType)) {
+			if (LoginFunctions.activateHit(context,
+					LoginFunctions.getPlayerHitsID(context, userFunctions.getEmail(context)), MGP.hitsInGame.get(k).hitType, "")) {
 				Toast toast = Toast.makeText(context,
 						"HitsSuccessfullyDeactivated", Toast.LENGTH_LONG);
 				toast.show();
 
 			} else {
+				Toast toast = Toast.makeText(context,
+						"Hits Not Deactivated", Toast.LENGTH_LONG);
+				toast.show();
 				UnprocessedHits = getSharedPreferences("UnprocessedHits", 0);
 				SharedPreferences.Editor UnprocessedHitsEditor = UnprocessedHits
 						.edit();
