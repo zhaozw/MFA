@@ -104,6 +104,38 @@
             android:name="com.example.HitMenuActivities.Hit6Menu"
             android:label="@string/title_activity_hit6_menu" >
         </activity>
+        <activity
+            android:name="com.example.activities.HitsNew"
+            android:label="@string/title_activity_hits_new" >
+        </activity>
+        <activity
+            android:name="com.example.activities.CustomGameOptions"
+            android:label="@string/title_activity_custom_game_options" >
+        </activity>
+        <activity
+            android:name="com.example.mfa.NewMenu"
+            android:label="@string/title_activity_new_menu" >
+        </activity>
+        <activity
+            android:name="com.example.activities.ColorOptionsActivity"
+            android:label="@string/title_activity_color_options" >
+        </activity>
+        <activity
+            android:name="com.example.activities.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name="com.example.activities.ShipTypeActivity"
+            android:label="@string/title_activity_ship_type" >
+        </activity>
+        <activity
+            android:name="com.example.activities.ColorOptionsActivity2"
+            android:label="@string/title_activity_color_options_activity2" >
+        </activity>
+        <activity
+            android:name="com.example.activities.AchievementsActivity"
+            android:label="@string/title_activity_achievements" >
+        </activity>
     </application>
 
 </manifest>

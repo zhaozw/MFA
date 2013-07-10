@@ -184,7 +184,6 @@
     <string name="Market_Item_35_Name"> unknown hit </string>
     <string name="Market_Item_35_Price">1</string>
     <string name="Market_Item_35_Description"> Allows the player to send the hit after themselves. Custom games only  </string>
- 
     <string name="Trophy_0_Requirement">1</string>
     <string name="Trophy_1_Requirement">10</string>
     <string name="Trophy_2_Requirement">50</string>
@@ -197,7 +196,7 @@
     <string name="Trophy_9_Requirement">50000</string>
     <string name="Trophy_10_Requirement">100000</string>
     <string name="Trophy_11_Requirement">1000000</string>
-    <string name="Trophy_0_Name">Asteroid Killer</string> 
+    <string name="Trophy_0_Name">Asteroid Killer</string>
     <string name="Trophy_1_Name">Asteroid Murderer</string>
     <string name="Trophy_2_Name">Asteroid Destroyer</string>
     <string name="Trophy_3_Name">Asteroid Desecrater</string>
@@ -221,83 +220,60 @@
     <string name="Trophy_9_Description">Liquidate 50000 Asteroid</string>
     <string name="Trophy_10_Description">Annihilate 100000 Asteroid</string>
     <string name="Trophy_11_Description">Terminate 1000000 Asteroid</string>
-
-    
-    
-    
     <string name="Trophy_12_Name">Penny Pincher</string>
     <string name="Trophy_12_Requirement">5000</string>
     <string name="Trophy_12_Description">Retain 5000 in Cash</string>
-    
     <string name="Trophy_13_Name">Cheapskate</string>
     <string name="Trophy_13_Requirement">10000</string>
     <string name="Trophy_13_Description">Retain 10000 in Cash</string>
-    
     <string name="Trophy_14_Name">Money Grubber</string>
     <string name="Trophy_14_Requirement">50000</string>
     <string name="Trophy_14_Description">Retain 50000 in Cash</string>
-    
     <string name="Trophy_15_Name">Master Scrooge</string>
     <string name="Trophy_15_Requirement">100000</string>
     <string name="Trophy_15_Description">Retain 100000 in Cash</string>
-    
-    
     <string name="Trophy_16_Name">Acquirer</string>
     <string name="Trophy_16_Requirement"> 2500 </string>
     <string name="Trophy_16_Description">Acquire 2500 points in a single Standard match.</string>
-    
     <string name="Trophy_17_Name">Appropriator</string>
     <string name="Trophy_17_Requirement"> 5000 </string>
     <string name="Trophy_17_Description">Appropriate 5000 points in a single Standard match.</string>
-
     <string name="Trophy_18_Name">Claimant</string>
     <string name="Trophy_18_Requirement"> 7500 </string>
     <string name="Trophy_18_Description">Claim 75000 points in a single Standard match.</string>
-    
     <string name="Trophy_19_Name">Failure</string>
     <string name="Trophy_19_Requirement"> 0 </string>
     <string name="Trophy_19_Description">Die Before Firing a Single Shot.</string>
-    
     <string name="Trophy_20_Name">Beginner</string>
     <string name="Trophy_20_Requirement"> 1 </string>
     <string name="Trophy_20_Description">Complete wave 1.</string>
-    
     <string name="Trophy_21_Name">Amateur</string>
     <string name="Trophy_21_Requirement"> 2 </string>
     <string name="Trophy_21_Description">Complete wave 2.</string>
-    
     <string name="Trophy_22_Name">Greenhorn</string>
     <string name="Trophy_22_Requirement"> 3 </string>
     <string name="Trophy_22_Description">Complete wave 3.</string>
-    
     <string name="Trophy_23_Name">Competent</string>
     <string name="Trophy_23_Requirement"> 4 </string>
     <string name="Trophy_23_Description">Complete wave 4.</string>
-    
     <string name="Trophy_24_Name">Passable</string>
     <string name="Trophy_24_Requirement"> 5 </string>
     <string name="Trophy_24_Description">Complete wave 5.</string>
-    
     <string name="Trophy_25_Name">Decent</string>
     <string name="Trophy_25_Requirement"> 6 </string>
     <string name="Trophy_25_Description">Complete wave 6.</string>
-    
     <string name="Trophy_26_Name">Satisfactory</string>
     <string name="Trophy_26_Requirement"> 7 </string>
     <string name="Trophy_26_Description">Complete wave 7.</string>
-   
     <string name="Trophy_27_Name">Adept</string>
     <string name="Trophy_27_Requirement"> 8 </string>
     <string name="Trophy_27_Description">Complete wave 8.</string>
-    
     <string name="Trophy_28_Name">Master</string>
     <string name="Trophy_28_Requirement"> 9 </string>
     <string name="Trophy_28_Description">Complete wave 9.</string>
-    
     <string name="Trophy_29_Name">lord</string>
     <string name="Trophy_29_Requirement"> 10 </string>
     <string name="Trophy_29_Description">Complete wave 10.</string>
-    
     <string name="TrophySuccessMessage">Congratulations For Your Achievement</string>
     <string name="TrophyNoSuccessMessage">No Trophy For You</string>
     <string name="AchievementsUnlocked">Achievements Unlocked</string>
@@ -364,15 +340,12 @@
     <string name="HitNotSuccessful">Hit was not successful</string>
     <string name="GameOver">GameOver</string>
     <string name="Wave">Wave</string>
-    
     <string name="Time">Time</string>
     <string name="title_activity_color_options">ColorOptionsActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_ship_type">ShipTypeActivity</string>
     <string name="title_activity_color_options_activity2">ColorOptionsActivity2</string>
     <string name="title_activity_achievements">AchievementsActivity</string>
-    
-    
-    
+    <string name="title_activity_hits_new">HitsNew</string>
 
 </resources>

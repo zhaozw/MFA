@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import com.example.activities.AchievementsActivity;
 import com.example.activities.Hits;
+import com.example.activities.HitsNew;
 import com.example.activities.Market;
 import com.example.activities.NewGameOptions;
 import com.example.activities.Options;
@@ -125,7 +126,7 @@ public class NewMenu extends Activity {
 			break;
 		}
 		case R.id.newMenuHits: {
-			Intent i = new Intent(NewMenu.this, Hits.class);
+			Intent i = new Intent(NewMenu.this, HitsNew.class);
 			startActivity(i);
 			break;
 		}
