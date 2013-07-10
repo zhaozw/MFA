@@ -22,3 +22,5 @@ local.properties
 *.ap_
 
 MFA/bin/resources.ap_
+
+*.class
