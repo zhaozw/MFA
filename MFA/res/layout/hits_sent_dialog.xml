@@ -26,14 +26,14 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <Button
-             android:layout_marginRight="7dp"
             android:id="@+id/hits_sent_dialog_hit_1_sender_stats"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="7dp"
             android:layout_marginTop="15dp"
             android:layout_weight="0"
-            android:text="@string/Stats" />
+            android:text="@string/SendHitBack" />
 
     </LinearLayout>
 
@@ -76,14 +76,14 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <Button
-             android:layout_marginRight="7dp"
             android:id="@+id/hits_sender_dialog_hit_2_sender_stats"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="7dp"
             android:layout_marginTop="15dp"
             android:layout_weight="0"
-            android:text="@string/Stats" />
+            android:text="@string/SendHitBack" />
 
     </LinearLayout>
 
@@ -136,7 +136,7 @@
             android:layout_marginRight="7dp"
             android:layout_marginTop="15dp"
             android:layout_weight="0"
-            android:text="@string/Stats" />
+            android:text="@string/SendHitBack" />
 
     </LinearLayout>
 

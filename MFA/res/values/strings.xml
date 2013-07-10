@@ -340,7 +340,7 @@
     <string name="ItemNotToBePurchased">This item will not be usable until purchase is made.</string>
     <string name="ItemAlreadyPurchased">This item has been purchased</string>
     <string name="Purchased">Purchased</string>
-    
+    <string name="SendHitBack">Send Hit Back</string>
     <string name="Friends">Friends</string>
     <string name="Score">Score</string>
     <string name="ThisGameStats">this.stats</string>
