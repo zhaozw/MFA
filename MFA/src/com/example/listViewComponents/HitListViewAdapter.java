@@ -20,7 +20,8 @@ public class HitListViewAdapter extends BaseAdapter {
 
 	private LayoutInflater l_Inflater;
 
-	public HitListViewAdapter(Context context, ArrayList<HitListViewItem> results) {
+	public HitListViewAdapter(Context context,
+			ArrayList<HitListViewItem> results) {
 		itemDetailsrrayList = results;
 		l_Inflater = LayoutInflater.from(context);
 		imgid = new Integer[results.size()];
@@ -57,10 +58,10 @@ public class HitListViewAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		holder.txt_itemName.setText(itemDetailsrrayList.get(position).getHitName());
+		holder.txt_itemName.setText(itemDetailsrrayList.get(position)
+				.getHitName());
 
 		holder.itemImage.setImageResource(imgid[position]);
-
 
 		return convertView;
 	}

@@ -17,15 +17,20 @@ public class CompanyLogo extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE); // make it landscape mode
+		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE); // make
+																					// it
+																					// landscape
+																					// mode
 		requestWindowFeature(Window.FEATURE_NO_TITLE); // no title
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		setContentView(R.layout.activity_company_logo);
 
-		NewRelic.withApplicationToken("AA669df5e1adf6624b19defec8715286f92bcb51a0").start(this.getApplication());
-		
+		NewRelic.withApplicationToken(
+				"AA669df5e1adf6624b19defec8715286f92bcb51a0").start(
+				this.getApplication());
+
 		// making the logo image run for a few seconds and then moving to the
 		// next activity
 		Thread splashThread = new Thread() {

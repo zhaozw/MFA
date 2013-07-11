@@ -4,7 +4,7 @@ public class HitListViewItem {
 
 	private String hitName;
 	private Integer imageID;
-	
+
 	public HitListViewItem() {
 
 	}
@@ -25,5 +25,4 @@ public class HitListViewItem {
 		this.imageID = imageID;
 	}
 
-	
 }

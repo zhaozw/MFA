@@ -64,15 +64,15 @@ public class HitsAllInfo {
 				if (onlineHits.get("Hit" + k + "Active").toString().equals("1")) {
 					totalActiveHits++;
 					hitsInGame.add(new HitsInfo());
-					hitsInGame.get(hitsInGame.size()-1).active = true;
-					hitsInGame.get(hitsInGame.size()-1).HitID = onlineHits
+					hitsInGame.get(hitsInGame.size() - 1).active = true;
+					hitsInGame.get(hitsInGame.size() - 1).HitID = onlineHits
 							.get("Hit" + k + "From");
-					hitsInGame.get(hitsInGame.size()-1).name = LoginFunctions
+					hitsInGame.get(hitsInGame.size() - 1).name = LoginFunctions
 							.getPlayerNameFromID(context,
 									onlineHits.get("Hit" + k + "From"));
-					hitsInGame.get(hitsInGame.size()-1).message = onlineHits.get("Hit" + k
-							+ "Msg");
-					hitsInGame.get(hitsInGame.size()-1).hitType = k;
+					hitsInGame.get(hitsInGame.size() - 1).message = onlineHits
+							.get("Hit" + k + "Msg");
+					hitsInGame.get(hitsInGame.size() - 1).hitType = k;
 				}
 		}
 

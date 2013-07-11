@@ -35,9 +35,10 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class HitsNew extends Activity {
-	
+
 	ArrayList<HitListViewItem> hitsDetails;
 	final Context context = this;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,8 +47,6 @@ public class HitsNew extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_hits_new);
-		
-		
 
 		hitsDetails = GetSearchResults();
 		final ListView lv1 = (ListView) findViewById(R.id.HitsListView);
@@ -56,68 +55,61 @@ public class HitsNew extends Activity {
 		lv1.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> a, View v, int position,
 					long id) {
-				createIndividualHitDialog(position);		
+				createIndividualHitDialog(position);
 			}
 		});
-		
-	}
-	
-	public void createIndividualHitDialog(final int hit){
-		
-			AlertDialog.Builder builder = new AlertDialog.Builder(context);
-					
-			final FrameLayout frameView = new FrameLayout(context);
-			builder.setView(frameView);
-
-			final AlertDialog alertDialog = builder.create();
-			LayoutInflater inflater = alertDialog.getLayoutInflater();
-			View dialoglayout = inflater.inflate(R.layout.individual_hit_details_dialog,
-					frameView);
-
-			TextView name = (TextView) dialoglayout
-					.findViewById(R.id.name);
-			name.setText(getString(getResources()
-					.getIdentifier("hits_" + hit + "_name",
-							"string", getPackageName())));
-
-			TextView description = (TextView) dialoglayout
-					.findViewById(R.id.description);
-			description.setText(getString(getResources()
-					.getIdentifier("hits_" + hit + "_description",
-							"string", getPackageName())));
-
-			TextView availability = (TextView) dialoglayout
-					.findViewById(R.id.availability);
-			availability.setText("Available");
-
-			TextView cost = (TextView) dialoglayout
-					.findViewById(R.id.cost);
-			cost.setText(getString(getResources()
-					.getIdentifier("hits_" + hit + "_cost",
-							"string", getPackageName())));
-
-			ImageView image = (ImageView) dialoglayout
-					.findViewById(R.id.image);
-			image.setId(R.drawable.africanamericanrectangle);
-		
-			Button chooseOpponent = (Button) dialoglayout
-					.findViewById(R.id.chooseOpponent);
-			chooseOpponent.setOnClickListener(new View.OnClickListener() {
-				public void onClick(View v) {
-					createChooseOpponentDialog(hit);
-					alertDialog.dismiss();
-				}
-			});
-
-			
-			alertDialog.show();
 
 	}
-		
-	public void createChooseOpponentDialog(final int hit){
-		
+
+	public void createIndividualHitDialog(final int hit) {
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-				
+
+		final FrameLayout frameView = new FrameLayout(context);
+		builder.setView(frameView);
+
+		final AlertDialog alertDialog = builder.create();
+		LayoutInflater inflater = alertDialog.getLayoutInflater();
+		View dialoglayout = inflater.inflate(
+				R.layout.individual_hit_details_dialog, frameView);
+
+		TextView name = (TextView) dialoglayout.findViewById(R.id.name);
+		name.setText(getString(getResources().getIdentifier(
+				"hits_" + hit + "_name", "string", getPackageName())));
+
+		TextView description = (TextView) dialoglayout
+				.findViewById(R.id.description);
+		description.setText(getString(getResources().getIdentifier(
+				"hits_" + hit + "_description", "string", getPackageName())));
+
+		TextView availability = (TextView) dialoglayout
+				.findViewById(R.id.availability);
+		availability.setText("Available");
+
+		TextView cost = (TextView) dialoglayout.findViewById(R.id.cost);
+		cost.setText(getString(getResources().getIdentifier(
+				"hits_" + hit + "_cost", "string", getPackageName())));
+
+		ImageView image = (ImageView) dialoglayout.findViewById(R.id.image);
+		image.setId(R.drawable.africanamericanrectangle);
+
+		Button chooseOpponent = (Button) dialoglayout
+				.findViewById(R.id.chooseOpponent);
+		chooseOpponent.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				createChooseOpponentDialog(hit);
+				alertDialog.dismiss();
+			}
+		});
+
+		alertDialog.show();
+
+	}
+
+	public void createChooseOpponentDialog(final int hit) {
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
 		final FrameLayout frameView = new FrameLayout(context);
 		builder.setView(frameView);
 
@@ -134,7 +126,7 @@ public class HitsNew extends Activity {
 				alertDialog.dismiss();
 			}
 		});
-		
+
 		Button Random = (Button) dialoglayout
 				.findViewById(R.id.ChooseOpponentRandom);
 		Random.setOnClickListener(new View.OnClickListener() {
@@ -144,7 +136,7 @@ public class HitsNew extends Activity {
 				toast.show();
 			}
 		});
-		
+
 		Button Enemies = (Button) dialoglayout
 				.findViewById(R.id.ChooseOpponentEnemies);
 		Enemies.setOnClickListener(new View.OnClickListener() {
@@ -155,51 +147,51 @@ public class HitsNew extends Activity {
 			}
 		});
 
-		
 		alertDialog.show();
 
-}
-	
-	public void createRivalsDialog(final int hit){
-		
-		final ArrayList<RivalsItem> rivalsDetails = GetRivalsForListView();
-		ArrayList<String> names = new ArrayList<String>();
-		for(int k=0;k<rivalsDetails.size();k++){
-			names.add(rivalsDetails.get(k).getUserName());
-		}
-		
-			AlertDialog.Builder builder = new AlertDialog.Builder(context)
-					.setTitle(context.getString(R.string.Rivals));
-			final FrameLayout frameView = new FrameLayout(context);
-			builder.setView(frameView);
-
-			final AlertDialog alertDialog = builder.create();
-			LayoutInflater inflater = alertDialog.getLayoutInflater();
-			View dialoglayout = inflater.inflate(R.layout.rivals_listview_2, frameView);
-
-			final ListView lv1 = (ListView) dialoglayout
-					.findViewById(R.id.rivalsListView);
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
-			        android.R.layout.simple_list_item_1, names);
-			lv1.setAdapter(adapter);
-
-			lv1.setOnItemClickListener(new OnItemClickListener() {
-				public void onItemClick(AdapterView<?> a, View v, int position,
-						long id) {
-					   
-					createAreYouSureDialog(hit,rivalsDetails.get(position));
-
-				}
-			});
-
-			alertDialog.show();
-			
 	}
 
-	public void createAreYouSureDialog(final int hit,final RivalsItem rival){
-		
+	public void createRivalsDialog(final int hit) {
+
+		final ArrayList<RivalsItem> rivalsDetails = GetRivalsForListView();
+		ArrayList<String> names = new ArrayList<String>();
+		for (int k = 0; k < rivalsDetails.size(); k++) {
+			names.add(rivalsDetails.get(k).getUserName());
+		}
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(context)
+				.setTitle(context.getString(R.string.Rivals));
+		final FrameLayout frameView = new FrameLayout(context);
+		builder.setView(frameView);
+
+		final AlertDialog alertDialog = builder.create();
+		LayoutInflater inflater = alertDialog.getLayoutInflater();
+		View dialoglayout = inflater.inflate(R.layout.rivals_listview_2,
+				frameView);
+
+		final ListView lv1 = (ListView) dialoglayout
+				.findViewById(R.id.rivalsListView);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, names);
+		lv1.setAdapter(adapter);
+
+		lv1.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> a, View v, int position,
+					long id) {
+
+				createAreYouSureDialog(hit, rivalsDetails.get(position));
+
+			}
+		});
+
+		alertDialog.show();
+
+	}
+
+	public void createAreYouSureDialog(final int hit, final RivalsItem rival) {
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		
+
 		final FrameLayout frameView = new FrameLayout(context);
 		builder.setView(frameView);
 
@@ -208,148 +200,158 @@ public class HitsNew extends Activity {
 		View dialoglayout = inflater.inflate(R.layout.confirm_send_hit_dialog,
 				frameView);
 
-				  final EditText messageTextBox = (EditText) dialoglayout.findViewById(R.id.confirmHitText);
-	
-				    TextView userName = (TextView) dialoglayout.findViewById(R.id.ConfirmHitDialogUserName);
-				    userName.setText(getString(R.string.SendAfter)+" " +rival.getUserName());
+		final EditText messageTextBox = (EditText) dialoglayout
+				.findViewById(R.id.confirmHitText);
 
-					TextView hitName = (TextView) dialoglayout.findViewById(R.id.ConfirmHitDialogHitName);
-					hitName.setText(getString(getResources().getIdentifier("hits_" + hit + "_name",
-									"string", getPackageName())));
+		TextView userName = (TextView) dialoglayout
+				.findViewById(R.id.ConfirmHitDialogUserName);
+		userName.setText(getString(R.string.SendAfter) + " "
+				+ rival.getUserName());
 
+		TextView hitName = (TextView) dialoglayout
+				.findViewById(R.id.ConfirmHitDialogHitName);
+		hitName.setText(getString(getResources().getIdentifier(
+				"hits_" + hit + "_name", "string", getPackageName())));
 
 		Button Yes = (Button) dialoglayout
 				.findViewById(R.id.ConfirmHitDialogYes);
 		Yes.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (messageTextBox.getText().toString().length() < 0) {
-				    Toast toast = Toast.makeText(context,context.getString(R.string.MustIncludeMessage),Toast.LENGTH_SHORT);
-					toast.show();		
-				}else{
-					LoginFunctions.activateHit(context, rival.gethitId(), hit,convertUnnacceptableCharacters(messageTextBox.getText().toString()));
-					Toast toast = Toast.makeText(context,context.getString(R.string.HitSentConfirmed)+" "
-					+rival.getUserName()+", "+ messageTextBox.getText().toString(),Toast.LENGTH_SHORT);
-				    toast.show();	
+					Toast toast = Toast.makeText(context,
+							context.getString(R.string.MustIncludeMessage),
+							Toast.LENGTH_SHORT);
+					toast.show();
+				} else {
+					LoginFunctions.activateHit(context, rival.gethitId(), hit,
+							convertUnnacceptableCharacters(messageTextBox
+									.getText().toString()));
+					Toast toast = Toast.makeText(context,
+							context.getString(R.string.HitSentConfirmed) + " "
+									+ rival.getUserName() + ", "
+									+ messageTextBox.getText().toString(),
+							Toast.LENGTH_SHORT);
+					toast.show();
 					alertDialog.dismiss();
 				}
 			}
 		});
-//		
-		Button No = (Button) dialoglayout
-				.findViewById(R.id.ConfirmHitDialogNo);
+		//
+		Button No = (Button) dialoglayout.findViewById(R.id.ConfirmHitDialogNo);
 		No.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-			alertDialog.dismiss();
+				alertDialog.dismiss();
 			}
 		});
-//		
-		alertDialog.show();	
-		
+		//
+		alertDialog.show();
+
 	}
-	
-	
-	public String convertUnnacceptableCharacters(String message){
-		
+
+	public String convertUnnacceptableCharacters(String message) {
+
 		StringBuilder myName = new StringBuilder("");
-		
-		for(int k=0;k<message.length();k++){
-			if     (message.charAt(k)==' ')
-			     myName.append("%20");
-			else if(message.charAt(k)=='$')
-				 myName.append("%24");
-			else if(message.charAt(k)=='&')
-				 myName.append("%26");
-			else if(message.charAt(k)=='+')
-				 myName.append("%2B");
-			else if(message.charAt(k)==',')
-				 myName.append("%2C");	
-			else if(message.charAt(k)=='/')
-				 myName.append("%2F");
-			else if(message.charAt(k)==':')
-				 myName.append("%3A");
-			else if(message.charAt(k)==';')
-				 myName.append("%3B");	
-			else if(message.charAt(k)=='=')	
-				 myName.append("%3D");	
-			else if(message.charAt(k)=='?')	
-				 myName.append("%3F");
-			else if(message.charAt(k)=='@')	
-				 myName.append("%40");
-			else if(message.charAt(k)=='?')	
-				 myName.append("%22");
-			else if(message.charAt(k)=='<')	
-				 myName.append("%3C");
-			else if(message.charAt(k)=='>')	
-				 myName.append("%3E");
-			else if(message.charAt(k)=='#')	
-				 myName.append("%23");
-			else if(message.charAt(k)=='%')	
-				 myName.append("%25");
-			else if(message.charAt(k)=='{')	
-				 myName.append("%7B");
-			else if(message.charAt(k)=='}')	
-				 myName.append("%7D");
-			else if(message.charAt(k)=='|')	
-				 myName.append("%7C");
-			else if(message.charAt(k)=='^')	
-				 myName.append("%5E");
-			else if(message.charAt(k)=='~')	
-				 myName.append("%7E");
-			else if(message.charAt(k)=='[')	
-				 myName.append("%5B");
-			else if(message.charAt(k)==']')	
-				 myName.append("%5D");
-			else if(message.charAt(k)=='`')	
-				 myName.append("%60");
+
+		for (int k = 0; k < message.length(); k++) {
+			if (message.charAt(k) == ' ')
+				myName.append("%20");
+			else if (message.charAt(k) == '$')
+				myName.append("%24");
+			else if (message.charAt(k) == '&')
+				myName.append("%26");
+			else if (message.charAt(k) == '+')
+				myName.append("%2B");
+			else if (message.charAt(k) == ',')
+				myName.append("%2C");
+			else if (message.charAt(k) == '/')
+				myName.append("%2F");
+			else if (message.charAt(k) == ':')
+				myName.append("%3A");
+			else if (message.charAt(k) == ';')
+				myName.append("%3B");
+			else if (message.charAt(k) == '=')
+				myName.append("%3D");
+			else if (message.charAt(k) == '?')
+				myName.append("%3F");
+			else if (message.charAt(k) == '@')
+				myName.append("%40");
+			else if (message.charAt(k) == '?')
+				myName.append("%22");
+			else if (message.charAt(k) == '<')
+				myName.append("%3C");
+			else if (message.charAt(k) == '>')
+				myName.append("%3E");
+			else if (message.charAt(k) == '#')
+				myName.append("%23");
+			else if (message.charAt(k) == '%')
+				myName.append("%25");
+			else if (message.charAt(k) == '{')
+				myName.append("%7B");
+			else if (message.charAt(k) == '}')
+				myName.append("%7D");
+			else if (message.charAt(k) == '|')
+				myName.append("%7C");
+			else if (message.charAt(k) == '^')
+				myName.append("%5E");
+			else if (message.charAt(k) == '~')
+				myName.append("%7E");
+			else if (message.charAt(k) == '[')
+				myName.append("%5B");
+			else if (message.charAt(k) == ']')
+				myName.append("%5D");
+			else if (message.charAt(k) == '`')
+				myName.append("%60");
 			else
-				 myName.append(message.charAt(k));
+				myName.append(message.charAt(k));
 		}
-		Log.d("ConvertedString"," "+ myName);
+		Log.d("ConvertedString", " " + myName);
 		return myName.toString();
 	}
-	
-    public void createAreYouSureDialog2(final int hit,final RivalsItem rival){
-		
-	
-	final Dialog d = new Dialog(this,R.style.CustomDialogTheme);
-	d.setContentView(R.layout.confirm_send_hit_dialog);
-	
-	
-	final EditText textBox = (EditText) d.findViewById(R.id.confirmHitText);
-	
-	Button close_btn = (Button) d.findViewById(R.id.ConfirmHitDialogYes);
-	close_btn.setOnClickListener(new View.OnClickListener() {
-	    public void onClick(View v) {
-	    	
 
-			if (textBox.getText().toString().length() > 0) {
-			    Toast toast = Toast.makeText(context,context.getString(R.string.MustIncludeMessage),Toast.LENGTH_SHORT);
-				toast.show();		
-			}else{
-				LoginFunctions.activateHit(context, rival.gethitId(), hit,textBox.getText().toString());
-				Toast toast = Toast.makeText(context,context.getString(R.string.HitSentConfirmed)+" "
-				+rival.getUserName()+", "+ textBox.getText().toString(),Toast.LENGTH_SHORT);
-			    toast.show();	
-				d.dismiss();
+	public void createAreYouSureDialog2(final int hit, final RivalsItem rival) {
+
+		final Dialog d = new Dialog(this, R.style.CustomDialogTheme);
+		d.setContentView(R.layout.confirm_send_hit_dialog);
+
+		final EditText textBox = (EditText) d.findViewById(R.id.confirmHitText);
+
+		Button close_btn = (Button) d.findViewById(R.id.ConfirmHitDialogYes);
+		close_btn.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+
+				if (textBox.getText().toString().length() > 0) {
+					Toast toast = Toast.makeText(context,
+							context.getString(R.string.MustIncludeMessage),
+							Toast.LENGTH_SHORT);
+					toast.show();
+				} else {
+					LoginFunctions.activateHit(context, rival.gethitId(), hit,
+							textBox.getText().toString());
+					Toast toast = Toast.makeText(context,
+							context.getString(R.string.HitSentConfirmed) + " "
+									+ rival.getUserName() + ", "
+									+ textBox.getText().toString(),
+							Toast.LENGTH_SHORT);
+					toast.show();
+					d.dismiss();
+				}
+
 			}
-	     
-	    }
-	});
-	
-	Button No = (Button) d.findViewById(R.id.ConfirmHitDialogNo);
-	No.setOnClickListener(new View.OnClickListener() {
-		public void onClick(View v) {
-			Toast toast = Toast.makeText(context, "Display Hits Gallery",
-					Toast.LENGTH_SHORT);
-			toast.show();
-		}
-	});
-	
-	d.show();
-	
+		});
+
+		Button No = (Button) d.findViewById(R.id.ConfirmHitDialogNo);
+		No.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Toast toast = Toast.makeText(context, "Display Hits Gallery",
+						Toast.LENGTH_SHORT);
+				toast.show();
+			}
+		});
+
+		d.show();
+
 	}
-	
-	
+
 	private ArrayList<RivalsItem> GetRivalsForListView() {
 		ArrayList<RivalsItem> results = new ArrayList<RivalsItem>();
 
@@ -380,16 +382,16 @@ public class HitsNew extends Activity {
 
 		return results;
 	}
-			
-	
-	
+
 	private ArrayList<HitListViewItem> GetSearchResults() {
 		ArrayList<HitListViewItem> results = new ArrayList<HitListViewItem>();
 		HitListViewItem hitDetails;
 		for (int k = 0; k <= 15; k++) {
 			hitDetails = new HitListViewItem();
-			hitDetails.setHitName(getString(getResources().getIdentifier("hits_" + k + "_name", "string", getPackageName())));
-			hitDetails.setImageID(getResources().getIdentifier("africanamericanrectangle", "drawable",getPackageName()));
+			hitDetails.setHitName(getString(getResources().getIdentifier(
+					"hits_" + k + "_name", "string", getPackageName())));
+			hitDetails.setImageID(getResources().getIdentifier(
+					"africanamericanrectangle", "drawable", getPackageName()));
 			results.add(hitDetails);
 		}
 		return results;

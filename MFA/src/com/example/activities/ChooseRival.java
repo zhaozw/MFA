@@ -143,7 +143,6 @@ public class ChooseRival extends Activity implements OnItemSelectedListener {
 		// RivalAdapter adapter = new RivalAdapter(this,
 		// R.layout.activity_choose_rival, playerStatsArray);
 
-		@SuppressWarnings("unchecked")
 		ListAdapter adapter = new ArrayAdapter<HashMap<String, String>>(this,
 				R.layout.list_item, Players);
 
